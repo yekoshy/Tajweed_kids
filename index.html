@@ -3,773 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فتوحات الرحمن في تيسير تجويد القرآن للأطفال</title>
-    
-    <!-- خطوط المراعي من Google Fonts -->
+    <title>فتوحات الرحمن في تيسير تجويد القرآن</title>
+
+    <!-- Google Fonts: Almarai -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
-        :root {
-            --primary: #2e7d32;
-            --secondary: #f57c00;
-            --background: #f1f8e9;
-            --text-color: #1b5e20;
-            --card-bg: #ffffff;
-            --correct: #4caf50;
-            --wrong: #f44336;
-        }
-
-        /* تنسيقات الخطوط */
-        .almarai-light { font-family: "Almarai", sans-serif; font-weight: 300; }
-        .almarai-regular { font-family: "Almarai", sans-serif; font-weight: 400; }
-        .almarai-bold { font-family: "Almarai", sans-serif; font-weight: 700; }
-        .almarai-extrabold { font-family: "Almarai", sans-serif; font-weight: 800; }
-
+        /* Typography */
         body {
             font-family: "Almarai", sans-serif;
-            font-weight: 700;
-            background-color: var(--background);
-            color: var(--text-color);
+            background-color: #f4fcf4;
+            color: #333;
             margin: 0;
             padding: 0;
-            font-size: 28px; /* خط كبير ومناسب للأطفال */
-            line-height: 2;
-        }
-
-        /* رأس الصفحة */
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            font-size: 38px;
-            font-weight: 800;
-            border-bottom: 6px solid var(--secondary);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        /* أزرار التنقل */
-        .nav-menu {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 40px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .almarai-light { font-weight: 300; }
+        .almarai-regular { font-weight: 400; }
+        .almarai-bold { font-weight: 700; }
+        .almarai-extrabold { font-weight: 800; }
+
+        /* UI Layout */
+        #sidebar {
+            width: 300px;
+            background-color: #1e8449;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -3px 0 10px rgba(0,0,0,0.1);
+        }
+
+        #sidebar h2 {
+            font-size: 1.8rem;
+            text-align: center;
+            border-bottom: 2px solid white;
+            padding-bottom: 10px;
         }
 
         .nav-btn {
-            background-color: var(--secondary);
-            color: white;
-            border: 3px solid transparent;
-            padding: 12px 25px;
-            font-size: 24px;
-            font-family: "Almarai", sans-serif;
-            font-weight: 700;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .nav-btn:hover {
-            transform: translateY(-3px);
-            background-color: #e65100;
-        }
-
-        .nav-btn.active {
-            background-color: #bf360c;
-            border-color: white;
-            transform: scale(1.05);
-        }
-
-        /* أقسام الدروس */
-        .section {
-            display: none;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border: 3px solid #c8e6c9;
-            margin-bottom: 50px;
-        }
-
-        .section.active {
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            color: var(--primary);
-            text-align: center;
-            font-size: 40px;
-            border-bottom: 4px dashed var(--secondary);
-            padding-bottom: 15px;
-            margin-top: 0;
-            font-weight: 800;
-        }
-
-        .lesson-text {
-            background-color: #e8f5e9;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            border-right: 8px solid var(--primary);
-        }
-
-        /* تنسيقات التدريبات والاختبارات */
-        .exercise-box {
-            background-color: #fff3e0;
-            padding: 30px;
-            border-radius: 15px;
-            border: 3px solid #ffb74d;
-        }
-
-        .exercise-title {
-            color: #d84315;
-            font-size: 34px;
-            text-align: center;
-            margin-bottom: 25px;
-            font-weight: 800;
-        }
-
-        .question-block {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 2px solid #ffe0b2;
-        }
-
-        .question-text {
-            font-size: 30px;
-            color: #3e2723;
-            margin-bottom: 15px;
-        }
-
-        .options-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            background-color: #f5f5f5;
+            width: 100%;
+            background-color: #27ae60;
+            color: white;
+            border: none;
             padding: 15px;
+            margin: 10px 0;
+            font-size: 1.2rem;
             border-radius: 10px;
             cursor: pointer;
-            transition: 0.2s;
-            border: 2px solid #e0e0e0;
-            font-size: 26px;
+            transition: background 0.3s;
+            text-align: right;
+            font-family: "Almarai", sans-serif;
+            font-weight: 700;
         }
 
-        .option-label:hover {
-            background-color: #e0f7fa;
+        .nav-btn:hover { background-color: #2ecc71; }
+
+        #content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background-image: url('https://www.transparenttextures.com/patterns/arabesque.png');
         }
 
-        .option-label input {
-            margin-left: 15px;
-            transform: scale(1.5);
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Lesson Styles */
+        h1 {
+            color: #c0392b;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        /* ألوان الإجابات بعد التحقق */
-        .correct-ans {
-            background-color: #c8e6c9 !important;
-            border-color: var(--correct) !important;
-            color: var(--primary);
+        .lesson-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 3px solid #f39c12;
+            font-size: 2.2rem;
+            line-height: 1.8;
         }
 
-        .wrong-ans {
-            background-color: #ffcdd2 !important;
-            border-color: var(--wrong) !important;
-            color: #b71c1c;
+        .quran-text {
+            color: #2980b9;
+            font-weight: 800;
+            font-size: 2.5rem;
+            text-align: center;
+            display: block;
+            margin: 20px 0;
         }
 
-        .check-btn {
-            background-color: var(--primary);
+        /* Quiz Styles */
+        .quiz-container {
+            background-color: #e8f8f5;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px dashed #16a085;
+            margin-top: 20px;
+        }
+
+        .question {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .options label {
+            display: block;
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.8rem;
+            border: 2px solid #bdc3c7;
+            transition: 0.3s;
+        }
+
+        .options input[type="radio"] { transform: scale(1.5); margin-left: 10px; }
+
+        .submit-btn {
+            background-color: #d35400;
             color: white;
             border: none;
             padding: 15px 30px;
-            font-size: 28px;
-            border-radius: 12px;
+            font-size: 1.5rem;
+            border-radius: 10px;
             cursor: pointer;
             display: block;
-            margin: 30px auto 0;
+            margin: 20px auto 0;
             font-family: "Almarai", sans-serif;
-            font-weight: 800;
-            transition: 0.3s;
+            font-weight: 700;
         }
-
-        .check-btn:hover { background-color: #1b5e20; }
 
         .score-display {
             text-align: center;
-            font-size: 36px;
-            color: #d84315;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #27ae60;
             margin-top: 20px;
-            font-weight: 800;
             display: none;
-            background: #ffe0b2;
-            padding: 15px;
-            border-radius: 10px;
         }
 
-        /* تنسيقات متن تحفة الأطفال */
+        /* Poem Styles */
         .poem-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #ccc;
+            background-color: #fff9e6;
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid #d4ac0d;
         }
-        .poem-title {
-            text-align: center;
-            color: #b71c1c;
-            font-size: 36px;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #b71c1c;
-            display: inline-block;
-        }
+
         .poem-line {
             display: flex;
-            justify-content: center;
-            padding: 10px;
-            border-bottom: 1px dashed #e0e0e0;
-            color: #1a237e;
-            font-size: 30px;
-            text-align: center;
+            justify-content: space-between;
+            font-size: 2rem;
+            color: #1a5276;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #d4ac0d;
         }
-        .poem-line:nth-child(even) { background-color: #f9fbe7; }
-        .poem-line:last-child { border-bottom: none; }
 
-        .highlight {
-            color: #d84315;
-            font-weight: 800;
-        }
+        .poem-line div { width: 48%; text-align: center; font-weight: 700; }
+        .poem-separator { color: #c0392b; }
+
     </style>
 </head>
 <body>
 
-    <header>
-        فُتُوحَاتُ الرَّحْمَنِ فِي تَيْسِيرِ تَجْوِيدِ الْقُرْآنِ
-    </header>
-
-    <div class="container">
-        
-        <!-- قائمة التنقل -->
-        <div class="nav-menu">
-            <button class="nav-btn active" onclick="showSection('lesson1')">١. الْمَدُّ الطَّبِيعِيُّ</button>
-            <button class="nav-btn" onclick="showSection('lesson2')">٢. الْمَدُّ بِسَبَبِ الْهَمْزَةِ</button>
-            <button class="nav-btn" onclick="showSection('lesson3')">٣. الْمَدُّ بِسَبَبِ السُّكُونِ</button>
-            <button class="nav-btn" onclick="showSection('lesson4')">٤. الْمَدُّ اللَّازِمُ</button>
-            <button class="nav-btn" onclick="showSection('lesson5')">٥. مَدُّ الصِّلَةِ وَالْعِوَضِ</button>
-            <button class="nav-btn" onclick="showSection('lesson6')">٦. مُرَاجَعَةٌ شَامِلَةٌ</button>
-            <button class="nav-btn" onclick="showSection('lesson7')">📜 مَتْنُ تُحْفَةِ الْأَطْفَالِ</button>
-        </div>
-
-        <!-- ================= الدرس الأول: المد الطبيعي ================= -->
-        <div id="lesson1" class="section active">
-            <h2>الْمَدُّ الطَّبِيعِيُّ</h2>
-            <div class="lesson-text">
-                <span class="highlight">الْمَدُّ الطَّبِيعِيُّ:</span> هُوَ أَنْ يَأْتِيَ حَرْفُ الْمَدِّ (الأَلِف، الْوَاو، الْيَاء) وَلَيْسَ بَعْدَهُ هَمْزٌ أَوْ سُكُونٌ.<br>
-                - <b>الأَلِف:</b> تَكُونُ سَاكِنَةً وَمَا قَبْلَهَا مَفْتُوحٌ. مِثْل: (قَالَ).<br>
-                - <b>الْيَاء:</b> تَكُونُ سَاكِنَةً وَمَا قَبْلَهَا مَكْسُورٌ. مِثْل: (قِيلَ).<br>
-                - <b>الْوَاو:</b> تَكُونُ سَاكِنَةً وَمَا قَبْلَهَا مَضْمُومٌ. مِثْل: (يَقُولُ).<br>
-                يُمَدُّ بِمِقْدَارِ حَرَكَتَيْنِ فَقَطْ.
-            </div>
-
-            <!-- تدريبات الدرس الأول -->
-            <div class="exercise-box">
-                <div class="exercise-title">📝 تَدْرِيبَاتُ الْمَدِّ الطَّبِيعِيِّ (ص ٥ - ٨)</div>
-                
-                <div class="question-block">
-                    <div class="question-text">١. حَرْفُ الْمَدِّ فِي كَلِمَةِ (حَكِيمٌ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q1_1" value="false"> الْأَلِفُ</label>
-                        <label class="option-label"><input type="radio" name="q1_1" value="true"> الْيَاءُ</label>
-                        <label class="option-label"><input type="radio" name="q1_1" value="false"> الْوَاوُ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٢. حَرْفُ الْمَدِّ فِي كَلِمَةِ (دَاوُدُ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q1_2" value="true"> الْوَاوُ</label>
-                        <label class="option-label"><input type="radio" name="q1_2" value="false"> الْيَاءُ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٣. الْحَرْفُ الْمَمْدُودُ (الَّذِي يَسْبِقُ الْمَدَّ) فِي كَلِمَةِ (صَوَابًا) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q1_3" value="true"> الْوَاوُ الْمَفْتُوحَةُ</label>
-                        <label class="option-label"><input type="radio" name="q1_3" value="false"> الْأَلِفُ السَّاكِنَةُ</label>
-                        <label class="option-label"><input type="radio" name="q1_3" value="false"> الصَّادُ الْمَفْتُوحَةُ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٤. أَيُّ الْكَلِمَاتِ التَّالِيَةِ بِهَا مَدٌّ بِالْأَلِفِ؟</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q1_4" value="false"> يَزِيدُ</label>
-                        <label class="option-label"><input type="radio" name="q1_4" value="true"> صِرَاطَ</label>
-                        <label class="option-label"><input type="radio" name="q1_4" value="false"> يَرِثُونَ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٥. مِقْدَارُ حَرَكَاتِ الْمَدِّ الطَّبِيعِيِّ هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q1_5" value="false"> ٤ حَرَكَاتٍ</label>
-                        <label class="option-label"><input type="radio" name="q1_5" value="true"> حَرَكَتَانِ</label>
-                        <label class="option-label"><input type="radio" name="q1_5" value="false"> ٦ حَرَكَاتٍ</label>
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('lesson1')">تَحَقَّقْ مِنَ الإِجَابَاتِ ✔️</button>
-                <div class="score-display"></div>
-            </div>
-        </div>
-
-        <!-- ================= الدرس الثاني: المد بسبب الهمزة ================= -->
-        <div id="lesson2" class="section">
-            <h2>الْمَدُّ بِسَبَبِ الْهَمْزَةِ</h2>
-            <div class="lesson-text">
-                <span class="highlight">١. مَدُّ الْبَدَلِ:</span> أَنْ تَأْتِيَ الْهَمْزَةُ قَبْلَ حَرْفِ الْمَدِّ فِي كَلِمَةٍ. مِثْل: (ءَامَنَ، أُوتُوا، إِيمَانًا). يُمَدُّ حَرَكَتَيْنِ.<br>
-                <span class="highlight">٢. الْمَدُّ الْمُتَّصِلُ:</span> أَنْ يَأْتِيَ حَرْفُ الْمَدِّ وَبَعْدَهُ هَمْزَةٌ فِي نَفْسِ الْكَلِمَةِ. مِثْل: (جَاءَ، سُوءَ). يُسَمَّى وَاجِبًا وَيُمَدُّ ٤ أَوْ ٥ حَرَكَاتٍ.<br>
-                <span class="highlight">٣. الْمَدُّ الْمُنْفَصِلُ:</span> أَنْ يَأْتِيَ حَرْفُ الْمَدِّ فِي نِهَايَةِ كَلِمَةٍ، وَالْهَمْزَةُ فِي بِدَايَةِ الْكَلِمَةِ الَّتِي تَلِيهَا. مِثْل: (بِمَا أُنْزِلَ). يُسَمَّى جَائِزًا وَيُمَدُّ ٢ أَو ٤ أَو ٥ حَرَكَاتٍ.
-            </div>
-
-            <!-- تدريبات الدرس الثاني -->
-            <div class="exercise-box">
-                <div class="exercise-title">📝 تَدْرِيبَاتُ الْمَدِّ بِسَبَبِ الْهَمْزَةِ (ص ٩ - ٢١)</div>
-                
-                <div class="question-block">
-                    <div class="question-text">١. نَوْعُ الْمَدِّ فِي كَلِمَةِ (مُتَّكِئِينَ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q2_1" value="false"> مَدٌّ مُتَّصِلٌ</label>
-                        <label class="option-label"><input type="radio" name="q2_1" value="true"> مَدُّ بَدَلٍ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٢. ﴿هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ﴾.. الْمَدُّ فِي كَلِمَةِ (جَزَاءُ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q2_2" value="true"> مَدٌّ مُتَّصِلٌ</label>
-                        <label class="option-label"><input type="radio" name="q2_2" value="false"> مَدٌّ مُنْفَصِلٌ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٣. إِذَا كَانَتِ الْهَمْزَةُ قَبْلَ حَرْفِ الْمَدِّ فِي كَلِمَةٍ، فَهَذَا يُسَمَّى:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q2_3" value="false"> مَدٌّ مُتَّصِلٌ</label>
-                        <label class="option-label"><input type="radio" name="q2_3" value="true"> مَدُّ بَدَلٍ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٤. نَوْعُ الْمَدِّ فِي قَوْلِهِ (فِي أَكِنَّةٍ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q2_4" value="false"> مَدٌّ مُتَّصِلٌ</label>
-                        <label class="option-label"><input type="radio" name="q2_4" value="true"> مَدٌّ مُنْفَصِلٌ</label>
-                        <label class="option-label"><input type="radio" name="q2_4" value="false"> مَدُّ بَدَلٍ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٥. الشَّاهِدُ (فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدّ فِي كِلْمَةٍ) يَدُلُّ عَلَى:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q2_5" value="false"> الْمَدِّ الْمُنْفَصِلِ</label>
-                        <label class="option-label"><input type="radio" name="q2_5" value="true"> الْمَدِّ الْمُتَّصِلِ</label>
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('lesson2')">تَحَقَّقْ مِنَ الإِجَابَاتِ ✔️</button>
-                <div class="score-display"></div>
-            </div>
-        </div>
-
-        <!-- ================= الدرس الثالث: المد بسبب السكون ================= -->
-        <div id="lesson3" class="section">
-            <h2>الْمَدُّ بِسَبَبِ السُّكُونِ</h2>
-            <div class="lesson-text">
-                <span class="highlight">١. الْمَدُّ الْعَارِضُ لِلسُّكُونِ:</span> هُوَ أَنْ يَأْتِيَ بَعْدَ حَرْفِ الْمَدِّ حَرْفٌ مُتَحَرِّكٌ، نَقِفُ عَلَيْهِ بِالسُّكُونِ الْعَارِضِ. مِثْل: (نَسْتَعِينُ ⬅ نَسْتَعِينْ). حُكْمُهُ جَائِزٌ (٢ أَو ٤ أَو ٦ حَرَكَاتٍ).<br>
-                <span class="highlight">٢. مَدُّ اللِّينِ:</span> هُوَ أَنْ تَأْتِيَ (الْوَاوُ أَوْ الْيَاءُ) سَاكِنَتَيْنِ مَفْتُوحًا مَا قَبْلَهُمَا، ثُمَّ يَأْتِي بَعْدَهُمَا حَرْفٌ نَقِفُ عَلَيْهِ بِالسُّكُونِ. مِثْل: (خَوْفٍ، قُرَيْشٍ). حُكْمُهُ جَائِزٌ عِنْدَ الْوَقْفِ (٢ أَو ٤ أَو ٦ حَرَكَاتٍ).
-            </div>
-
-            <!-- تدريبات الدرس الثالث -->
-            <div class="exercise-box">
-                <div class="exercise-title">📝 تَدْرِيبَاتُ الْمَدِّ بِسَبَبِ السُّكُونِ (ص ٢٢ - ٢٩)</div>
-                
-                <div class="question-block">
-                    <div class="question-text">١. نَوْعُ الْمَدِّ عِنْدَ الْوَقْفِ عَلَى كَلِمَةِ (الْعَالَمِينَ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q3_1" value="true"> مَدٌّ عَارِضٌ لِلسُّكُونِ</label>
-                        <label class="option-label"><input type="radio" name="q3_1" value="false"> مَدُّ لِينٍ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٢. عِنْدَ الْوَصْلِ فِي قَوْلِهِ (قَالَ)، يَكُونُ الْمَدُّ طَبِيعِيًّا (حَرَكَتَانِ)، وَعِنْدَ الْوَقْفِ يَكُونُ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q3_2" value="false"> مَدًّا لَازِمًا</label>
-                        <label class="option-label"><input type="radio" name="q3_2" value="true"> مَدًّا عَارِضًا لِلسُّكُونِ (٢، ٤، ٦ حَرَكَات)</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٣. الْمَدُّ عِنْدَ الْوَقْفِ عَلَى كَلِمَةِ (خَوْفٍ) يُسَمَّى:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q3_3" value="true"> مَدُّ لِينٍ</label>
-                        <label class="option-label"><input type="radio" name="q3_3" value="false"> مَدُّ بَدَلٍ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٤. الشَّاهِدُ: (وَمِثْلُ ذَا إِنْ عَرَضَ السُّكُونُ * وَقْفًا كَتَعْلَمُونَ نَسْتَعِينُ) يَدُلُّ عَلَى:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q3_4" value="false"> الْمَدِّ اللَّازِمِ</label>
-                        <label class="option-label"><input type="radio" name="q3_4" value="true"> الْمَدِّ الْعَارِضِ لِلسُّكُونِ</label>
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('lesson3')">تَحَقَّقْ مِنَ الإِجَابَاتِ ✔️</button>
-                <div class="score-display"></div>
-            </div>
-        </div>
-
-        <!-- ================= الدرس الرابع: المد اللازم ================= -->
-        <div id="lesson4" class="section">
-            <h2>الْمَدُّ اللَّازِمُ</h2>
-            <div class="lesson-text">
-                هُوَ أَنْ يَقَعَ سُكُونٌ أَصْلِيٌّ (أَيْ ثَابِتٌ وَصْلًا وَوَقْفًا) أَوْ حَرْفٌ مُشَدَّدٌ بَعْدَ حَرْفِ الْمَدِّ.<br>
-                يُمَدُّ مِقْدَارَ <span class="highlight">٦ حَرَكَاتٍ</span> دَائِمًا (لَزُومًا).<br>
-                - <b>لَازِمٌ كَلِمِيٌّ:</b> فِي كَلِمَةٍ مِثْل: (الْحَاقَّةُ، الطَّامَّةُ، آلْآنَ).<br>
-                - <b>لَازِمٌ حَرْفِيٌّ:</b> فِي الْحُرُوفِ الْمُقَطَّعَةِ أَوَائِلَ السُّوَرِ، مَجْمُوعَةٌ فِي (نَقَصَ عَسَلُكُمْ). مِثْل: (الم، ق، ص).
-            </div>
-
-            <!-- تدريبات الدرس الرابع -->
-            <div class="exercise-box">
-                <div class="exercise-title">📝 تَدْرِيبَاتُ الْمَدِّ اللَّازِمِ (ص ٣٠ - ٣٥)</div>
-                
-                <div class="question-block">
-                    <div class="question-text">١. حُكْمُ الْمَدِّ فِي قَوْلِهِ تَعَالَى ﴿الْحَاقَّةُ﴾ هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q4_1" value="false"> مَدٌّ مُتَّصِلٌ</label>
-                        <label class="option-label"><input type="radio" name="q4_1" value="true"> مَدٌّ لَازِمٌ (٦ حَرَكَاتٍ)</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٢. الْمَدُّ فِي حَرْفِ (ق) مِنْ قَوْلِهِ ﴿ق وَالْقُرْآنِ الْمَجِيدِ﴾ هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q4_2" value="true"> مَدٌّ لَازِمٌ حَرْفِيٌّ (٦ حَرَكَاتٍ)</label>
-                        <label class="option-label"><input type="radio" name="q4_2" value="false"> مَدٌّ طَبِيعِيٌّ (حَرَكَتَانِ)</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٣. الْحُرُوفُ الْمَجْمُوعَةُ فِي كَلِمَةِ (حَيٌّ طَهُرَ) فِي أَوَائِلِ السُّوَرِ تُمَدُّ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q4_3" value="true"> حَرَكَتَيْنِ (مَدٌّ طَبِيعِيٌّ حَرْفِيٌّ)</label>
-                        <label class="option-label"><input type="radio" name="q4_3" value="false"> ٦ حَرَكَاتٍ (لَازِمٌ)</label>
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('lesson4')">تَحَقَّقْ مِنَ الإِجَابَاتِ ✔️</button>
-                <div class="score-display"></div>
-            </div>
-        </div>
-
-        <!-- ================= الدرس الخامس: مد الصلة ومد العوض ================= -->
-        <div id="lesson5" class="section">
-            <h2>مَدُّ الصِّلَةِ وَالْعِوَضِ</h2>
-            <div class="lesson-text">
-                <span class="highlight">١. مَدُّ الصِّلَةِ:</span> يَتَعَلَّقُ بِهَاءِ الضَّمِيرِ لِلْمُفْرَدِ الْمُذَكَّرِ الْغَائِبِ الْوَاقِعَةِ بَيْنَ مُتَحَرِّكَيْنِ.<br>
-                - <b>صِلَةٌ صُغْرَى:</b> إِذَا لَمْ يَأْتِ بَعْدَ الْهَاءِ هَمْزَةٌ (بِهِ نَقْعًا). حَرَكَتَانِ.<br>
-                - <b>صِلَةٌ كُبْرَى:</b> إِذَا جَاءَ بَعْدَهَا هَمْزَةٌ (وَلَهُ أَخٌ). ٢ أَو ٤ أَو ٥ حَرَكَاتٍ.<br><br>
-                <span class="highlight">٢. مَدُّ الْعِوَضِ:</span> يَقَعُ عِنْدَ الْوَقْفِ عَلَى التَّنْوِينِ بِالْفَتْحِ فَقَطْ، فَنَسْتَبْدِلُهُ بِأَلِفٍ تُمَدُّ حَرَكَتَيْنِ. مِثْل: (عَلِيمًا ⬅ عَلِيمَا).
-            </div>
-
-            <!-- تدريبات الدرس الخامس -->
-            <div class="exercise-box">
-                <div class="exercise-title">📝 تَدْرِيبَاتُ الصِّلَةِ وَالْعِوَضِ (ص ٣٦ - ٣٩)</div>
-                
-                <div class="question-block">
-                    <div class="question-text">١. نَوْعُ الْمَدِّ فِي قَوْلِهِ (إِنَّهُ كَانَ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q5_1" value="true"> مَدُّ صِلَةٍ صُغْرَى</label>
-                        <label class="option-label"><input type="radio" name="q5_1" value="false"> مَدُّ صِلَةٍ كُبْرَى</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٢. نَوْعُ الْمَدِّ فِي قَوْلِهِ (وَثَاقَهُ أَحَدٌ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q5_2" value="false"> مَدُّ صِلَةٍ صُغْرَى</label>
-                        <label class="option-label"><input type="radio" name="q5_2" value="true"> مَدُّ صِلَةٍ كُبْرَى</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٣. كَيْفَ نَقِفُ عَلَى كَلِمَةِ (حَكِيمًا)؟</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q5_3" value="true"> نَقِفُ بِأَلِفِ مَدِّ عِوَضٍ (حَكِيمَا)</label>
-                        <label class="option-label"><input type="radio" name="q5_3" value="false"> نَقِفُ بِالسُّكُونِ (حَكِيمْ)</label>
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('lesson5')">تَحَقَّقْ مِنَ الإِجَابَاتِ ✔️</button>
-                <div class="score-display"></div>
-            </div>
-        </div>
-
-        <!-- ================= الدرس السادس: مراجعة شاملة ================= -->
-        <div id="lesson6" class="section">
-            <h2>مُرَاجَعَةٌ شَامِلَةٌ (ص ٤٠ - ٤٧)</h2>
-            <div class="lesson-text">
-                فِي هَذَا الْقِسْمِ سَنُذَكِّرُكَ بِأَحْكَامِ النُّونِ وَالْمِيمِ وَالْمُدُودِ الَّتِي دَرَسْتَهَا لِتَكُونَ مُتْقِنًا لِتِلَاوَةِ الْقُرْآنِ الْكَرِيمِ كَالأَبْطَالِ!
-            </div>
-
-            <!-- اختبار المراجعة الشاملة -->
-            <div class="exercise-box">
-                <div class="exercise-title">📝 اخْتِبَارُ الْأَبْطَالِ (صَحْ أَمْ خَطَأ وَاخْتِيَارَاتٌ)</div>
-                
-                <div class="question-block">
-                    <div class="question-text">١. كَلِمَةُ (شَاءَ) بِهَا أَلِفُ مَدٍّ مُتَّصِلٍ.</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q6_1" value="true"> صَحْ (✔️)</label>
-                        <label class="option-label"><input type="radio" name="q6_1" value="false"> خَطَأ (❌)</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٢. حُكْمُ النُّونِ فِي (أَنبَأَهُم) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q6_2" value="false"> إِظْهَارٌ</label>
-                        <label class="option-label"><input type="radio" name="q6_2" value="true"> إِقْلَابٌ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٣. حُكْمُ النُّونِ فِي (عَنْهَا) هُوَ إِخْفَاءٌ.</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q6_3" value="false"> صَحْ (✔️)</label>
-                        <label class="option-label"><input type="radio" name="q6_3" value="true"> خَطَأ (❌) - الصَّحِيحُ إِظْهَارٌ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٤. حُكْمُ التَّنْوِينِ فِي (نَفْسٍ لِّنَفْسٍ) هُوَ:</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q6_4" value="true"> إِدْغَامٌ بِغَيْرِ غُنَّةٍ</label>
-                        <label class="option-label"><input type="radio" name="q6_4" value="false"> إِدْغَامٌ بِغُنَّةٍ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٥. حُرُوفُ الإِدْغَامِ بِغُنَّةٍ هِيَ (ء هـ ع ح غ خ).</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q6_5" value="false"> صَحْ (✔️)</label>
-                        <label class="option-label"><input type="radio" name="q6_5" value="true"> خَطَأ (❌) - هَذِهِ حُرُوفُ الْإِظْهَارِ</label>
-                    </div>
-                </div>
-
-                <div class="question-block">
-                    <div class="question-text">٦. نَوْعُ الْمَدِّ فِي كَلِمَةِ (الإِنسَانُ) هُوَ عَارِضٌ لِلسُّكُونِ إِذَا وَقَفْنَا عَلَيْهَا.</div>
-                    <div class="options-group">
-                        <label class="option-label"><input type="radio" name="q6_6" value="true"> صَحْ (✔️)</label>
-                        <label class="option-label"><input type="radio" name="q6_6" value="false"> خَطَأ (❌)</label>
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('lesson6')">تَحَقَّقْ مِنَ الإِجَابَاتِ ✔️</button>
-                <div class="score-display"></div>
-            </div>
-        </div>
-
-        <!-- ================= متن تحفة الأطفال ================= -->
-        <div id="lesson7" class="section">
-            <h2>مَتْنُ تُحْفَةِ الأَطْفَالِ لِسُلَيْمَانَ الْجَمْزُورِيِّ</h2>
-            <div class="poem-container">
-                <center><h3 class="poem-title">الْمُقَدِّمَةُ</h3></center>
-                <div class="poem-line">يَقُولُ رَاجِي رَحْمَةِ الْغَفُورِ ... دَوْمَاً سُلَيْمَانُ هُوَ الجَمْزُورِي</div>
-                <div class="poem-line">الْحَمْدُ لِلَّهِ مُصَلِّيَاً عَلَى ... مُحَمَّدٍ وَآلِهِ وَمَنْ تَلَا</div>
-                <div class="poem-line">وَبَعْدُ هَذَا النَّظْمُ لِلْمُرِيدِ ... فِي النُّونِ وَالتَّنْوِينِ وَالْمُدُودِ</div>
-                <div class="poem-line">سَمَّيْتُهُ بِتُحْفَةِ الأَطْفَالِ ... عَنْ شَيْخِنَا الْمِيهِيِّ ذِي الْكَمَالِ</div>
-                <div class="poem-line">أَرْجُو بِهِ أَنْ يَنْفَعَ الطُّلَّابَا ... وَالأَجْرَ وَالْقَبُولَ وَالثَّوَابَا</div>
-                
-                <center><h3 class="poem-title">أَحْكَامُ النُّونِ السَّاكِنَةِ وَالتَّنْوِينِ</h3></center>
-                <div class="poem-line">لِلنُّونِ إِنْ تَسْكُنْ وَلِلتَّنْوِينِ ... أَرْبَعُ أَحْكَامٍ فَخُذْ تَبْيِينِي</div>
-                <div class="poem-line">فَالأَوَّلُ الإِظْهَارُ قَبْلَ أَحْرُفِ ... لِلْحَلْقِ سِتٌّ رُتِّبَتْ فَلْتَعْرِفِ</div>
-                <div class="poem-line">هَمْزٌ فَهَاءٌ ثُمَّ عَيْنٌ حَاءُ ... مُهْمَلَتَانِ ثُمَّ غَيْنٌ خَاءُ</div>
-                <div class="poem-line">وَالثَّانِي إِدْغَامٌ بِسِتَّةٍ أَتَتْ ... فِي يَرْمَلُونَ عِنْدَهُمْ قَدْ ثَبَتَتْ</div>
-                <div class="poem-line">لَكِنَّهَا قِسْمَانِ قِسْمٌ يُدْغَمَا ... فِيهِ بِغُنَّةٍ بِيَنْمُو عُلِمَا</div>
-                <div class="poem-line">إِلَّا إِذَا كَانَا بِكِلْمَةٍ فَلَا ... تُدْغِمْ كَدُنْيَا ثُمَّ صِنْوَانٍ تَلَا</div>
-                <div class="poem-line">وَالثَّانِي إِدْغَامٌ بِغَيْرِ غُنَّةْ ... فِي اللَّامِ وَالرَّا ثُمَّ كَرِّرَنَّهْ</div>
-                <div class="poem-line">وَالثَّالِثُ الإِقْلَابُ عِنْدَ الْبَاءِ ... مِيمَاً بِغُنَّةٍ مَعَ الإِخْفَاءِ</div>
-                <div class="poem-line">وَالرَّابِعُ الإِخْفَاءُ عِنْدَ الْفَاضِلِ ... مِنَ الحُرُوفِ وَاجِبٌ لِلْفَاضِلِ</div>
-                <div class="poem-line">فِي خَمْسَةٍ مِنْ بَعْدِ عَشْرٍ رَمْزُهَا ... فِي كِلْمِ هَذَا البَيْتِ قَدْ ضَمَّنْتُهَا</div>
-                <div class="poem-line">صِفْ ذَا ثَنَا كَمْ جَادَ شَخْصٌ قَدْ سَمَا ... دُمْ طَيِّبَاً زِدْ فِي تُقَىً ضَعْ ظَالِمَا</div>
-                
-                <center><h3 class="poem-title">أَحْكَامُ الْمِيمِ وَالنُّونِ الْمُشَدَّدَتَيْنِ</h3></center>
-                <div class="poem-line">وَغُنَّ مِيمَاً ثُمَّ نُونَاً شُدِّدَا ... وَسَمِّ كُلَّاً حَرْفَ غُنَّةٍ بَدَا</div>
-
-                <center><h3 class="poem-title">أَحْكَامُ الْمِيمِ السَّاكِنَةِ</h3></center>
-                <div class="poem-line">وَالْمِيمُ إِنْ تَسْكُنْ تَجِي قَبْلَ الْهِجَا ... لَا أَلِفٍ لَيِّنَةٍ لِذِي الْحِجَا</div>
-                <div class="poem-line">أَحْكَامُهَا ثَلَاثَةٌ لِمَنْ ضَبَطْ ... إِخْفَاءٌ ادْغَامٌ وَإِظْهَارٌ فَقَطْ</div>
-                <div class="poem-line">فَالأَوَّلُ الإِخْفَاءُ عِنْدَ الْبَاءِ ... وَسَمِّهِ الشَّفْوِيَّ لِلْقُرَّاءِ</div>
-                <div class="poem-line">وَالثَّانِي إِدْغَامٌ بِمِثْلِهَا أَتَى ... وَسَمِّ إِدْغَامَاً صَغِيرَاً يَا فَتَى</div>
-                <div class="poem-line">وَالثَّالِثُ الإِظْهَارُ فِي الْبَقِيَّةْ ... مِنْ أَحْرُفٍ وَسَمِّهَا شَفْوِيَّةْ</div>
-                <div class="poem-line">وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي ... لِقُرْبِهَا وَالاتِّحَادِ فَاعْرِفِ</div>
-
-                <center><h3 class="poem-title">حُكْمُ لَامِ أَلْ وَلَامِ الْفِعْلِ</h3></center>
-                <div class="poem-line">لِلَامِ أَلْ حَالَانِ قَبْلَ الأَحْرُفِ ... أُولَاهُمَا إِظْهَارُهَا فَلْتَعْرِفِ</div>
-                <div class="poem-line">قَبْلَ ارْبَعٍ مَعْ عَشْرَةٍ خُذْ عِلْمَهُ ... مِنْ إِبْغِ حَجَّكَ وَخَفْ عَقِيمَهُ</div>
-                <div class="poem-line">ثَانِيهِمَا إِدْغَامُهَا فِي أَرْبَعِ ... وَعَشْرَةٍ أَيْضَاً وَرَمْزَهَا فَعِ</div>
-                <div class="poem-line">طِبْ ثُمَّ صِلْ رُحْمَاً تَفُزْ ضِفْ ذَا نِعَمْ ... دَعْ سُوءَ ظَنٍّ زُرْ شَرِيفَاً لِلْكَرَمْ</div>
-                <div class="poem-line">وَاللَّامَ الأُولَى سَمِّهَا قَمْرِيَّةْ ... وَاللَّامَ الأُخْرَى سَمِّهَا شَمْسِيَّةْ</div>
-                <div class="poem-line">وَأظْهِرَنَّ لَامَ فِعْلٍ مُطْلَقَا ... فِي نَحْوِ قُلْ نَعَمْ وَقُلْنَا وَالْتَقَى</div>
-
-                <center><h3 class="poem-title">فِي الْمِثْلَيْنِ وَالْمُتَقَارِبَيْنِ وَالْمُتَجَانِسَيْنِ</h3></center>
-                <div class="poem-line">إِنْ فِي الصِّفَاتِ وَالْمَخَارِجِ اتَّفَقْ ... حَرْفَانِ فَالْمِثْلَانِ فِيهِمَا أَحَقْ</div>
-                <div class="poem-line">وَإِنْ يَكُونَا مَخْرَجَاً تَقَارَبَا ... وَفِي الصِّفَاتِ اخْتَلَفَا يُلَقَّبَا</div>
-                <div class="poem-line">مُتَقَارِبَيْنِ أَوْ يَكُونَا اتَّفَقَا ... فِي مَخْرَجٍ دُونَ الصِّفَاتِ حُقِّقَا</div>
-                <div class="poem-line">بِالْمُتَجَانِسَيْنِ ثُمَّ إِنْ سَكَنْ ... أَوَّلُ كُلٍّ فَالصَّغِيرَ سَمِّيَنْ</div>
-                <div class="poem-line">أَوْ حُرِّكَ الحَرْفَانِ فِي كُلٍّ فَقُلْ ... كُلٌّ كَبِيرٌ وَافْهَمَنْهُ بِالْمُثُلْ</div>
-
-                <center><h3 class="poem-title">أَقْسَامُ الْمَدِّ</h3></center>
-                <div class="poem-line">وَالْمَدُّ أَصْلِيٌّ وَ فَرْعِيٌّ لَهُ ... وَسَمِّ أَوَّلَاً طَبِيعِيَّاً وَهُو</div>
-                <div class="poem-line">مَا لَا تَوَقُّفٌ لَهُ عَلَى سَبَبْ ... وَلَا بِدُونِهِ الحُرُوفُ تُجْتَلَبْ</div>
-                <div class="poem-line">بَلْ أَيُّ حَرْفٍ غَيْرُ هَمْزٍ أَوْ سُكُونْ ... جَا بَعْدَ مَدٍّ فَالطَّبِيعِيَّ يَكُونْ</div>
-                <div class="poem-line">وَالآخَرُ الْفَرْعِيُّ مَوْقُوفٌ عَلَى ... سَبَبْ كَهَمْزٍ أَوْ سُكُونٍ مُسْجَلَا</div>
-                <div class="poem-line">حُرُوفُهُ ثَلَاثَةٌ فَعِيهَا ... مِنْ لَفْظِ وَايٍ وَهْيَ فِي نُوحِيهَا</div>
-                <div class="poem-line">وَالْكَسْرُ قَبْلَ الْيَا وَقَبْلَ الْوَاوِ ضَمْ ... شَرْطٌ وَفَتْحٌ قَبْلَ أَلِفٍ يُلْتَزَمْ</div>
-                <div class="poem-line">وَاللِّينُ مِنْهَا الْيَا وَوَاوٌ سُكِّنَا ... إِنِ انْفِتَاحٌ قَبْلَ كُلٍّ أُعْلِنَا</div>
-
-                <center><h3 class="poem-title">أَحْكَامُ الْمَدِّ</h3></center>
-                <div class="poem-line">لِلْمَدِّ أَحْكَامٌ ثَلَاثَةٌ تَدُومْ ... وَهْيَ الْوُجُوبُ وَالْجَوَازُ وَاللُّزُومْ</div>
-                <div class="poem-line">فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدْ ... فِي كِلْمَةٍ وَذَا بِمُتَّصِلٍ يُعَدْ</div>
-                <div class="poem-line">وَجَائِزٌ مَدٌّ وَقَصْرٌ إِنْ فُصِلْ ... كُلٌّ بِكِلْمَةٍ وَهَذَا الْمُنْفَصِلْ</div>
-                <div class="poem-line">وَمِثْلُ ذَا إِنْ عَرَضَ السُّكُونُ ... وَقْفَاً كَتَعْلَمُونَ نَسْتَعِينُ</div>
-                <div class="poem-line">أَوْ قُدِّمَ الْهَمْزُ عَلَى الْمَدِّ وَذَا ... بَدَلْ كَآمَنُوا وَإِيمَانَاً خُذَا</div>
-                <div class="poem-line">وَلَازِمٌ إِنِ السُّكُونُ أُصِّلَا ... وَصْلَاً وَوَقْفَاً بَعْدَ مَدٍّ طُوِّلَا</div>
-
-                <center><h3 class="poem-title">أَقْسَامُ الْمَدِّ اللَّازِمِ</h3></center>
-                <div class="poem-line">أَقْسَامُ لَازِمٍ لَدَيْهِمْ أَرْبَعَةْ ... وَتِلْكَ كِلْمِيٌّ وَحَرْفِيٌّ مَعَهْ</div>
-                <div class="poem-line">كِلَاهُمَا مُخَفَّفٌ مُثَقَّلُ ... فَهَذِهِ أَرْبَعَةٌ تُفَصَّلُ</div>
-                <div class="poem-line">فَإِنْ بِكِلْمَةٍ سُكُونٌ اجْتَمَعْ ... مَعْ حَرْفِ مَدٍّ فَهْوَ كِلْمِيٌّ وَقَعْ</div>
-                <div class="poem-line">أَوْ فِي ثُلَاثِيِّ الحُرُوفِ وُجِدَا ... وَالْمَدُّ وَسْطُهُ فَحَرْفِيٌّ بَدَا</div>
-                <div class="poem-line">كِلَاهُمَا مُثَقَّلٌ إِنْ أُدْغِمَا ... مُخَفَّفٌ كُلٌّ إِذَا لَمْ يُدْغَمَا</div>
-                <div class="poem-line">وَاللَّازِمُ الْحَرْفِيُّ أَوَّلَ السُّوَرْ ... وُجُودُهُ وَفِي ثَمَانٍ انْحَصَرْ</div>
-                <div class="poem-line">يَجْمَعُهَا حُرُوفُ كَمْ عَسَلْ نَقَصْ ... وَعَيْنُ ذُو وَجْهَيْنِ وَالطُّولُ أَخَصْ</div>
-                <div class="poem-line">وَمَا سِوَى الحَرْفِ الثُّلَاثِي لَا أَلِفْ ... فَمَدُّهُ مَدَّاً طَبِيعِيَّاً أُلِفْ</div>
-                <div class="poem-line">وَذَاكَ أَيْضَاً فِي فَوَاتِحِ السُّوَرْ ... فِي لَفْظِ حَيٍّ طَاهِرٍ قَدِ انْحَصَرْ</div>
-                <div class="poem-line">وَيَجْمَعُ الْفَوَاتِحَ الأَرْبَعْ عَشَرْ ... صِلْهُ سُحَيْرَاً مَنْ قَطَعْكَ ذَا اشْتَهَرْ</div>
-
-                <center><h3 class="poem-title">الْخَاتِمَةُ</h3></center>
-                <div class="poem-line">وَتَمَّ ذَا النَّظْمُ بِحَمْدِ اللَّهِ ... عَلَى تَمَامِهِ بِلَا تَنَاهِي</div>
-                <div class="poem-line">أَبْيَاتُهُ نَدٌّ بَدَا لِذِي النُّهَى ... تَارِيخُهَا بُشْرَى لِمَنْ يُتْقِنُهَا</div>
-                <div class="poem-line">ثُمَّ الصَّلَاةُ وَالسَّلَامُ أَبَدَا ... عَلَى خِتَامِ الأَنْبِيَاءِ أَحْمَدَا</div>
-                <div class="poem-line">وَالآلِ وَالصَّحْبِ وَكُلِّ تَابِعِ ... وَكُلِّ قَارِئٍ وَكُلِّ سَامِعِ</div>
-            </div>
-        </div>
-
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="almarai-bold">
+        <h2>أقسام الدروس</h2>
+        <button class="nav-btn" onclick="showSection('home')">🏠 الصفحة الرئيسية</button>
+        <button class="nav-btn" onclick="showSection('lesson1')">1️⃣ الميم والنون المشددتين</button>
+        <button class="nav-btn" onclick="showSection('lesson2')">2️⃣ أحكام الميم الساكنة</button>
+        <button class="nav-btn" onclick="showSection('lesson3')">3️⃣ أحكام النون الساكنة والتنوين</button>
+        <button class="nav-btn" onclick="showSection('lesson4')">4️⃣ أقسام المد الطبيعي</button>
+        <button class="nav-btn" onclick="showSection('revision')">📝 مراجعة عامة</button>
+        <button class="nav-btn" onclick="showSection('poem')">📜 متن تحفة الأطفال</button>
     </div>
 
-    <!-- نظام التصحيح والتنقل (JavaScript) -->
+    <!-- Main Content Area -->
+    <div id="content" class="almarai-regular">
+        
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <h1 class="almarai-extrabold">مرحباً بك في فتوحات الرحمن 📖</h1>
+            <div class="lesson-box" style="text-align: center;">
+                <p>تطبيق تعليمي تفاعلي للأطفال لتعلم تيسير تجويد القرآن الكريم.</p>
+                <p>اختر درساً من القائمة الجانبية لتبدأ رحلتك الممتعة مع كتاب الله!</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/3389/3389081.png" width="150" alt="Quran Icon">
+            </div>
+        </div>
+
+        <!-- Lesson 1 -->
+        <div id="lesson1" class="section">
+            <h1 class="almarai-extrabold">الدرس الأول: الميم والنون المشددتين</h1>
+            <div class="lesson-box">
+                <p>أي ميم أو نون (عليها شدة) تغن بمقدار <strong>حركتين</strong>.</p>
+                <p>أمثلة على حرف الميم المشدد: <span class="quran-text">عَمَّ</span> ، <span class="quran-text">حَمَّالَةَ</span></p>
+                <p>أمثلة على حرف النون المشدد: <span class="quran-text">إِنَّ</span> ، <span class="quran-text">إِنَّهَا</span></p>
+                <p style="color: #c0392b; font-size:1.8rem; text-align:center;">الشاهد من التحفة: وَغُـنَّ مِيـماً ثُـمَّ نُونـاً شُــدِّدَا ... وَسَــمِّ كُـلاً حَـرْفَ غُـنَّـةٍ بَـدَا</p>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="question">تدريب: استخرج الكلمة التي بها حرف غنة مشدد (ميم أو نون):</div>
+                <div class="options">
+                    <label><input type="radio" name="q1_1" value="wrong"> وَلَقَدْ </label>
+                    <label><input type="radio" name="q1_1" value="correct"> هَمَّتْ </label>
+                    <label><input type="radio" name="q1_1" value="wrong"> بِهِ </label>
+                </div>
+                <div class="options">
+                    <label><input type="radio" name="q1_2" value="wrong"> الْيَاقُوتُ </label>
+                    <label><input type="radio" name="q1_2" value="wrong"> وَالْمَرْجَانُ </label>
+                    <label><input type="radio" name="q1_2" value="correct"> كَأَنَّهُنَّ </label>
+                </div>
+                <button class="submit-btn" onclick="checkAnswers('q1', 2)">تحقق من الإجابة ✅</button>
+                <div id="score-q1" class="score-display"></div>
+            </div>
+        </div>
+
+        <!-- Lesson 2 -->
+        <div id="lesson2" class="section">
+            <h1 class="almarai-extrabold">الدرس الثاني: أحكام الميم الساكنة</h1>
+            <div class="lesson-box">
+                <p>للميم الساكنة ثلاثة أحكام رئيسية:</p>
+                <ul>
+                    <li><strong>الإخفاء الشفوي:</strong> ميم ساكنة + حرف الباء (ب) = تخفى الميم بغنة حركتين. (مثال: <span class="quran-text">هُم بَارِزُونَ</span>)</li>
+                    <li><strong>إدغام المثلين الصغير:</strong> ميم ساكنة + ميم (م) = تدغم وتصبح ميماً واحدة مشددة. (مثال: <span class="quran-text">لَهُم مَّغْفِرَةٌ</span>)</li>
+                    <li><strong>الإظهار الشفوي:</strong> ميم ساكنة + باقي الحروف = تُظهر الميم بدون غنة كاملة. (مثال: <span class="quran-text">الْحَمْدُ لِلَّهِ</span>)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-container">
+                <div class="question">تدريب: اختر الحكم التجويدي الصحيح لما تحته خط:</div>
+                <div class="options">
+                    <p class="quran-text">يُطَافُ عَلَيْهِم بِكَأْسٍ</p>
+                    <label><input type="radio" name="q2_1" value="correct"> إخفاء شفوي</label>
+                    <label><input type="radio" name="q2_1" value="wrong"> إدغام مثلين صغير</label>
+                    <label><input type="radio" name="q2_1" value="wrong"> إظهار شفوي</label>
+                </div>
+                <div class="options">
+                    <p class="quran-text">أَطْعَمَهُم مِّن جُوعٍ</p>
+                    <label><input type="radio" name="q2_2" value="wrong"> إخفاء شفوي</label>
+                    <label><input type="radio" name="q2_2" value="correct"> إدغام مثلين صغير</label>
+                </div>
+                <button class="submit-btn" onclick="checkAnswers('q2', 2)">تحقق من الإجابة ✅</button>
+                <div id="score-q2" class="score-display"></div>
+            </div>
+        </div>
+
+        <!-- Lesson 3 -->
+        <div id="lesson3" class="section">
+            <h1 class="almarai-extrabold">الدرس الثالث: النون الساكنة والتنوين</h1>
+            <div class="lesson-box">
+                <p>أحكام النون الساكنة والتنوين أربعة:</p>
+                <ol>
+                    <li><strong>الإظهار الحلقي:</strong> حروفه (ء، هـ، ع، ح، غ، خ).</li>
+                    <li><strong>الإدغام:</strong> حروفه (يرملون). ينقسم إلى بغنة (ينمو) وبغير غنة (ل، ر).</li>
+                    <li><strong>الإقلاب:</strong> حرفه (ب). تقلب النون ميماً مخفاة بغنة.</li>
+                    <li><strong>الإخفاء الحقيقي:</strong> باقي الحروف (١٥ حرفاً).</li>
+                </ol>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="question">تدريب: صل الكلمة بحكمها المناسب:</div>
+                <div class="options">
+                    <p class="quran-text">مِن بَعْدِ</p>
+                    <label><input type="radio" name="q3_1" value="correct"> إقلاب</label>
+                    <label><input type="radio" name="q3_1" value="wrong"> إظهار حلقي</label>
+                </div>
+                <div class="options">
+                    <p class="quran-text">مِن رَّبِّهِمْ</p>
+                    <label><input type="radio" name="q3_2" value="wrong"> إدغام بغنة</label>
+                    <label><input type="radio" name="q3_2" value="correct"> إدغام بغير غنة</label>
+                </div>
+                <button class="submit-btn" onclick="checkAnswers('q3', 2)">تحقق من الإجابة ✅</button>
+                <div id="score-q3" class="score-display"></div>
+            </div>
+        </div>
+
+        <!-- Lesson 4 -->
+        <div id="lesson4" class="section">
+            <h1 class="almarai-extrabold">الدرس الرابع: أقسام المد</h1>
+            <div class="lesson-box">
+                <p><strong>المد الطبيعي:</strong> هو ما لا تقوم ذات الحرف إلا به ولا يتوقف على سبب (همز أو سكون).</p>
+                <p>حروفه ثلاثة (مجموعة في كلمة نُوحِيهَا):</p>
+                <ul>
+                    <li>الألف الساكنة المفتوح ما قبلها (مثال: <span class="quran-text">قَالَ</span>)</li>
+                    <li>الواو الساكنة المضموم ما قبلها (مثال: <span class="quran-text">يَقُولُ</span>)</li>
+                    <li>الياء الساكنة المكسور ما قبلها (مثال: <span class="quran-text">قِيلَ</span>)</li>
+                </ul>
+            </div>
+
+            <div class="quiz-container">
+                <div class="question">تدريب: حدد حرف المد في الكلمة التالية:</div>
+                <div class="options">
+                    <p class="quran-text">غَفُورًا</p>
+                    <label><input type="radio" name="q4_1" value="wrong"> الألف</label>
+                    <label><input type="radio" name="q4_1" value="correct"> الواو</label>
+                    <label><input type="radio" name="q4_1" value="wrong"> الياء</label>
+                </div>
+                <button class="submit-btn" onclick="checkAnswers('q4', 1)">تحقق من الإجابة ✅</button>
+                <div id="score-q4" class="score-display"></div>
+            </div>
+        </div>
+
+        <!-- Revision -->
+        <div id="revision" class="section">
+            <h1 class="almarai-extrabold">📝 مراجعة عامة شاملة</h1>
+            <div class="lesson-box">
+                <p>لنختبر معلوماتك في الأحكام التي تعلمتها من كتاب (فتوحات الرحمن)!</p>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="question">١- استخرج الحكم من: <span class="quran-text">وَأَمَّا السَّائِلَ</span></div>
+                <div class="options">
+                    <label><input type="radio" name="q5_1" value="wrong"> مد بدل</label>
+                    <label><input type="radio" name="q5_1" value="correct"> مد متصل</label>
+                    <label><input type="radio" name="q5_1" value="wrong"> مد منفصل</label>
+                </div>
+
+                <div class="question">٢- استخرج الحكم من: <span class="quran-text">مِن قَبْلِهِ</span></div>
+                <div class="options">
+                    <label><input type="radio" name="q5_2" value="wrong"> إظهار حلقي</label>
+                    <label><input type="radio" name="q5_2" value="correct"> إخفاء حقيقي</label>
+                </div>
+
+                <div class="question">٣- استخرج الحكم من: <span class="quran-text">وَمَن يَعْمَلْ</span></div>
+                <div class="options">
+                    <label><input type="radio" name="q5_3" value="correct"> إدغام بغنة</label>
+                    <label><input type="radio" name="q5_3" value="wrong"> إقلاب</label>
+                </div>
+
+                <button class="submit-btn" onclick="checkAnswers('q5', 3)">عرض النتيجة النهائية 🏆</button>
+                <div id="score-q5" class="score-display"></div>
+            </div>
+        </div>
+
+        <!-- Poem Text (Tuhfat al-Atfal) -->
+        <div id="poem" class="section">
+            <h1 class="almarai-extrabold">📜 متن تحفة الأطفال والغلمان</h1>
+            <h3 style="text-align: center; color: #7f8c8d; font-size: 2rem;">تأليف: سليمان الجمزوري</h3>
+            
+            <div class="poem-container">
+                <div class="poem-line">
+                    <div>يَقُـولُ رَاجِـي رَحْمَـةِ الْغَـفُـورِ</div><div class="poem-separator">۞</div><div>دَوْمَـاً سُلَيْمَـانُ هُـوَ الْجَمْـزُورِي</div>
+                </div>
+                <div class="poem-line">
+                    <div>الْحَمْـدُ لِلَّهِ مُـصَـلِّـيَـاً عَـلَـى</div><div class="poem-separator">۞</div><div>مُـحَـمَّـدٍ وَآلِــهِ وَمَـنْ تَـلَا</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَبَعْـدُ هَـذَا النَّـظْـمُ لِلْـمُـرِيدِ</div><div class="poem-separator">۞</div><div>فِـي النُّـونَ وَالتَّنْوِيـنِ وَالْمُـدُودِ</div>
+                </div>
+                <div class="poem-line">
+                    <div>سَـمَّيْـتُـهُ بِتُحْـفَـةِ الْأَطْفَـالِ</div><div class="poem-separator">۞</div><div>عَـنْ شَيْخِنَا الْمِيهِـيِّ ذِي الْكَمَالِ</div>
+                </div>
+                <div class="poem-line">
+                    <div>أَرْجُـو بِـهِ أَنْ يَنْفَـعَ الطُّـلَّابَـا</div><div class="poem-separator">۞</div><div>وَالْأَجْـرَ وَالْـقَبُـولَ وَالثَّـوَابَـا</div>
+                </div>
+                
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">أَحْكَامُ النُّونِ السَّاكِنَةِ وَالتَّنْوِينِ</h3>
+                
+                <div class="poem-line">
+                    <div>لِلـنُّـونِ إِنْ تَسْكُنْ وَلِلتَّنْـوِينِ</div><div class="poem-separator">۞</div><div>أَرْبَـعُ أَحْكَـامٍ فَخُـذْ تَبْيِيـنِـي</div>
+                </div>
+                <div class="poem-line">
+                    <div>فَالْأَوَّلُ الإِظْهَـارُ قَبْـلَ أَحْـرُفِ</div><div class="poem-separator">۞</div><div>لِلْحَلْـقِ سِـتٌّ رُتِّبَـتْ فَلْتَعْـرِفِ</div>
+                </div>
+                <div class="poem-line">
+                    <div>هَمْـزٌ فَهَـاءٌ ثُـمَّ عَيْـنٌ حَـاءُ</div><div class="poem-separator">۞</div><div>مُـهْمَلَتَـانِ ثُـمَّ غَيْـنٌ خَـاءُ</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالثَّـانِ إِدْغَـامٌ بِسِتَّـةٍ أَتَـتْ</div><div class="poem-separator">۞</div><div>فِـي يَرْمَلُـونَ عِنْدَهُمْ قَدْ ثَبَتَتْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>لَكِنَّهَا قِسْمَانِ قِسْـمٌ يُدْغَمَـا</div><div class="poem-separator">۞</div><div>فِيـهِ بِـغُـنَّـةٍ بِيَنْـمُـو عُلِمَـا</div>
+                </div>
+                <div class="poem-line">
+                    <div>إِلَّا إِذَا كَانَا بِكِـلْمَـةٍ فَلَا</div><div class="poem-separator">۞</div><div>تُدْغِـمْ كَدُنْيَـا ثُـمَّ صِنْـوَانٍ تَلَا</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالثَّـانِ إِدْغَـامٌ بِغَيْـرِ غُـنَّـةْ</div><div class="poem-separator">۞</div><div>فِـي اللَّامِ وَالـرَّا ثُـمَّ كَـرِّرَنَّـهْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالثَّالِثُ الإِقْلَابُ عِنْدَ الْبَـاءِ</div><div class="poem-separator">۞</div><div>مِيمَـاً بِغُنَّـةٍ مَـعَ الإِخْـفَـاءِ</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالرَّابِعُ الإِخْفَاءُ عِنْدَ الْفَاضِـلِ</div><div class="poem-separator">۞</div><div>مِـنَ الحُـرُوفِ وَاجِبٌ لِلْفَاضِـلِ</div>
+                </div>
+                <div class="poem-line">
+                    <div>فِي خَمْسَةٍ مِنْ بَعْدِ عَشْرٍ رَمْزُهَـا</div><div class="poem-separator">۞</div><div>فِي كِلْمِ هَذَا الْبَيْتِ قَـدْ ضَمَّنْتُهَـا</div>
+                </div>
+                <div class="poem-line">
+                    <div>صِفْ ذَا ثَنَا كَمْ جَادَ شَخْصٌ قَدْ سَمَا</div><div class="poem-separator">۞</div><div>دُمْ طَيِّبَاً زِدْ فِي تُقَـىً ضَعْ ظَالِمَـا</div>
+                </div>
+
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">أَحْكَامُ الْمِيمِ وَالنُّونِ الْمُشَدَّدَتَيْنِ</h3>
+                <div class="poem-line">
+                    <div>وَغُـنَّ مِيـمَـاً ثُـمَّ نُونَـاً شُـدِّدَا</div><div class="poem-separator">۞</div><div>وَسَـمِّ كُـلاً حَـرْفَ غُـنَّـةٍ بَـدَا</div>
+                </div>
+
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">أَحْكَامُ الْمِيمِ السَّاكِنَةِ</h3>
+                <div class="poem-line">
+                    <div>وَالْمِيـمُ إِنْ تَسْكُنْ تَجِي قَبْلَ الْهِجَا</div><div class="poem-separator">۞</div><div>لَا أَلِــفٍ لَيِّنَـةٍ لِـذِي الْـحِجَـا</div>
+                </div>
+                <div class="poem-line">
+                    <div>أَحْكَامُـهَا ثَلَاثَـةٌ لِمَـنْ ضَبَـطْ</div><div class="poem-separator">۞</div><div>إِخْفَـاءٌ ادْغَـامٌ وَإِظْـهَـارٌ فَـقَـطْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>فَالْأَوَّلُ الإِخْفَـاءُ قَبْـلَ الْبَـاءِ</div><div class="poem-separator">۞</div><div>وَسَـمِّهِ الشَّفْـوِيَّ لِلْـقُـرَّاءِ</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالثَّانِ إِدْغَـامٌ بِمِثْلِهَـا أَتَـى</div><div class="poem-separator">۞</div><div>وَسَـمِّ إِدْغَـامَاً صَغِـيرَاً يَا فَتَـى</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالثَّالِثُ الإِظْهَارُ فِـي الْبَقِيَّـةْ</div><div class="poem-separator">۞</div><div>مِنْ أَحْرُفٍ وَسَمِّهَا شَفْوِيَّـةْ</div>
+                </div>
+
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">أَقْسَامُ الْمَدِّ</h3>
+                <div class="poem-line">
+                    <div>وَالْمَدُّ أَصْلِيٌّ وَفَرْعِيٌّ لَهُ</div><div class="poem-separator">۞</div><div>وَسَمِّ أَوَّلَاً طَبِيعِيَّاً وَهُوَ</div>
+                </div>
+                <div class="poem-line">
+                    <div>مَا لَا تَوَقُّفٌ لَهُ عَلَى سَبَبْ</div><div class="poem-separator">۞</div><div>وَلَا بِدُونِهِ الحُرُوفُ تُجْتَلَبْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>بَلْ أَيُّ حَرْفٍ غَيْرُ هَمْزٍ أَوْ سُكُونْ</div><div class="poem-separator">۞</div><div>جَا بَعْدَ مَدٍّ فَالطَّبِيعِيَّ يَكُونْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالْآخَرُ الْفَرْعِيُّ مَوْقُوفٌ عَلَى</div><div class="poem-separator">۞</div><div>سَبَبْ كَهَمْزٍ أَوْ سُكُونٍ مُسْجَلَا</div>
+                </div>
+                
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">أَحْكَامُ الْمَدِّ</h3>
+                <div class="poem-line">
+                    <div>لِلْمَدِّ أَحْكَامٌ ثَلَاثَةٌ تَدُومْ</div><div class="poem-separator">۞</div><div>وَهْيَ الْوُجُوبُ وَالْجَوَازُ وَاللُّزُومْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدْ</div><div class="poem-separator">۞</div><div>فِي كِلْمَةٍ وَذَا بِمُتَّصِلٍ يُعَدْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَجَائِزٌ مَدٌّ وَقَصْرٌ إِنْ فُصِلْ</div><div class="poem-separator">۞</div><div>كُلٌّ بِكِلْمَةٍ وَهَذَا الْمُنْفَصِلْ</div>
+                </div>
+
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">أَقْسَامُ الْمَدِّ اللَّازِمِ</h3>
+                <div class="poem-line">
+                    <div>أَقْسَامُ لَازِمٍ لَدَيْهِمْ أَرْبَعَةْ</div><div class="poem-separator">۞</div><div>وَتِلْكَ كِلْمِيٌّ وَحَرْفِيٌّ مَعَهْ</div>
+                </div>
+                <div class="poem-line">
+                    <div>كِلَاهُمَا مُخَفَّفٌ مُثَقَّلُ</div><div class="poem-separator">۞</div><div>فَهَذِهِ أَرْبَعَةٌ تُفَصَّلُ</div>
+                </div>
+                
+                <h3 style="text-align:center; color:#e67e22; font-size:2.5rem; margin-top:40px;">الخَاتِمَة</h3>
+                <div class="poem-line">
+                    <div>وَتَمَّ ذَا النَّظْمُ بِحَمْدِ اللَّهِ</div><div class="poem-separator">۞</div><div>عَلَى تَمَامِهِ بِلَا تَنَاهِي</div>
+                </div>
+                <div class="poem-line">
+                    <div>أَبْيَاتُهُ نَدٌّ بَدَا لِذِي النُّهَى</div><div class="poem-separator">۞</div><div>تَارِيخُهَا بُشْرَى لِمَنْ يُتْقِنُهَا</div>
+                </div>
+                <div class="poem-line">
+                    <div>ثُمَّ الصَّلَاةُ وَالسَّلَامُ أَبَدَا</div><div class="poem-separator">۞</div><div>عَلَى خِتَامِ الأَنْبِيَاءِ أَحْمَدَا</div>
+                </div>
+                <div class="poem-line">
+                    <div>وَالْآلِ وَالصَّحْبِ وَكُلِّ تَابِعِ</div><div class="poem-separator">۞</div><div>وَكُلِّ قَارِئٍ وَكُلِّ سَامِعِ</div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Interactive Logic Scripts -->
     <script>
-        // إظهار القسم المطلوب وإخفاء الباقي
-        function showSection(id) {
-            // إخفاء جميع الأقسام
+        function showSection(sectionId) {
+            // Hide all sections
             const sections = document.querySelectorAll('.section');
             sections.forEach(sec => sec.classList.remove('active'));
-            
-            // إظهار القسم المختار
-            document.getElementById(id).classList.add('active');
 
-            // تحديث حالة الأزرار
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll to top automatically
+            document.getElementById('content').scrollTo(0,0);
         }
 
-        // دالة التحقق من الإجابات وحساب النقاط
-        function checkAnswers(sectionId) {
-            const container = document.getElementById(sectionId);
-            const questions = container.querySelectorAll('.question-block');
+        function checkAnswers(quizGroup, totalQuestions) {
             let score = 0;
-            let total = questions.length;
-
-            questions.forEach(q => {
-                // البحث عن جميع الخيارات داخل السؤال لإزالة الألوان القديمة
-                const labels = q.querySelectorAll('label');
-                labels.forEach(lbl => {
-                    lbl.classList.remove('correct-ans', 'wrong-ans');
-                });
-
-                // معرفة الخيار الذي اختاره الطالب
-                const selectedInput = q.querySelector('input[type="radio"]:checked');
+            
+            // Validate each question in the quiz
+            for(let i=1; i<=totalQuestions; i++) {
+                const radios = document.getElementsByName(quizGroup + '_' + i);
+                let answeredCorrectly = false;
                 
-                if (selectedInput) {
-                    if (selectedInput.value === 'true') {
-                        score++;
-                        selectedInput.parentElement.classList.add('correct-ans');
-                    } else {
-                        selectedInput.parentElement.classList.add('wrong-ans');
-                        // إظهار الإجابة الصحيحة باللون الأخضر حتى لو أخطأ الطالب
-                        const correctInput = q.querySelector('input[value="true"]');
-                        if (correctInput) {
-                            correctInput.parentElement.classList.add('correct-ans');
-                        }
-                    }
-                } else {
-                    // إذا لم يختر الطالب شيئاً، نعرض له الإجابة الصحيحة
-                    const correctInput = q.querySelector('input[value="true"]');
-                    if (correctInput) {
-                        correctInput.parentElement.classList.add('correct-ans');
+                for(let j=0; j<radios.length; j++) {
+                    if(radios[j].checked && radios[j].value === 'correct') {
+                        answeredCorrectly = true;
                     }
                 }
-
-                // تعطيل الأزرار بعد الإجابة لمنع التغيير
-                const allInputs = q.querySelectorAll('input[type="radio"]');
-                allInputs.forEach(input => input.disabled = true);
-            });
-
-            // إظهار النتيجة النهائية
-            const resultDiv = container.querySelector('.score-display');
-            if (resultDiv) {
-                if(score === total) {
-                    resultDiv.innerHTML = `أَحْسَنْتَ يَا بَطَل! نَتِيجَتُكَ: ${score} مِنْ ${total} 🌟🏆`;
-                    resultDiv.style.color = '#2e7d32';
-                    resultDiv.style.backgroundColor = '#c8e6c9';
-                } else {
-                    resultDiv.innerHTML = `نَتِيجَتُكَ: ${score} مِنْ ${total}. حَاوِلْ مَرَّةً أُخْرَى! 👍`;
-                    resultDiv.style.color = '#d84315';
+                
+                if(answeredCorrectly) {
+                    score++;
                 }
-                resultDiv.style.display = 'block';
             }
             
-            // إخفاء زر التحقق بعد الضغط عليه
-            const checkBtn = container.querySelector('.check-btn');
-            if(checkBtn) {
-                checkBtn.style.display = 'none';
+            // Display Results
+            const scoreDiv = document.getElementById('score-' + quizGroup);
+            scoreDiv.style.display = 'block';
+            
+            if(score === totalQuestions) {
+                scoreDiv.style.color = '#27ae60';
+                scoreDiv.innerHTML = `أحسنت! درجتك: ${score} من ${totalQuestions} 🌟🎉`;
+            } else {
+                scoreDiv.style.color = '#c0392b';
+                scoreDiv.innerHTML = `حاول مرة أخرى. درجتك: ${score} من ${totalQuestions} 🔄`;
             }
         }
     </script>
