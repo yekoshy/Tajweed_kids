@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فتوحات الرحمن - علاقات الحروف (المثلين والمتقاربين والمتجانسين)</title>
+    
+    <!-- استدعاء خط Almarai من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF6F00;
+            --secondary: #00838F;
+            --background: #FFF9C4;
+            --card-bg: #FFFFFF;
+            --text-dark: #212121;
+            --success: #388E3C;
+            --danger: #D32F2F;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Almarai", sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .almarai-light { font-weight: 300; font-style: normal; }
+        .almarai-regular { font-weight: 400; font-style: normal; }
+        .almarai-bold { font-weight: 700; font-style: normal; }
+        .almarai-extrabold { font-weight: 800; font-style: normal; }
+
+        /* الهيدر للموبايل (Hamburger Menu) */
+        #mobile-header {
+            display: none;
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        #mobile-header h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #FFF59D;
+        }
+
+        .hamburger {
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* الشريط الجانبي (القائمة) */
+        #sidebar {
+            width: 320px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 20px 15px;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar h2.desktop-title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 30px;
+            color: #FFF59D;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid transparent;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 18px; 
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+            line-height: 1.5;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            border-color: #FFF;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .lesson-container {
+            display: none;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 950px;
+            margin: 0 auto;
+            border: 4px solid #E0E0E0;
+        }
+
+        .lesson-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson-title {
+            color: var(--primary);
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 3px dashed var(--primary);
+            padding-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .lesson-text {
+            font-size: 28px;
+            line-height: 2.2;
+            margin-bottom: 30px;
+        }
+
+        .quran-text {
+            color: var(--success);
+            font-size: 40px;
+            font-weight: 800;
+            text-align: center;
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #81C784;
+            line-height: 1.8;
+        }
+
+        .poem-text {
+            color: var(--secondary);
+            background: #E0F7FA;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #80DEEA;
+            font-size: 30px;
+            text-align: center;
+            line-height: 2;
+            margin: 20px 0;
+        }
+
+        /* التدريبات */
+        .exercise-section {
+            background: #FFF3E0;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #FFB74D;
+            margin-top: 40px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-size: 34px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .difficulty-header {
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 20px 0;
+        }
+
+        .question-block {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .question {
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #37474F;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: #FAFAFA;
+            border: 3px solid #B0BEC5;
+            padding: 15px 20px;
+            font-size: 24px;
+            font-family: inherit;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover { background: #ECEFF1; }
+        
+        .option-btn.selected {
+            border-color: var(--secondary);
+            background: #E0F7FA;
+        }
+        .option-btn.correct {
+            border-color: var(--success);
+            background: #C8E6C9;
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            border-color: var(--danger);
+            background: #FFCDD2;
+            color: var(--danger);
+        }
+
+        .check-btn {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            font-size: 30px;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 800;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .check-btn:hover { background: #E65100; transform: scale(1.02); }
+
+        .score-display {
+            font-size: 36px;
+            text-align: center;
+            font-weight: 800;
+            margin-top: 25px;
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .revision-box {
+            background: #E1F5FE;
+            border: 3px solid #4FC3F7;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .revision-box h3 { color: #0277BD; font-size: 30px; margin-top: 0; }
+        
+        /* طبقة التظليل للموبايل */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        /* تصميم للموبايل */
+        @media (max-width: 900px) {
+            #mobile-header { display: flex; }
+            #sidebar {
+                position: fixed;
+                right: 0;
+                transform: translateX(100%);
+                width: 280px;
+                padding-top: 80px;
+            }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar h2.desktop-title { display: none; }
+            #overlay.active { display: block; }
+            #main-content { padding: 90px 15px 30px 15px; }
+            
+            .lesson-container { padding: 25px 15px; }
+            .lesson-title { font-size: 30px; }
+            .lesson-text { font-size: 22px; }
+            .quran-text { font-size: 30px; padding: 15px; }
+            .poem-text { font-size: 22px; padding: 15px; }
+            .question { font-size: 22px; }
+            .option-btn { font-size: 20px; padding: 12px; }
+            .check-btn { font-size: 24px; padding: 15px; }
+            .score-display { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر للموبايل -->
+    <div id="mobile-header">
+        <h2 class="almarai-extrabold">أبطال التجويد (علاقات الحروف)</h2>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <!-- تظليل الخلفية عند فتح القائمة بالموبايل -->
+    <div id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- القائمة الجانبية -->
+    <div id="sidebar">
+        <h2 class="desktop-title almarai-extrabold">🌟 أبطال التجويد 🌟</h2>
+        <div id="nav-buttons"></div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="main-content"></div>
+
+    <script>
+        // === بيانات الدروس والتدريبات مع إضافة أبيات الشعر ===
+        const data = [
+            {
+                id: "lesson1",
+                title: "١. الْمُتَمَاثِلَانِ (الْمِثْلَانِ)",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>الْمُتَمَاثِلَانِ:</b> هُمَا الْحَرْفَانِ اللَّذَانِ اتَّفَقَا فِي الْمَخْرَجِ وَالصِّفَةِ.
+                        <br>بِالْمُخْتَصَرِ: هُوَ نَفْسُ الْحَرْفِ يَتَكَرَّرُ مَرَّتَيْنِ (مِثْلُ: ب وَ ب، م وَ م).
+                        <br><br>
+                        إِذَا جَاءَ الْحَرْفُ الْأَوَّلُ سَاكِناً وَالثَّانِي مُتَحَرِّكاً، فَيَجِبُ <b>الْإِدْغَامُ</b> (إِدْغَامُ مِثْلَيْنِ صَغِير).
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        إِنْ فِي الصِّفَاتِ وَالْمَخَارِجِ اتَّفَقْ ... حَرْفَانِ فَالْمِثْلَانِ فِيهِمَا أَحَقْ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        اضْرِب بِّعَصَاكَ (ب وَ ب) - قَد دَّخَلُوا (د وَ د)
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هما الحرفان المتماثلان؟", options: ["اتفقا في المخرج واختلفا في الصفة", "اتفقا في المخرج والصفة (نفس الحرف)", "اختلفا في المخرج والصفة"], answer: 1 },
+                    { q: "ما هو حكم الحرفين المتماثلين إذا كان الأول ساكناً والثاني متحركاً؟", options: ["الإظهار", "الإدغام", "الإقلاب"], answer: 1 },
+                    { q: "أكمل الشاهد: إِنْ فِي الصِّفَاتِ وَالْمَخَارِجِ اتَّفَقْ ... حَرْفَانِ فَالْمِثْلَانِ...", options: ["فِيهِمَا أَحَقْ", "يُلَقَّبَا", "حُقِّقَا"], answer: 0 },
+                    { q: "استخرج الكلمة التي بها متماثلان (أولهما ساكن):", options: ["قُل رَّبِّ", "اذْهَب بِّكِتَابِي", "قَد تَّبَيَّنَ"], answer: 1 },
+                    { q: "في قوله تعالى (قَد دَّخَلُوا)، ما العلاقة بين الدال والدال؟", options: ["متقاربان", "متجانسان", "متماثلان"], answer: 2 },
+                    { q: "ما المقصود باتفاق الحرفين في المخرج والصفة؟", options: ["أنهما حرفان مختلفان يخرجان من نفس المكان", "أنهما نفس الحرف تماماً (مثل ك وك)", "أنهما من حروف المد"], answer: 1 },
+                    { q: "عند إدغام (اضْرِب بِّعَصَاكَ)، كيف تُنْطَق؟", options: ["بباء واحدة مشددة", "بباءين منفصلتين", "يتم إخفاء الباء"], answer: 0 },
+                    { q: "إذا التقى حرفان متماثلان، الأول متحرك والثاني متحرك (مثل مَنَاسِكَكُمْ)، ما هو الحكم؟", options: ["إدغام", "إظهار (مثلين كبير)", "إخفاء"], answer: 1 },
+                    { q: "أي الآيات التالية تحتوي على (إدغام مثلين صغير)؟", options: ["يَلْهَث ذَّٰلِكَ", "فَمَا رَبِحَت تِّجَارَتُهُمْ", "نَخْلُقكُّمْ"], answer: 1 },
+                    { q: "التاء المفتوحة والتاء الساكنة (ت وت)، هل هما متماثلان؟", options: ["نعم", "لا", "فقط في بعض الكلمات"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson2",
+                title: "٢. الْمُتَقَارِبَانِ",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>الْمُتَقَارِبَانِ:</b> هُمَا الْحَرْفَانِ اللَّذَانِ تَقَارَبَا فِي الْمَخْرَجِ وَاخْتَلَفَا فِي الصِّفَةِ (أَوْ تَقَارَبَا فِي الْمَخْرَجِ وَالصِّفَةِ).
+                        <br>بِالْمُخْتَصَرِ: حَرْفَانِ جِيرَانِ قَرِيبَانِ مِنْ بَعْضِهِمَا فِي مَكَانِ النُّطْقِ.
+                        <br><br>
+                        حُكْمُهُمَا غَالِباً: <b>الْإِظْهَارُ</b>، وَيُدْغَمَانِ فِي حَالَاتٍ مَخْصُوصَةٍ (مِثْلُ اللَّامِ مَعَ الرَّاءِ، وَالْقَافِ مَعَ الْكَافِ).
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        وَإِنْ يَكُونَا مَخْرَجاً تَقَارَبَا ... وَفِي الصِّفَاتِ اخْتَلَفَا يُلَقَّبَا<br>
+                        مُتَقَارِبَيْنِ ...
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        قُل رَّبِّ (ل وَ ر) - نَخْلُقكُّمْ (ق وَ ك)
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هما الحرفان المتقاربان؟", options: ["اتفقا في المخرج واختلفا صفة", "تقاربا في المخرج واختلفا في الصفة", "اتفقا في المخرج والصفة"], answer: 1 },
+                    { q: "في قوله تعالى (قُل رَّبِّ)، ما هي العلاقة بين اللام والراء؟", options: ["متقاربان", "متماثلان", "متجانسان"], answer: 0 },
+                    { q: "ما هو حكم (قُل رَّبِّ) لِحَفْص؟", options: ["إظهار اللام", "إدغام اللام في الراء", "إخفاء اللام"], answer: 1 },
+                    { q: "في كلمة (أَلَمْ نَخْلُقكُّمْ)، العلاقة بين القاف والكاف هي:", options: ["متجانسان", "متماثلان", "متقاربان"], answer: 2 },
+                    { q: "أكمل الشاهد: وَإِنْ يَكُونَا مَخْرَجاً تَقَارَبَا ... وَفِي الصِّفَاتِ اخْتَلَفَا...", options: ["يُلَقَّبَا مُتَقَارِبَيْنِ", "فَالصَّغِيرَ سَمِّيَنْ", "أَحَقْ"], answer: 0 },
+                    { q: "ما هو الحكم الغالب في الحرفين المتقاربين إذا التقيا؟", options: ["الإدغام دائماً", "الإظهار غالباً إلا في حالات معينة", "الإقلاب"], answer: 1 },
+                    { q: "كلمة (كَذَّبَتْ ثَمُودُ)، التاء والثاء مخرجهما قريب، فهما:", options: ["متقاربان", "متماثلان", "منفصلان"], answer: 0 },
+                    { q: "هل القاف والكاف يخرجان من نفس المخرج تماماً؟", options: ["نعم", "لا، هما متقاربان (من أقصى اللسان)", "مخرجهما من الشفتين"], answer: 1 },
+                    { q: "في (نَخْلُقكُّمْ)، يُسَمَّى الإدغام هنا إدغاماً...", options: ["متماثلين", "متقاربين", "متجانسين"], answer: 1 },
+                    { q: "التقارب في الحروف يعني أنهما:", options: ["جيران في المخرج (مكان النطق)", "نفس الحرف", "متشابهان في الرسم فقط"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson3",
+                title: "٣. الْمُتَجَانِسَانِ",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>الْمُتَجَانِسَانِ:</b> هُمَا الْحَرْفَانِ اللَّذَانِ <b>اتَّفَقَا فِي الْمَخْرَجِ</b> (يَخْرُجَانِ مِنْ نَفْسِ الْمَكَانِ تَمَاماً) <b>وَاخْتَلَفَا فِي الصِّفَاتِ</b>.
+                        <br>مِثْلُ مَخْرَجِ (ت، د، ط) أَوْ مَخْرَجِ (ث، ذ، ظ) أَوْ مَخْرَجِ (ب، م).
+                        <br><br>
+                        إِذَا سَكَنَ الْأَوَّلُ مِنْهُمَا فَإِنَّهُ يُدْغَمُ فِي الثَّانِي فِي كَلِمَاتٍ مَحْدُودَةٍ فِي الْقُرْآنِ.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        ... أَوْ يَكُونَا اتَّفَقَا<br>
+                        فِي مَخْرَجٍ دُونَ الصِّفَاتِ حُقِّقَا ... بِالْمُتَجَانِسَيْنِ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        قَد تَّبَيَّنَ (د وَ ت) - يَلْهَث ذَّٰلِكَ (ث وَ ذ)
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هما الحرفان المتجانسان؟", options: ["اتفقا في المخرج واختلفا في الصفة", "تقاربا في المخرج واختلفا صفة", "اتفقا في الصفة واختلفا في المخرج"], answer: 0 },
+                    { q: "في قوله تعالى (قَد تَّبَيَّنَ)، العلاقة بين الدال والتاء هي:", options: ["متماثلان", "متجانسان (لهما نفس المخرج)", "متقاربان"], answer: 1 },
+                    { q: "ما حكم الدال في (قَد تَّبَيَّنَ)؟", options: ["الإظهار", "الإدغام في التاء", "الإخفاء"], answer: 1 },
+                    { q: "في قوله تعالى (هَمَّت طَّائِفَةٌ)، التاء والطاء حرفان:", options: ["متقاربان", "متجانسان", "متماثلان"], answer: 1 },
+                    { q: "أكمل الشاهد: أَوْ يَكُونَا اتَّفَقَا ... فِي مَخْرَجٍ دُونَ الصِّفَاتِ حُقِّقَا ...", options: ["بِالْمُتَقَارِبَيْنِ", "بِالْمُتَجَانِسَيْنِ", "بِالْمُتَمَاثِلَيْنِ"], answer: 1 },
+                    { q: "الحروف (ت، د، ط) تعتبر حروفاً متجانسة لأنها:", options: ["تخرج من نفس المخرج تماماً", "تتفق في جميع الصفات", "نفس الحرف"], answer: 0 },
+                    { q: "في قوله تعالى (يَلْهَث ذَّٰلِكَ)، العلاقة بين الثاء والذال هي:", options: ["متجانسان", "متقاربان", "متماثلان"], answer: 0 },
+                    { q: "في قوله تعالى (ارْكَب مَّعَنَا)، الباء والميم يخرجان من الشفتين، فهما:", options: ["متقاربان", "متجانسان", "متماثلان"], answer: 1 },
+                    { q: "ما هو حكم (ارْكَب مَّعَنَا)؟", options: ["إدغام الباء في الميم مع الغنة", "إظهار الباء", "إقلاب"], answer: 0 },
+                    { q: "المتجانس يعني حرفين:", options: ["من نفس العائلة (المخرج) ولكن بصوت (صفة) مختلف", "بعيدين عن بعضهما", "متطابقين شكلاً"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson4",
+                title: "٤. أَقْسَامُ التَّلَاقِي (الصَّغِيرُ وَالْكَبِيرُ)",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        أَيُّ حَرْفَيْنِ يَلْتَقِيَانِ (سَوَاءً كَانَا مِثْلَيْنِ أَوْ مُتَقَارِبَيْنِ أَوْ مُتَجَانِسَيْنِ) لَهُمَا حَالَتَانِ رَئِيسِيَّتَانِ:
+                        <br><br>
+                        ١- <b>الصَّغِيرُ:</b> إِذَا كَانَ الْحَرْفُ <b>الْأَوَّلُ سَاكِناً</b> وَالثَّانِي مُتَحَرِّكاً. (حُكْمُهُ الْإِدْغَامُ غَالِباً).
+                        <br>٢- <b>الْكَبِيرُ:</b> إِذَا كَانَ الْحَرْفَانِ <b>مُتَحَرِّكَيْنِ</b>. (حُكْمُهُ الْإِظْهَارُ عِنْدَ حَفْصٍ).
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        ثُمَّ إِنْ سَكَنْ ... أَوَّلُ كُلٍّ فَالصَّغِيرَ سَمِّيَنْ<br>
+                        أَوْ حُرِّكَ الْحَرْفَانِ فِي كُلٍّ فَقُلْ ... كُلٌّ كَبِيرٌ وَافْهَمَنْهُ بِالْمُثُلْ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        صَغِير: قَد دَّخَلُوا (دْ + دَ)<br>
+                        كَبِير: مَنَاسِكَكُمْ (كَ + كُ)
+                    </div>
+                `,
+                exercises: [
+                    { q: "متى يُسَمَّى الْتِقَاءُ الْحَرْفَيْنِ بـ (الصَّغِير)؟", options: ["إذا كانا متحركين", "إذا كان الأول ساكناً والثاني متحركاً", "إذا كان الأول متحركاً والثاني ساكناً"], answer: 1 },
+                    { q: "متى يُسَمَّى الْتِقَاءُ الْحَرْفَيْنِ بـ (الْكَبِير)؟", options: ["إذا كان الحرفان متحركين", "إذا كان الحرفان ساكنين", "إذا كان الأول ساكناً"], answer: 0 },
+                    { q: "في قوله تعالى (اضْرِب بِّعَصَاكَ)، الباء الأولى ساكنة والثانية متحركة، فهذا:", options: ["مثلين كبير", "مثلين صغير", "متقاربين كبير"], answer: 1 },
+                    { q: "في قوله تعالى (مَنَاسِكَكُمْ)، الكاف الأولى مفتوحة والثانية مضمومة، فهذا:", options: ["مثلين كبير", "مثلين صغير", "متجانسين صغير"], answer: 0 },
+                    { q: "أكمل الشاهد: ثُمَّ إِنْ سَكَنْ ... أَوَّلُ كُلٍّ فَالـ...", options: ["كَبِيرَ سَمِّيَنْ", "صَّغِيرَ سَمِّيَنْ", "مِثْلَيْنِ سَمِّيَنْ"], answer: 1 },
+                    { q: "أكمل الشاهد: أَوْ حُرِّكَ الْحَرْفَانِ فِي كُلٍّ فَقُلْ ... كُلٌّ ...", options: ["صَغِيرٌ", "كَبِيرٌ وَافْهَمَنْهُ بِالْمُثُلْ", "مُدْغَمٌ"], answer: 1 },
+                    { q: "ما هو الحكم الغالب لـ (الصغير) في المتماثلين؟", options: ["الإدغام", "الإظهار", "الإخفاء"], answer: 0 },
+                    { q: "ما هو حكم (الكبير) عند قراءة الإمام حفص عن عاصم؟", options: ["الإدغام دائماً", "الإظهار دائماً (إلا في كلمات نادرة مثل تَأْمَنَّا)", "الإخفاء"], answer: 1 },
+                    { q: "لماذا سُمِّيَ الصغير صغيراً؟", options: ["لِقِلَّةِ العمل فيه (فقط ندغم الساكن في المتحرك)", "لأنه يحتاج إلى تسكين الأول ثم إدغامه", "لأن حروفه قليلة"], answer: 0 },
+                    { q: "لماذا سُمِّيَ الكبير كبيراً؟", options: ["لأنه يكثر في القرآن", "لكثرة العمل فيه (يحتاج إلى تسكين الأول ثم الإدغام لو أردنا إدغامه)", "لأن حروفه قوية"], answer: 1 }
+                ]
+            },
+            {
+                id: "revision",
+                title: "📚 الْمُرَاجَعَةُ الشَّامِلَةُ 📚",
+                content: `
+                    <div class="almarai-regular lesson-text">
+                        لَقَدْ تَعَلَّمْنَا يَا بَطَلُ عَلَاقَاتِ الْحُرُوفِ، هَيَّا نُرَاجِعُهَا بِسُرْعَةٍ قَبْلَ الِاخْتِبَارِ النِّهَائِيِّ:
+                        <br><br>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">١. الْمُتَمَاثِلَانِ:</h3>
+                            نَفْسُ الْحَرْفِ مَرَّتَيْنِ (مَخْرَجاً وَصِفَةً).<br>
+                            - مِثْلُ: اضْرِب بِّـعَصَاكَ (ب وَ ب). حُكْمُهُ الْإِدْغَامُ إِذَا كَانَ الْأَوَّلُ سَاكِناً (صَغِير).
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">٢. الْمُتَقَارِبَانِ:</h3>
+                            حَرْفَانِ جِيرَانِ فِي الْمَخْرَجِ (تَقَارَبَا فِي الْمَخْرَجِ وَاخْتَلَفَا فِي الصِّفَةِ).<br>
+                            - مِثْلُ: قُل رَّبِّ (ل وَ ر)، نَخْلُقكُّـمْ (ق وَ ك). يُدْغَمَانِ فِي هَاتَيْنِ الْحَالَتَيْنِ.
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">٣. الْمُتَجَانِسَانِ:</h3>
+                            حَرْفَانِ يَخْرُجَانِ مِنْ نَفْسِ الْمَكَانِ تَمَاماً لَكِنَّ صَوْتَهُمَا (صِفَتَهُمَا) مُخْتَلِفٌ.<br>
+                            - مِثْلُ: (ت، د، ط)، أَوْ (ث، ذ، ظ)، أَوْ (ب، م).<br>
+                            - مِثْلُ: قَد تَّـبَيَّنَ، ارْكَب مَّـعَنَا.
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">٤. الصَّغِيرُ وَالْكَبِيرُ:</h3>
+                            - <b>الصَّغِيرُ:</b> الْأَوَّلُ سَاكِنٌ وَالثَّانِي مُتَحَرِّكٌ (غَالِباً يُدْغَمُ).<br>
+                            - <b>الْكَبِيرُ:</b> الْحَرْفَانِ مُتَحَرِّكَانِ (يُظْهَرُ غَالِباً عِنْدَ حَفْصٍ، مِثْلُ: مَنَاسِكَـكُمْ).
+                        </div>
+                    </div>
+                    <div style="text-align:center; font-size: 30px; color: var(--primary);" class="almarai-extrabold">
+                        هَلْ أَنْتَ مُسْتَعِدٌّ؟ تَوَجَّهْ الْآنَ لِلِاخْتِبَارِ النِّهَائِيِّ! 🏆
+                    </div>
+                `,
+                exercises: []
+            },
+            {
+                id: "final-test",
+                title: "🏆 الِاخْتِبَارُ النِّهَائِيُّ الشَّامِلُ 🏆",
+                content: `
+                    <div class="almarai-bold lesson-text" style="text-align: center; color: var(--secondary);">
+                        أَجِبْ عَنِ الْأَسْئِلَةِ الثَّلَاثِينَ التَّالِيَةِ لِتُثْبِتَ أَنَّكَ بَطَلُ التَّجْوِيدِ بِحَقٍّ!
+                    </div>
+                `,
+                isFinal: true,
+                exercises: [
+                    // --- 10 Easy Questions ---
+                    { q: "حرفان اتفقا في المخرج والصفة هما:", options: ["المتقاربان", "المتماثلان", "المتجانسان"], answer: 1, difficulty: "easy" },
+                    { q: "حرفان اتفقا في المخرج واختلفا في الصفة هما:", options: ["المتجانسان", "المتقاربان", "المتماثلان"], answer: 0, difficulty: "easy" },
+                    { q: "حرفان تقاربا في المخرج والصفة هما:", options: ["المتماثلان", "المتجانسان", "المتقاربان"], answer: 2, difficulty: "easy" },
+                    { q: "إذا كان الحرف الأول ساكناً والثاني متحركاً يُسمى التلاقي:", options: ["صغيراً", "كبيراً", "مطلقاً"], answer: 0, difficulty: "easy" },
+                    { q: "إذا كان الحرفان متحركين يُسمى التلاقي:", options: ["صغيراً", "كبيراً", "مخففاً"], answer: 1, difficulty: "easy" },
+                    { q: "في قوله (قَد دَّخَلُوا)، الدال والدال هما:", options: ["متجانسان", "متقاربان", "متماثلان"], answer: 2, difficulty: "easy" },
+                    { q: "في قوله (اضْرِب بِّعَصَاكَ)، الباء والباء هما:", options: ["متماثلان", "متجانسان", "متقاربان"], answer: 0, difficulty: "easy" },
+                    { q: "في قوله (قُل رَّبِّ)، اللام والراء هما:", options: ["متماثلان", "متقاربان", "متجانسان"], answer: 1, difficulty: "easy" },
+                    { q: "في قوله (قَد تَّبَيَّنَ)، الدال والتاء هما:", options: ["متماثلان", "متقاربان", "متجانسان"], answer: 2, difficulty: "easy" },
+                    { q: "ما هو حكم المثلين الصغير؟", options: ["الإظهار", "الإدغام", "الإقلاب"], answer: 1, difficulty: "easy" },
+
+                    // --- 10 Medium Questions ---
+                    { q: "التاء المفتوحة والتاء المضمومة في كلمة (تَتَوَفَّاهُمْ) هما:", options: ["مثلين صغير", "مثلين كبير", "متقاربين"], answer: 1, difficulty: "medium" },
+                    { q: "في قوله تعالى (يَلْهَث ذَّٰلِكَ)، الثاء والذال يخرجان من طرف اللسان، فهما:", options: ["متجانسان", "متقاربان", "متماثلان"], answer: 0, difficulty: "medium" },
+                    { q: "ما حكم المتجانسين الصغير في (يَلْهَث ذَّٰلِكَ)؟", options: ["الإظهار", "إدغام الثاء في الذال", "الإخفاء"], answer: 1, difficulty: "medium" },
+                    { q: "في (ارْكَب مَّعَنَا)، الباء والميم مخرجهما الشفتان، فهما:", options: ["متماثلان", "متقاربان", "متجانسان"], answer: 2, difficulty: "medium" },
+                    { q: "في قوله (أَلَمْ نَخْلُقكُّمْ)، القاف والكاف حرفان:", options: ["متقاربان", "متجانسان", "متماثلان"], answer: 0, difficulty: "medium" },
+                    { q: "أكمل الشاهد: إِنْ فِي الصِّفَاتِ وَالْمَخَارِجِ اتَّفَقْ ... حَرْفَانِ فَالـ...", options: ["مُتَقَارِبَانِ فِيهِمَا أَحَقْ", "مِثْلَانِ فِيهِمَا أَحَقْ", "مُتَجَانِسَانِ"], answer: 1, difficulty: "medium" },
+                    { q: "أكمل الشاهد: أَوْ حُرِّكَ الْحَرْفَانِ فِي كُلٍّ فَقُلْ ... كُلٌّ ...", options: ["صَغِيرٌ", "كَبِيرٌ وَافْهَمَنْهُ بِالْمُثُلْ", "إِدْغَامٌ"], answer: 1, difficulty: "medium" },
+                    { q: "في قوله (فَمَا رَبِحَت تِّجَارَتُهُمْ)، التاء والتاء هما:", options: ["مثلين كبير", "مثلين صغير (إدغام)", "متقاربين"], answer: 1, difficulty: "medium" },
+                    { q: "في قوله تعالى (كَذَّبَتْ ثَمُودُ)، التاء والثاء قريبان في المخرج، فهما:", options: ["متقاربان (وحكمهما الإظهار هنا)", "متجانسان", "متماثلان"], answer: 0, difficulty: "medium" },
+                    { q: "في قوله (هَمَّت طَّائِفَةٌ)، التاء والطاء حرفان:", options: ["متجانسان (ويدغمان)", "متقاربان", "متماثلان"], answer: 0, difficulty: "medium" },
+
+                    // --- 10 Hard Questions ---
+                    { q: "أكمل الشاهد: وَإِنْ يَكُونَا مَخْرَجاً تَقَارَبَا ... وَفِي الصِّفَاتِ اخْتَلَفَا يُلَقَّبَا ...", options: ["مِثْلَيْنِ", "مُتَجَانِسَيْنِ", "مُتَقَارِبَيْنِ"], answer: 2, difficulty: "hard" },
+                    { q: "أكمل الشاهد: أَوْ يَكُونَا اتَّفَقَا فِي مَخْرَجٍ دُونَ الصِّفَاتِ حُقِّقَا ... بِالـ...", options: ["مُتَجَانِسَيْنِ", "مُتَقَارِبَيْنِ", "مِثْلَيْنِ"], answer: 0, difficulty: "hard" },
+                    { q: "ما هو حكم (المثلين الكبير) عند الإمام حفص عن عاصم في عامة القرآن؟", options: ["الإدغام", "الإظهار", "الإقلاب"], answer: 1, difficulty: "hard" },
+                    { q: "كلمة (مَكَّنِّي) أصلها (مَكَّنَنِي) وتم إدغام النونين. هذا يعتبر إدغام:", options: ["متقاربين", "متجانسين", "مثلين كبير (كاستثناء أُدْغِمَ للتخفيف)"], answer: 2, difficulty: "hard" },
+                    { q: "في قوله (يَلْهَث ذَّٰلِكَ)، الإدغام هنا إدغام:", options: ["متجانسين صغير", "متقاربين صغير", "مثلين صغير"], answer: 0, difficulty: "hard" },
+                    { q: "حروف (ت، د، ط) تُعَدُّ حروفاً:", options: ["متقاربة", "متجانسة", "متماثلة"], answer: 1, difficulty: "hard" },
+                    { q: "في كلمة (يُدْرِككُّمُ)، الكاف الأولى ساكنة والثانية متحركة، هذا يسمى:", options: ["مثلين صغير", "متجانسين صغير", "متقاربين كبير"], answer: 0, difficulty: "hard" },
+                    { q: "ماذا يسمى التقاء الحرفين إذا كان الأول متحركاً والثاني ساكناً؟ (خارج حدود الصغير والكبير)", options: ["مطلقاً (وحكمه الإظهار)", "صغيراً", "كبيراً"], answer: 0, difficulty: "hard" },
+                    { q: "في الإدغام المتقاربين (نَخْلُقكُّمْ)، يُدْغَم القاف في الكاف. هل الإدغام هنا كامل أم ناقص؟", options: ["كامل (تذهب القاف وصفتها)", "ناقص (تبقى صفة الاستعلاء للقاف)", "يجوز الوجهان، والكامل أشهر"], answer: 2, difficulty: "hard" },
+                    { q: "القاعدة العامة للمتجانسين والمتقاربين (الصغير) عند حفص هي الإظهار، فهل (ارْكَب مَّعَنَا) شاذة عن القاعدة؟", options: ["نعم، هي من الحالات المخصوصة التي تُدْغَم (إدغام متجانسين)", "لا، الإدغام هو القاعدة العامة", "هي إظهار وليست إدغاماً"], answer: 0, difficulty: "hard" }
+                ]
+            }
+        ];
+
+        let userAnswers = {}; 
+
+        // تهيئة التطبيق
+        function initApp() {
+            const sidebar = document.getElementById("nav-buttons");
+            const mainContent = document.getElementById("main-content");
+
+            data.forEach((item, index) => {
+                // إنشاء أزرار القائمة
+                const btn = document.createElement("button");
+                btn.className = "nav-btn almarai-bold" + (index === 0 ? " active" : "");
+                btn.innerText = item.title; 
+                btn.onclick = () => { showLesson(item.id, btn); closeMenu(); };
+                sidebar.appendChild(btn);
+
+                // إنشاء محتوى الدرس
+                const section = document.createElement("div");
+                section.id = item.id;
+                section.className = "lesson-container" + (index === 0 ? " active" : "");
+                
+                let html = `<h1 class="lesson-title almarai-extrabold">${item.title}</h1>`;
+                html += item.content;
+
+                // إنشاء التدريبات
+                if (item.exercises && item.exercises.length > 0) {
+                    html += `<div class="exercise-section">
+                        <h2 class="exercise-title almarai-extrabold">✏️ التَّدْرِيبَاتُ وَالتَّطْبِيقَاتُ ✏️</h2>
+                        <div id="quiz-${item.id}">`;
+                    
+                    let currentDifficulty = "";
+                    
+                    item.exercises.forEach((ex, qIndex) => {
+                        // إضافة فواصل الصعوبة للاختبار النهائي
+                        if (item.isFinal && ex.difficulty !== currentDifficulty) {
+                            currentDifficulty = ex.difficulty;
+                            let title = currentDifficulty === "easy" ? "🟢 الْمَرْحَلَةُ الْأُولَى: أَسْئِلَةُ التَّأْسِيسِ السَّهْلَة" :
+                                        currentDifficulty === "medium" ? "🟡 الْمَرْحَلَةُ الثَّانِيَةُ: أَسْئِلَةُ الْمُتَمَيِّزِينَ الْمُتَوَسِّطَة" :
+                                        "🔴 الْمَرْحَلَةُ الثَّالِثَةُ: أَسْئِلَةُ الْأَبْطَالِ وَالْمُحْتَرِفِين";
+                            html += `<div class="difficulty-header almarai-bold">${title}</div>`;
+                        }
+
+                        html += `
+                            <div class="question-block" id="qb-${item.id}-${qIndex}">
+                                <div class="question almarai-bold">${qIndex + 1}. ${ex.q}</div>
+                                <div class="options">
+                                    ${ex.options.map((opt, optIndex) => `
+                                        <button class="option-btn almarai-regular" onclick="selectOption('${item.id}', ${qIndex}, ${optIndex}, this)">
+                                            ${opt}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `</div>
+                        <button class="check-btn almarai-extrabold" onclick="checkAnswers('${item.id}')">اخْتَبِرْ إِجَابَاتِي ✔️</button>
+                        <div id="score-${item.id}" class="score-display almarai-extrabold"></div>
+                    </div>`;
+                }
+
+                section.innerHTML = html;
+                mainContent.appendChild(section);
+            });
+        }
+
+        // إظهار وإخفاء القائمة في الموبايل
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // التنقل بين الدروس
+        function showLesson(id, btnElement) {
+            document.querySelectorAll(".lesson-container").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active"));
+            
+            document.getElementById(id).classList.add("active");
+            btnElement.classList.add("active");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // اختيار إجابة
+        function selectOption(lessonId, qIndex, optIndex, btnElement) {
+            if (!userAnswers[lessonId]) userAnswers[lessonId] = {};
+            userAnswers[lessonId][qIndex] = optIndex;
+
+            const parent = btnElement.parentElement;
+            parent.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+            btnElement.classList.add("selected");
+        }
+
+        // فحص الإجابات وحساب النتيجة
+        function checkAnswers(lessonId) {
+            const lessonData = data.find(d => d.id === lessonId);
+            let score = 0;
+            let answeredAll = true;
+            let totalQs = lessonData.exercises.length;
+
+            lessonData.exercises.forEach((ex, qIndex) => {
+                const selected = userAnswers[lessonId] ? userAnswers[lessonId][qIndex] : undefined;
+                const parent = document.getElementById(`qb-${lessonId}-${qIndex}`).querySelector('.options');
+                const buttons = parent.querySelectorAll('.option-btn');
+
+                if (selected === undefined) {
+                    answeredAll = false;
+                } else {
+                    buttons.forEach(b => b.classList.remove('correct', 'wrong'));
+                    if (selected === ex.answer) {
+                        score++;
+                        buttons[selected].classList.add('correct');
+                    } else {
+                        buttons[selected].classList.add('wrong');
+                        buttons[ex.answer].classList.add('correct'); // إظهار الإجابة الصحيحة
+                    }
+                }
+            });
+
+            if (!answeredAll) {
+                alert("يَا بَطَلُ! يَجِبُ عَلَيْكَ الْإِجَابَةُ عَلَى جَمِيعِ الْأَسْئِلَةِ قَبْلَ الْفَحْصِ 🤓");
+                return;
+            }
+
+            const scoreDiv = document.getElementById(`score-${lessonId}`);
+            scoreDiv.style.display = "block";
+            
+            let percentage = (score / totalQs) * 100;
+
+            if (percentage === 100) {
+                scoreDiv.innerHTML = `🌟 رَائِعٌ وَمُمْتَازٌ! حَصَلْتَ عَلَى الْعَلَامَةِ الْكَامِلَةِ: ${score} مِنْ ${totalQs} 🌟`;
+                scoreDiv.style.color = "var(--success)";
+                scoreDiv.style.background = "#E8F5E9";
+                scoreDiv.style.border = "3px solid var(--success)";
+            } else if (percentage >= 70) {
+                scoreDiv.innerHTML = `👍 جَيِّدٌ جِدّاً! عَلَامَتُكَ هِيَ: ${score} مِنْ ${totalQs} - رَاجِعِ الْإِجَابَاتِ الْمُلَوَّنَةَ بِالْأَحْمَرِ لِتَعْرِفَ الصَّحَّ (بِالْأَخْضَرِ).`;
+                scoreDiv.style.color = "var(--primary)";
+                scoreDiv.style.background = "#E3F2FD";
+                scoreDiv.style.border = "3px solid var(--primary)";
+            } else {
+                scoreDiv.innerHTML = `💪 لَا بَأْسَ، الْمُحَاوَلَةُ الْقَادِمَةُ أَفْضَلُ! عَلَامَتُكَ: ${score} مِنْ ${totalQs} - اقْرَأِ الدَّرْسَ مَرَّةً أُخْرَى وَرَاجِعِ الْأَخْطَاءَ.`;
+                scoreDiv.style.color = "var(--danger)";
+                scoreDiv.style.background = "#FFEBEE";
+                scoreDiv.style.border = "3px solid var(--danger)";
+            }
+        }
+
+        // تشغيل التطبيق بعد تحميل الصفحة
+        window.onload = initApp;
+    </script>
+</body>
+</html>
