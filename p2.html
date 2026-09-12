@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فتوحات الرحمن - أحكام المدود</title>
+    
+    <!-- استدعاء خط Almarai -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #1565C0;
+            --secondary: #00838F;
+            --background: #E1F5FE;
+            --card-bg: #FFFFFF;
+            --text-dark: #212121;
+            --success: #2E7D32;
+            --danger: #C62828;
+            --accent: #FF8F00;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Almarai", sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* تنسيقات الأوزان المطلوبة */
+        .almarai-light { font-weight: 300; font-style: normal; }
+        .almarai-regular { font-weight: 400; font-style: normal; }
+        .almarai-bold { font-weight: 700; font-style: normal; }
+        .almarai-extrabold { font-weight: 800; font-style: normal; }
+
+        /* الهيدر للموبايل (Hamburger Menu) */
+        #mobile-header {
+            display: none;
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 25px;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #mobile-header h2 {
+            margin: 0;
+            font-size: 26px;
+            color: #FFF9C4;
+        }
+
+        .hamburger {
+            font-size: 35px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* الشريط الجانبي */
+        #sidebar {
+            width: 340px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 25px 15px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar h2.desktop-title {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 30px;
+            color: #FFF9C4;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid transparent;
+            padding: 18px 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            font-size: 20px; 
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.active {
+            background: var(--accent);
+            border-color: #FFF;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .lesson-container {
+            display: none;
+            background: var(--card-bg);
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 4px solid #B3E5FC;
+        }
+
+        .lesson-container.active {
+            display: block;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson-title {
+            color: var(--primary);
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 4px dashed var(--primary);
+            padding-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .lesson-text {
+            font-size: 32px;
+            line-height: 2.2;
+            margin-bottom: 35px;
+        }
+
+        .quran-text {
+            color: var(--primary);
+            font-size: 42px;
+            text-align: center;
+            background: #E3F2FD;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border: 3px solid #90CAF9;
+            line-height: 1.8;
+        }
+
+        .poem-text {
+            color: #388E3C;
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #81C784;
+            font-size: 30px;
+            text-align: center;
+            line-height: 2;
+        }
+
+        /* التدريبات */
+        .exercise-section {
+            background: #FFF8E1;
+            padding: 35px;
+            border-radius: 15px;
+            border: 3px solid #FFE082;
+            margin-top: 50px;
+        }
+
+        .exercise-title {
+            color: var(--accent);
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .difficulty-header {
+            background: var(--secondary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 30px;
+            margin: 40px 0 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .question-block {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 2px solid #E0E0E0;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .question {
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #263238;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: #FAFAFA;
+            border: 3px solid #CFD8DC;
+            padding: 18px 25px;
+            font-size: 26px;
+            font-family: inherit;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        .option-btn:hover { background: #ECEFF1; }
+        
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: #E3F2FD;
+        }
+        .option-btn.correct {
+            border-color: var(--success);
+            background: #C8E6C9;
+            color: var(--success);
+            font-weight: 800;
+        }
+        .option-btn.wrong {
+            border-color: var(--danger);
+            background: #FFCDD2;
+            color: var(--danger);
+            font-weight: 800;
+        }
+
+        .check-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            font-size: 34px;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 40px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .check-btn:hover { background: #FF6F00; transform: scale(1.02); }
+
+        .score-display {
+            font-size: 38px;
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+        }
+
+        .revision-box {
+            background: #FFF3E0;
+            border: 3px solid #FFB74D;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .revision-box h3 { color: #E65100; font-size: 34px; margin-top: 0; border-bottom: 2px solid #FFCC80; padding-bottom: 10px;}
+
+        /* تظليل الموبايل */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 998;
+        }
+
+        /* تصميم متجاوب للموبايل */
+        @media (max-width: 950px) {
+            #mobile-header { display: flex; }
+            #sidebar {
+                position: fixed;
+                right: 0;
+                transform: translateX(100%);
+                width: 320px;
+                padding-top: 90px;
+            }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar h2.desktop-title { display: none; }
+            #overlay.active { display: block; }
+            #main-content { padding: 100px 15px 30px 15px; }
+            
+            .lesson-container { padding: 25px 15px; }
+            .lesson-title { font-size: 32px; }
+            .lesson-text { font-size: 24px; }
+            .quran-text { font-size: 32px; padding: 20px; }
+            .poem-text { font-size: 22px; }
+            .question { font-size: 24px; }
+            .option-btn { font-size: 22px; padding: 15px; }
+            .check-btn { font-size: 28px; padding: 15px; }
+            .score-display { font-size: 28px; }
+            .exercise-title { font-size: 32px; }
+            .difficulty-header { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر للموبايل -->
+    <div id="mobile-header">
+        <h2 class="almarai-extrabold">أبطال التجويد (المدود)</h2>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <!-- التظليل -->
+    <div id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- القائمة الجانبية -->
+    <div id="sidebar">
+        <h2 class="desktop-title almarai-extrabold">🌟 أبطال التجويد 🌟</h2>
+        <div id="nav-buttons"></div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="main-content"></div>
+
+    <script>
+        // بيانات الدروس المستخرجة من فتوحات الرحمن (2) بالنص والتشكيل
+        const data = [
+            {
+                id: "lesson1",
+                title: "١. المد الطبيعي",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        المد الطبيعي (الأصلي) هو الذي لا يتوقف على سبب (همز أو سكون). وحروفه ثلاثة:
+                        <br>١- <b>الألف</b>: تكون ساكنة مفتوح ما قبلها.
+                        <br>٢- <b>الياء</b>: تكون ساكنة مكسورة ما قبلها.
+                        <br>٣- <b>الواو</b>: تكون ساكنة مضموم ما قبلها.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        وَالْمَدُّ أَصْلِيٌّ وَفَرْعِيٌّ لَهُ ... وَسَمِّ أَوَّلًا طَبِيعِيًّا وَهُوَ<br>
+                        مَا لَا تَوَقَّفْ لَهُ عَلَى سَبَبِ ... وَلَا بِدُونِهِ الْحُرُوفُ تُجْتَلَبُ<br>
+                        بَلْ أَيُّ حَرْفٍ غَيْرُ هَمْزٍ أَوْ سُكُونُ ... جَاءَ بَعْدَ مَدٍّ فَالطَّبِيعِيُّ يَكُونُ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        قَالَ - قِيلَ - يَقُولُ - حَكِيمٌ - شَكُورٌ
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هي حروف المد الطبيعي؟", options: ["الألف والواو والياء", "النون والميم", "السين والشين"], answer: 0 },
+                    { q: "ما هو شرط الألف لتكون حرف مد؟", options: ["تكون متحركة", "تكون ساكنة مفتوح ما قبلها", "تكون مكسورة"], answer: 1 },
+                    { q: "ما هو شرط الواو لتكون حرف مد؟", options: ["تكون ساكنة مضموم ما قبلها", "تكون مفتوحة", "تكون ساكنة مكسور ما قبلها"], answer: 0 },
+                    { q: "في كلمة (قَالَ)، ما هو حرف المد؟", options: ["القاف", "الألف", "اللام"], answer: 1 },
+                    { q: "في كلمة (قِيلَ)، ما هو حرف المد؟", options: ["الياء", "القاف", "اللام"], answer: 0 },
+                    { q: "كم مقدار المد الطبيعي؟", options: ["حركة واحدة", "حركتان", "٤ حركات"], answer: 1 },
+                    { q: "هل يتوقف المد الطبيعي على سبب (مثل الهمز أو السكون)؟", options: ["نعم دائماً", "لا يتوقف على سبب", "يتوقف على الهمز فقط"], answer: 1 },
+                    { q: "استخرج الكلمة التي بها مد بالواو:", options: ["غَفُورٌ", "عَلِيمٌ", "خَالِقٌ"], answer: 0 },
+                    { q: "استخرج الكلمة التي بها مد بالياء:", options: ["يَرِثُونَ", "بَصِيرٌ", "مَسَاجِدَ"], answer: 1 },
+                    { q: "أكمل الشاهد: بَلْ أَيُّ حَرْفٍ غَيْرُ هَمْزٍ أَوْ سُكُونُ ... جَاءَ بَعْدَ مَدٍّ فَالطَّبِيعِيُّ...", options: ["يَكُونُ", "يُعَدُّ", "يُخْفَى"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson2",
+                title: "٢. المد بسبب الهمزة (مد البدل)",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        أقسام المد بسبب الهمزة ثلاثة: (مد بدل - مد متصل - مد منفصل).
+                        <br><br>
+                        <b>مد البدل:</b> أن تأتي الهمزة قبل حرف المد وليس بعد حرف المد همز أو سكون.
+                        <br>مقداره: <b>حركتان</b>.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        أَوْ قُدِّمَ الْهَمْزُ عَلَى الْمَدِّ وَذَا ... بَدَلٌ كَآمَنُوا وَإِيمَانًا خُذَا
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        ءَا (ءَامَنَ) - ءِي (إِيمَانًا) - ءُو (أُوتُوا)
+                    </div>
+                `,
+                exercises: [
+                    { q: "مد البدل هو أن تأتي الهمزة...", options: ["بعد حرف المد", "قبل حرف المد", "فوق حرف المد"], answer: 1 },
+                    { q: "كم مقدار مد البدل؟", options: ["حركتان", "٤ حركات", "٦ حركات"], answer: 0 },
+                    { q: "الكلمة التي تحتوي على مد بدل هي:", options: ["السَّمَاء", "ءَامَنَ", "يَعْلَمُونَ"], answer: 1 },
+                    { q: "في كلمة (أُوتُوا)، نوع المد في أولها هو:", options: ["مد متصل", "مد منفصل", "مد بدل"], answer: 2 },
+                    { q: "في كلمة (إِيمَانًا)، الهمزة جاءت قبل حرف:", options: ["الألف", "الياء", "الواو"], answer: 1 },
+                    { q: "أكمل الشاهد: أَوْ قُدِّمَ الْهَمْزُ عَلَى الْمَدِّ وَذَا...", options: ["بَدَلٌ", "مُتَّصِلٌ", "عَارِضٌ"], answer: 0 },
+                    { q: "هل يأتي بعد حرف المد في مد البدل همز أو سكون؟", options: ["نعم", "لا", "أحياناً"], answer: 1 },
+                    { q: "أي كلمة بها مد بدل بالواو؟", options: ["ءَادَمَ", "أُوذُوا", "إِيلَافِ"], answer: 1 },
+                    { q: "الآية (وَلَقَدْ رَآهُ نَزْلَةً أُخْرَىٰ)، كلمة (رَآهُ) بها:", options: ["مد بدل", "مد متصل", "مد عارض"], answer: 0 },
+                    { q: "مد البدل يلحق بأي نوع من المدود من حيث المقدار؟", options: ["المد الطبيعي (حركتان)", "المد اللازم (٦ حركات)", "لا يمد أصلاً"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson3",
+                title: "٣. المد المتصل",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>المد المتصل:</b> هو أن يأتي بعد حرف المد همزة في <b>كلمة واحدة</b>.
+                        <br>حكمه: <b>واجب</b>.
+                        <br>مقداره: <b>٤ أو ٥ حركات</b>.
+                        <br>علامة الضبط: وضع علامة المد ( ~ ) على حرف المد وبعده همزة.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدّ ... فِي كِلْمَةٍ وَذَا بِمُتَّصِلٍ يُعَدّ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        جَاءَ - سِيءَ - تَبَوَّءُو
+                    </div>
+                `,
+                exercises: [
+                    { q: "المد المتصل هو أن يقع الهمز بعد حرف المد في:", options: ["كلمتين", "كلمة واحدة", "أول الكلمة"], answer: 1 },
+                    { q: "ما حكم المد المتصل؟", options: ["جائز", "واجب", "لازم"], answer: 1 },
+                    { q: "كم مقدار المد المتصل؟", options: ["حركتان", "٤ أو ٥ حركات", "٦ حركات دائماً"], answer: 1 },
+                    { q: "ما هي علامة المد المتصل في المصحف؟", options: ["سكون", "علامة الميم", "علامة المد ( ~ ) فوق الحرف"], answer: 2 },
+                    { q: "استخرج الكلمة التي بها مد متصل:", options: ["قَالَ", "السَّمَاءَ", "ءَامَنَ"], answer: 1 },
+                    { q: "الكلمة (سِيءَ) بها:", options: ["ياء مد متصل", "ألف مد متصل", "واو مد متصل"], answer: 0 },
+                    { q: "الكلمة (قُرُوءٍ) بها:", options: ["واو مد متصل", "ياء مد متصل", "ألف مد متصل"], answer: 0 },
+                    { q: "لماذا سُمي هذا المد (متصلاً)؟", options: ["التصال حرف المد بالهمز في كلمة واحدة", "لانفصالهما", "لاتصاله بالنون"], answer: 0 },
+                    { q: "أكمل الشاهد: فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدّ ... فِي كِلْمَةٍ وَذَا...", options: ["بِمُتَّصِلٍ يُعَدّ", "بِمُنْفَصِلٍ يُعَدّ", "بَدَلٌ"], answer: 0 },
+                    { q: "في الآية (لَهُم مَّا يَشَاءُونَ)، كلمة (يَشَاءُونَ) بها مد:", options: ["طبيعي", "متصل", "بدل"], answer: 1 }
+                ]
+            },
+            {
+                id: "lesson4",
+                title: "٤. المد المنفصل",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>المد المنفصل:</b> هو أن يقع حرف المدّ في <b>نهاية الكلمة</b> والهمزة في <b>بداية الكلمة التي تليها</b>.
+                        <br>حكمه: <b>جائز</b> (يجوز مده وقصره).
+                        <br>مقداره: <b>٢ أو ٤ أو ٥ حركات</b>.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        وَجَائِزٌ مَدٌّ وَقَصْرٌ إِنْ فُصِلْ ... كُلٌّ بِكِلْمَةٍ وَهَذَا الْمُنْفَصِلْ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        وَمَا أُنزِلَ - وَفِي أَنفُسِكُمْ - قُوا أَنفُسَكُمْ
+                    </div>
+                `,
+                exercises: [
+                    { q: "في المد المنفصل، أين تقع الهمزة؟", options: ["في نفس الكلمة", "في بداية الكلمة التي تلي حرف المد", "قبل حرف المد"], answer: 1 },
+                    { q: "ما حكم المد المنفصل؟", options: ["واجب", "جائز", "لازم"], answer: 1 },
+                    { q: "مقدار المد المنفصل هو:", options: ["٤ أو ٥ حركات فقط", "٢ أو ٤ أو ٥ حركات", "٦ حركات"], answer: 1 },
+                    { q: "الكلمة التي بها مد منفصل:", options: ["جَاءَ", "إِنِّي أَخَافُ", "أُوتُوا"], answer: 1 },
+                    { q: "في (قُوا أَنفُسَكُمْ)، نوع حرف المد هو:", options: ["ألف", "واو مد منفصل", "ياء"], answer: 1 },
+                    { q: "لماذا سمي (منفصلاً)؟", options: ["لانفصال حرف المد عن الهمزة في كلمتين", "لاتصالهما", "لانفصال الشفتين"], answer: 0 },
+                    { q: "أكمل الشاهد: وَجَائِزٌ مَدٌّ وَقَصْرٌ إِنْ فُصِلْ ... كُلٌّ بِكِلْمَةٍ وَهَذَا...", options: ["الْمُتَّصِلْ", "الْمُنْفَصِلْ", "الْبَدَلْ"], answer: 1 },
+                    { q: "ما الفرق الأساسي بين المتصل والمنفصل؟", options: ["لا يوجد فرق", "المتصل في كلمة والمنفصل في كلمتين", "المتصل مقداره حركتان"], answer: 1 },
+                    { q: "في (فِي أَكِنَّةٍ)، نوع المد:", options: ["ياء مد منفصل", "واو مد منفصل", "ألف مد منفصل"], answer: 0 },
+                    { q: "هل يجوز قصر المد المنفصل (حركتين)؟", options: ["نعم يجوز", "لا يجوز مطلقاً", "في سورة البقرة فقط"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson5",
+                title: "٥. المد العارض للسكون",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        من أقسام المد بسبب السكون: <b>المد العارض للسكون</b>.
+                        <br>وهو أن يأتي بعد حرف المد حرف متحرك نقف عليه بالسكون العارض (أجل الوقف).
+                        <br>حكمه: <b>جائز</b>.
+                        <br>مقداره: <b>٢ أو ٤ أو ٦ حركات</b>.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        وَمِثْلُ ذَا إِنْ عَرَضَ السُّكُونُ ... وَقْفًا كَتَعْلَمُونَ نَسْتَعِينُ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        الرَّحْمَٰنِ (عِند الوقف) - الرَّحِيمِ - يَعْلَمُونَ
+                    </div>
+                `,
+                exercises: [
+                    { q: "متى يحدث المد العارض للسكون؟", options: ["عند الوصل فقط", "عند الوقف على الكلمة بالسكون", "في بداية الكلمة"], answer: 1 },
+                    { q: "كم مقدار المد العارض للسكون؟", options: ["حركتان فقط", "٤ أو ٥ حركات", "٢ أو ٤ أو ٦ حركات"], answer: 2 },
+                    { q: "ما حكم المد العارض للسكون؟", options: ["واجب", "جائز", "لازم"], answer: 1 },
+                    { q: "في كلمة (يَعْلَمُونَ) عند الوقف، حرف المد هو:", options: ["الياء", "الواو", "النون"], answer: 1 },
+                    { q: "في كلمة (الرَّحِيمِ) عند الوقف، حرف المد هو:", options: ["الألف", "الياء", "الميم"], answer: 1 },
+                    { q: "في كلمة (الرَّحْمَٰنِ) عند الوقف، حرف المد هو:", options: ["الألف الصنجرية", "النون", "الميم"], answer: 0 },
+                    { q: "إذا لم نقف على الكلمة (وصلناها بما بعدها)، فماذا يصبح المد؟", options: ["يبقى عارضاً للسكون ٦ حركات", "يعود مداً طبيعياً حركتين", "يحذف تماماً"], answer: 1 },
+                    { q: "أكمل الشاهد: وَمِثْلُ ذَا إِنْ عَرَضَ السُّكُونُ ... وَقْفًا كَـ...", options: ["تَعْلَمُونَ نَسْتَعِينُ", "آمَنُوا وَإِيمَانًا", "السَّمَاءِ"], answer: 0 },
+                    { q: "السكون في هذا المد هل هو أصلي أم عارض بسبب الوقف؟", options: ["أصلي", "عارض بسبب الوقف", "لا يوجد سكون"], answer: 1 },
+                    { q: "ما الحكم في (الْمُسْتَقِيمِ) عند الوقف؟", options: ["مد متصل", "مد منفصل", "مد عارض للسكون"], answer: 2 }
+                ]
+            },
+            {
+                id: "lesson6",
+                title: "٦. مد اللين",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>مد اللين:</b> هو أن تأتي الواو أو الياء ساكنتين <b>مفتوحًا ما قبلهما</b>، ثم يأتي بعدهما حرف متحرك نقف عليه بالسكون العارض.
+                        <br>حكمه: <b>جائز</b>.
+                        <br>مقداره: <b>٢ أو ٤ أو ٦ حركات</b>.
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        قُرَيْشٍ (عند الوقف) - خَوْفٍ - الصَّيْفِ - الْبَيْتِ
+                    </div>
+                `,
+                exercises: [
+                    { q: "حروف مد اللين هي الواو والياء الساكنتين بشرط أن يكون ما قبلهما:", options: ["مكسوراً", "مفتوحاً", "مضموماً"], answer: 1 },
+                    { q: "ما مقدار مد اللين عند الوقف؟", options: ["حركتان فقط", "٤ حركات فقط", "٢ أو ٤ أو ٦ حركات"], answer: 2 },
+                    { q: "استخرج الكلمة التي بها مد لين بالياء:", options: ["قُرَيْشٍ", "يَقُولُ", "خَوْفٍ"], answer: 0 },
+                    { q: "استخرج الكلمة التي بها مد لين بالواو:", options: ["الْبَيْتِ", "خَوْفٍ", "الصَّيْفِ"], answer: 1 },
+                    { q: "هل الألف تعتبر من حروف مد اللين؟", options: ["نعم", "لا، اللين يختص بالواو والياء الساكنتين المفتوح ما قبلهما", "في بعض القراءات"], answer: 1 },
+                    { q: "في كلمة (الصَّيْفِ)، الحرف الذي يسبق الياء حركته:", options: ["فتحة (الصَّـ)", "كسرة", "ضمة"], answer: 0 },
+                    { q: "عند وصل كلمة (خَوْفٍ) بما بعدها، فكم نمد الواو؟", options: ["٦ حركات", "لا تُمَدّ (نعطيها زمن الرخاوة فقط)", "٤ حركات"], answer: 1 },
+                    { q: "ما الفرق بين المد العارض للسكون ومد اللين؟", options: ["العارض قبله حركة مجانسة، واللين قبله فتحة دائماً", "لا فرق أبداً", "اللين يمد ٨ حركات"], answer: 0 },
+                    { q: "ما الحكم في (شَيْءٍ) عند الوقف؟", options: ["مد متصل", "مد لين", "مد بدل"], answer: 1 },
+                    { q: "الكلمة (نَوْمٌ) عند الوقف بها:", options: ["ياء مد لين", "واو مد لين", "مد طبيعي"], answer: 1 }
+                ]
+            },
+            {
+                id: "lesson7",
+                title: "٧. المد اللازم (الكلمي والحرفي)",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>المد اللازم:</b> هو أن يقع <b>سكون أصلي</b> (ثابت وصلاً ووقفاً) بعد حرف المد في كلمة أو في حرف.
+                        <br>حكمه: <b>لازم</b> ، مقداره: <b>٦ حركات</b> (لزوماً).
+                        <br><br>
+                        ينقسم إلى:
+                        <br>١- <b>كلمي</b> (في كلمة): سكون أصلي (مثل: آلْآنَ) أو حرف مشدد (مثل: الْحَاقَّةُ، الضَّالِّينَ).
+                        <br>٢- <b>حرفي</b> (في الحروف المقطعة): وحروفه التي تمد ٦ حركات مجموعة في (نقص عسلكم).
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        وَلَازِمٌ إِنِ السُّكُونُ أُصِّلَا ... وَصْلًا وَوَقْفًا بَعْدَ مَدٍّ طُوِّلَا
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        الضَّالِّينَ - الطَّامَّةُ - دَابَّةٍ - ﴿الم﴾ - ﴿ق﴾
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هو المد اللازم؟", options: ["أن يأتي سكون أصلي بعد حرف المد", "أن تأتي همزة بعد حرف المد", "أن نقف على الكلمة"], answer: 0 },
+                    { q: "كم مقدار المد اللازم؟", options: ["٤ حركات", "٦ حركات (لزوماً)", "حركتان"], answer: 1 },
+                    { q: "الحرف المشدد بعد حرف المد (مثل الضَّالِّينَ) يعتبر مد لازم لأن الشدة عبارة عن:", options: ["حرفين أولهما ساكن", "حرف متحرك فقط", "حرفين متحركين"], answer: 0 },
+                    { q: "ما نوع المد اللازم في كلمة (الْحَاقَّةُ)؟", options: ["لازم حرفي", "لازم كلمي", "مد متصل"], answer: 1 },
+                    { q: "الحروف المقطعة التي تمد ٦ حركات مجموعة في كلمة:", options: ["حي طهر", "نقص عسلكم", "يرملون"], answer: 1 },
+                    { q: "الحروف المقطعة (حي طهر) مثل (حا، يا، طا..) تمد بمقدار:", options: ["٦ حركات", "حركتان (مد طبيعي حرفي)", "٤ حركات"], answer: 1 },
+                    { q: "في سورة ق ﴿ق وَالْقُرْآنِ الْمَجِيدِ﴾، مد حرف القاف هو:", options: ["لازم حرفي (٦ حركات)", "لازم كلمي", "طبيعي"], answer: 0 },
+                    { q: "أكمل الشاهد: وَلَازِمٌ إِنِ السُّكُونُ أُصِّلَا ... وَصْلًا وَوَقْفًا بَعْدَ مَدٍّ...", options: ["قُصِّرَا", "طُوِّلَا", "فُصِلَا"], answer: 1 },
+                    { q: "حرف الألف (ألف) في الحروف المقطعة يمد بمقدار:", options: ["٦ حركات", "حركتان", "لا يمد (ليس فيه حرف مد)"], answer: 2 },
+                    { q: "في كلمة (تَأْمُرُونِّي)، ما سبب المد اللازم؟", options: ["الهمزة", "النون المشددة بعد الواو", "الوقف"], answer: 1 }
+                ]
+            },
+            {
+                id: "lesson8",
+                title: "٨. مد الصلة",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>مد الصلة:</b> يتعلق بهاء الضمير الدالة على المفرد المذكر المتحركة بضم أو كسر، والواقعة بين متحركين.
+                        <br>وهو قسمان:
+                        <br>١- <b>صلة صغرى</b>: إذا لم يأت بعد هاء الضمير همز. تمد <b>حركتان</b>. (مثل: بِهِۦ نَقْعًا، إِنَّهُۥ كَانَ).
+                        <br>٢- <b>صلة كبرى</b>: إذا جاء بعد هاء الضمير <b>همز</b>. تمد <b>٢ أو ٤ أو ٥ حركات</b> كالمنفصل. (مثل: وَلَهُۥٓ أَخٌ، بِهِۦٓ أُو۟لَٰٓئِكَ).
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        صغرى: فَأَثَرْنَ بِهِۦ نَقْعًا - كُتُبِهِۦ وَرُسُلِهِ<br>
+                        كبرى: مَالَهُۥٓ أَخْلَدَهُ - أَمْرُهُۥٓ إِلَى اللَّهِ
+                    </div>
+                `,
+                exercises: [
+                    { q: "مد الصلة يتعلق بأي حرف؟", options: ["التاء المربوطة", "هاء الضمير للمفرد المذكر الغائب", "النون الساكنة"], answer: 1 },
+                    { q: "ما شرط هاء الضمير لكي تُمَد صلة؟", options: ["أن تكون ساكنة", "أن تكون متحركة وقبلها ساكن", "أن تكون متحركة وتقع بين حرفين متحركين"], answer: 2 },
+                    { q: "إذا لم يأت بعد الهاء همزة، يسمى المد:", options: ["صلة كبرى", "صلة صغرى", "مد متصل"], answer: 1 },
+                    { q: "كم مقدار مد الصلة الصغرى؟", options: ["حركتان", "٤ حركات", "٦ حركات"], answer: 0 },
+                    { q: "إذا جاء بعد هاء الضمير همزة، يسمى المد:", options: ["صلة صغرى", "صلة كبرى", "مد لازم"], answer: 1 },
+                    { q: "مد الصلة الكبرى يلحق بأي مد في مقداره (٢، ٤، ٥ حركات)؟", options: ["المد المتصل", "المد المنفصل", "المد العارض"], answer: 1 },
+                    { q: "الآية (إِنَّهُۥ كَانَ)، نوع المد في الهاء:", options: ["واو مد صلة كبرى", "واو مد صلة صغرى حركتان", "ياء مد صلة صغرى"], answer: 1 },
+                    { q: "الآية (وَلَهُۥٓ أَخٌ)، نوع المد في الهاء:", options: ["صلة كبرى", "صلة صغرى", "مد طبيعي"], answer: 0 },
+                    { q: "الآية (بِهِۦٓ أُو۟لَٰٓئِكَ)، نوع حرف المد الموصول هو:", options: ["واو", "ياء", "ألف"], answer: 1 },
+                    { q: "متى يثبت مد الصلة؟", options: ["في الوصل فقط", "في الوقف فقط", "وصلاً ووقفاً"], answer: 0 }
+                ]
+            },
+            {
+                id: "lesson9",
+                title: "٩. مد العوض",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>مد العوض:</b> يقع عند <b>الوقف</b> على التنوين بالفتح فقط (نستبدل نون التنوين بألف ممدودة).
+                        <br>مقداره: <b>حركتان</b>.
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        عَجَبًا (تُقرأ عند الوقف: عَجَبَا)<br>
+                        صَعَدًا - أَحَدًا - صَفًّا - حَقًّا - مَاءً (تُقرأ: مَاءَا)
+                    </div>
+                `,
+                exercises: [
+                    { q: "متى يقع مد العوض؟", options: ["عند الوصل فقط", "عند الوقف على التنوين بالضم", "عند الوقف على التنوين بالفتح فقط"], answer: 2 },
+                    { q: "كم مقدار مد العوض؟", options: ["حركتان", "٤ حركات", "٦ حركات"], answer: 0 },
+                    { q: "في مد العوض، يتم استبدال (عوض) نون التنوين بحرف:", options: ["واو", "ياء", "ألف ممدودة"], answer: 2 },
+                    { q: "كلمة (عَجَبًا) كيف تُقرأ عند الوقف؟", options: ["عَجَبًا (بالنون)", "عَجَبَا (بالألف حركتين)", "عَجَبْ (بالسكون)"], answer: 1 },
+                    { q: "هل نطبق مد العوض على التنوين بالكسر؟", options: ["نعم", "لا، نقف بالسكون", "نقف بحركتين كسر"], answer: 1 },
+                    { q: "كلمة (صَفًّا) عند الوقف، ما اسم المد فيها؟", options: ["مد عوض", "مد طبيعي", "مد متصل"], answer: 0 },
+                    { q: "إذا وصلنا كلمة (أَحَدًا) بما بعدها، فهل نأتي بمد العوض؟", options: ["نعم", "لا، نطبق أحكام التنوين (إظهار، إدغام..) حسب الحرف التالي", "نمدها ٤ حركات"], answer: 1 },
+                    { q: "كلمة (نَاصِرًا) عند الوقف تُقرأ:", options: ["نَاصِرْ", "نَاصِرَا", "نَاصِرُ"], answer: 1 },
+                    { q: "كيف نقف على التاء المربوطة المنونة بالفتح (مثل: جَنَّةً)؟", options: ["بالألف (جَنَّتَا)", "بالهاء الساكنة (جَنَّهْ) ولا يوجد فيها مد عوض", "بالتاء (جَنَّتْ)"], answer: 1 },
+                    { q: "استخرج الكلمة التي نقف عليها بمد العوض:", options: ["حَكِيمٌ", "عَذَابٍ", "سُبَاتًا"], answer: 2 }
+                ]
+            },
+            {
+                id: "revision",
+                title: "📚 المراجعة الشاملة لأحكام المدود 📚",
+                content: `
+                    <div class="almarai-regular lesson-text">
+                        هيا نلخص كل ما تعلمناه يا بطل لكي تستعد للاختبار النهائي:
+                        <br><br>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold almarai-bold">المد الطبيعي (الأصلي)</h3>
+                            مقدارة حركتان (ا، و، ي). لا همز ولا سكون بعده. (قَالَ، قِيلَ، يَقُولُ)
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold almarai-bold">المدود بسبب الهمزة</h3>
+                            - <b>مد البدل:</b> الهمزة تسبق المد (ءَامَنَ) = حركتان.<br>
+                            - <b>المد المتصل:</b> حرف المد والهمزة في كلمة (جَاءَ) = ٤ أو ٥ حركات (واجب).<br>
+                            - <b>المد المنفصل:</b> المد آخر كلمة والهمزة أول الكلمة الثانية (بِمَا أُنزِلَ) = ٢ أو ٤ أو ٥ حركات (جائز).
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold almarai-bold">المدود بسبب السكون</h3>
+                            - <b>المد العارض للسكون:</b> نقف على الكلمة بالسكون (الرَّحِيمِ) = ٢، ٤، ٦ حركات.<br>
+                            - <b>مد اللين:</b> واو/ياء ساكنتين قبلهما مفتوح عند الوقف (خَوْفٍ، قُرَيْشٍ) = ٢، ٤، ٦ حركات.<br>
+                            - <b>المد اللازم:</b> سكون أصلي أو شدة (الضَّالِّينَ، الحَاقَّة، ق) = ٦ حركات لزوماً.
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold almarai-bold">مدود أخرى</h3>
+                            - <b>مد الصلة:</b> هاء الضمير (صغرى=حركتان، كبرى مع الهمز=المنفصل).<br>
+                            - <b>مد العوض:</b> الوقف على تنوين الفتح بألف (حَكِيمًا -> حَكِيمَا) = حركتان.
+                        </div>
+                    </div>
+                `,
+                exercises: []
+            },
+            {
+                id: "final-test",
+                title: "🏆 الاختبار النهائي الشامل 🏆",
+                content: `
+                    <div class="almarai-bold lesson-text" style="text-align: center; color: var(--primary);">
+                        أجب عن الأسئلة الثلاثين التالية (١٠ سهلة، ١٠ متوسطة، ١٠ صعبة) لتتوج بلقب <b>بطل المدود</b>!
+                    </div>
+                `,
+                isFinal: true,
+                exercises: [
+                    // --- 10 Easy Questions ---
+                    { q: "ما هي حروف المد الطبيعي؟", options: ["الألف، الواو، الياء السواكن وقبلها حركة مجانسة", "الباء، التاء، الثاء", "الهمزة، النون، الميم"], answer: 0, difficulty: "easy" },
+                    { q: "كم مقدار المد الطبيعي ومد البدل؟", options: ["٤ حركات", "حركتان", "٦ حركات"], answer: 1, difficulty: "easy" },
+                    { q: "كم مقدار المد اللازم؟", options: ["حركتان", "٤ حركات", "٦ حركات لزوماً"], answer: 2, difficulty: "easy" },
+                    { q: "في مد البدل، أين تقع الهمزة؟", options: ["بعد حرف المد", "قبل حرف المد (مثل: ءَامَنَ)", "لا يوجد همزة"], answer: 1, difficulty: "easy" },
+                    { q: "المد المتصل يعني أن حرف المد والهمزة...", options: ["في نفس الكلمة (جَاءَ)", "في كلمتين", "في الحروف المقطعة"], answer: 0, difficulty: "easy" },
+                    { q: "ما هو المد المنفصل؟", options: ["المد والهمزة في كلمة واحدة", "المد في آخر الكلمة والهمزة في أول الكلمة الثانية", "سكون بعد حرف المد"], answer: 1, difficulty: "easy" },
+                    { q: "متى نمد مداً عارضاً للسكون؟", options: ["دائماً في أي كلمة", "فقط عند الوقف على كلمة قبل آخرها حرف مد", "في الحروف المقطعة"], answer: 1, difficulty: "easy" },
+                    { q: "حروف مد اللين هي الواو والياء الساكنتين بشرط أن يكون قبلهما:", options: ["مكسور", "مضموم", "مفتوح (مثل: خَوْف، قُرَيْش)"], answer: 2, difficulty: "easy" },
+                    { q: "مد الصلة يتعلق بأي حرف؟", options: ["النون الساكنة", "التاء المربوطة", "هاء الضمير الدالة على المفرد المذكر"], answer: 2, difficulty: "easy" },
+                    { q: "ما هو مد العوض؟", options: ["مد الهاء حركتين", "استبدال تنوين الفتح بألف عند الوقف", "مد الألف ٦ حركات"], answer: 1, difficulty: "easy" },
+                    
+                    // --- 10 Medium Questions ---
+                    { q: "ما حكم المد المتصل وما مقداره؟", options: ["واجب (٤ أو ٥ حركات)", "جائز (٢ أو ٤ أو ٥ حركات)", "لازم (٦ حركات)"], answer: 0, difficulty: "medium" },
+                    { q: "ما نوع المد في كلمة (السَّمَاءِ)؟", options: ["مد منفصل", "مد متصل", "مد لازم"], answer: 1, difficulty: "medium" },
+                    { q: "ما نوع المد في (فِي أَنفُسِكُمْ)؟", options: ["مد منفصل", "مد متصل", "مد بدل"], answer: 0, difficulty: "medium" },
+                    { q: "عند الوقف على (الْعَالَمِينَ)، ما نوع المد ومقداره؟", options: ["عارض للسكون (٢، ٤، ٦ حركات)", "طبيعي (حركتان)", "لين (٦ حركات فقط)"], answer: 0, difficulty: "medium" },
+                    { q: "عند الوقف على (الصَّيْفِ)، ما نوع المد؟", options: ["متصل", "لين", "بدل"], answer: 1, difficulty: "medium" },
+                    { q: "ما نوع المد في (الضَّالِّينَ)؟", options: ["لازم كلمي (٦ حركات)", "لازم حرفي (٦ حركات)", "مد طبيعي"], answer: 0, difficulty: "medium" },
+                    { q: "كلمة (بِهِۦٓ أَحَدٌ)، نوع المد هنا هو:", options: ["صلة صغرى", "صلة كبرى", "مد بدل"], answer: 1, difficulty: "medium" },
+                    { q: "عند الوقف على كلمة (حَكِيمًا)، كيف تُقرأ وما اسم المد؟", options: ["(حَكِيمَا) - مد عوض", "(حَكِيمْ) - مد عارض", "(حَكِيمًا) - لا مد"], answer: 0, difficulty: "medium" },
+                    { q: "الحروف (نقص عسلكم) في أوائل السور (مثل: ص، ق، ن) تمد مداً:", options: ["طبيعياً (حركتان)", "لازماً حرفياً (٦ حركات)", "منفصلاً"], answer: 1, difficulty: "medium" },
+                    { q: "الحروف (حي طهر) في أوائل السور (مثل: طه، الر) تمد مداً:", options: ["طبيعياً حرفياً (حركتان)", "لازماً (٦ حركات)", "واجب متصل"], answer: 0, difficulty: "medium" },
+
+                    // --- 10 Hard Questions ---
+                    { q: "في قوله تعالى (يَشَاءُونَ)، اجتمع مدان في هذه الكلمة، ما هما؟", options: ["بدل ثم منفصل", "متصل ثم طبيعي (أو عارض عند الوقف)", "منفصل ثم لين"], answer: 1, difficulty: "hard" },
+                    { q: "ما الفرق الجوهري بين المد العارض للسكون ومد اللين؟", options: ["العارض حركته قبل المد مجانسة للمد، أما اللين فالحركة قبل الواو/الياء دائماً فتحة", "العارض ٦ حركات واللين حركتان فقط", "لا فرق أبداً"], answer: 0, difficulty: "hard" },
+                    { q: "إذا وقفنا على مد منفصل (مثل: قُوا من قُوا أَنفُسَكُمْ)، ماذا يصبح المد؟", options: ["يسقط المد تماماً", "يصبح مداً طبيعياً يمد حركتين (قُوا)", "يبقى ٤ حركات"], answer: 1, difficulty: "hard" },
+                    { q: "لماذا سُمي المد اللازم بالكلمي والمثقل (مثل: الْحَاقَّةُ)؟", options: ["لأنه جاء في كلمة وبعده حرف مشدد (مثقل)", "لأنه جاء في حرف مقطع", "لأن الهمزة فيه ثقيلة"], answer: 0, difficulty: "hard" },
+                    { q: "صلة الهاء الكبرى (مثل: مَالَهُۥٓ أَخْلَدَهُ) تلحق بأي مد من حيث المقدار والجواز؟", options: ["تلحق بالمد المتصل", "تلحق بالمد المنفصل", "تلحق بالمد العارض"], answer: 1, difficulty: "hard" },
+                    { q: "في الحروف المقطعة ﴿الم﴾، ما نوع المد في حرف اللام؟", options: ["مد لازم حرفي مثقل (لإدغام ميم اللام في ميم الميم)", "مد طبيعي", "مد لين"], answer: 0, difficulty: "hard" },
+                    { q: "إذا وقفنا على كلمة (شَجَرَةً)، هل نقف عليها بمد العوض؟", options: ["نعم (شَجَرَتَا)", "لا، التاء المربوطة يوقف عليها بالهاء الساكنة (شَجَرَهْ)", "نقف بالسكون على التاء (شَجَرَتْ)"], answer: 1, difficulty: "hard" },
+                    { q: "ما حكم المد في كلمة (أُوتُوا)؟", options: ["مد متصل في الواو", "مد بدل في الواو الأولى، ومد طبيعي في الواو الثانية", "مد منفصل"], answer: 1, difficulty: "hard" },
+                    { q: "أي الحروف المقطعة التالية لا يمد أصلاً؟", options: ["حرف الصاد (ص)", "حرف الألف (ألف)", "حرف الطاء (طا)"], answer: 1, difficulty: "hard" },
+                    { q: "هل يأتي المد العارض للسكون في وسط القراءة (وصلاً)؟", options: ["نعم دائماً", "لا، يزول سبب السكون عند الوصل فيعود طبيعياً", "أحياناً في بعض الكلمات"], answer: 1, difficulty: "hard" }
+                ]
+            }
+        ];
+
+        let userAnswers = {}; 
+
+        // تهيئة واجهة التطبيق
+        function initApp() {
+            const sidebar = document.getElementById("nav-buttons");
+            const mainContent = document.getElementById("main-content");
+
+            data.forEach((item, index) => {
+                // إنشاء أزرار القائمة
+                const btn = document.createElement("button");
+                btn.className = "nav-btn almarai-bold" + (index === 0 ? " active" : "");
+                btn.innerText = item.title; 
+                btn.onclick = () => { showLesson(item.id, btn); closeMenu(); };
+                sidebar.appendChild(btn);
+
+                // إنشاء محتوى الدرس
+                const section = document.createElement("div");
+                section.id = item.id;
+                section.className = "lesson-container" + (index === 0 ? " active" : "");
+                
+                let html = `<h1 class="lesson-title almarai-extrabold">${item.title}</h1>`;
+                html += item.content;
+
+                // إنشاء التدريبات إن وجدت
+                if (item.exercises && item.exercises.length > 0) {
+                    html += `<div class="exercise-section">
+                        <h2 class="exercise-title almarai-extrabold">✏️ التدريبات والتطبيقات ✏️</h2>
+                        <div id="quiz-${item.id}">`;
+                    
+                    let currentDifficulty = "";
+                    
+                    item.exercises.forEach((ex, qIndex) => {
+                        // أقسام الصعوبة للاختبار النهائي
+                        if (item.isFinal && ex.difficulty !== currentDifficulty) {
+                            currentDifficulty = ex.difficulty;
+                            let title = currentDifficulty === "easy" ? "🟢 المرحلة الأولى: أسئلة التأسيس السهلة" :
+                                        currentDifficulty === "medium" ? "🟡 المرحلة الثانية: أسئلة المتميزين المتوسطة" :
+                                        "🔴 المرحلة الثالثة: أسئلة الأبطال والمحترفين";
+                            html += `<div class="difficulty-header almarai-bold">${title}</div>`;
+                        }
+
+                        html += `
+                            <div class="question-block" id="qb-${item.id}-${qIndex}">
+                                <div class="question almarai-bold">${qIndex + 1}. ${ex.q}</div>
+                                <div class="options">
+                                    ${ex.options.map((opt, optIndex) => `
+                                        <button class="option-btn almarai-regular" onclick="selectOption('${item.id}', ${qIndex}, ${optIndex}, this)">
+                                            ${opt}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `</div>
+                        <button class="check-btn almarai-extrabold" onclick="checkAnswers('${item.id}')">اختبر إجاباتي ✔️</button>
+                        <div id="score-${item.id}" class="score-display almarai-extrabold"></div>
+                    </div>`;
+                }
+
+                section.innerHTML = html;
+                mainContent.appendChild(section);
+            });
+        }
+
+        // التحكم بالقائمة الجانبية في الموبايل
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // التنقل بين الدروس
+        function showLesson(id, btnElement) {
+            document.querySelectorAll(".lesson-container").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active"));
+            
+            document.getElementById(id).classList.add("active");
+            btnElement.classList.add("active");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // اختيار إجابة
+        function selectOption(lessonId, qIndex, optIndex, btnElement) {
+            if (!userAnswers[lessonId]) userAnswers[lessonId] = {};
+            userAnswers[lessonId][qIndex] = optIndex;
+
+            const parent = btnElement.parentElement;
+            parent.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+            btnElement.classList.add("selected");
+        }
+
+        // فحص الإجابات وحساب النتيجة
+        function checkAnswers(lessonId) {
+            const lessonData = data.find(d => d.id === lessonId);
+            let score = 0;
+            let answeredAll = true;
+            let totalQs = lessonData.exercises.length;
+
+            lessonData.exercises.forEach((ex, qIndex) => {
+                const selected = userAnswers[lessonId] ? userAnswers[lessonId][qIndex] : undefined;
+                const parent = document.getElementById(`qb-${lessonId}-${qIndex}`).querySelector('.options');
+                const buttons = parent.querySelectorAll('.option-btn');
+
+                if (selected === undefined) {
+                    answeredAll = false;
+                } else {
+                    buttons.forEach(b => b.classList.remove('correct', 'wrong'));
+                    if (selected === ex.answer) {
+                        score++;
+                        buttons[selected].classList.add('correct');
+                    } else {
+                        buttons[selected].classList.add('wrong');
+                        buttons[ex.answer].classList.add('correct'); // إظهار الصحيحة
+                    }
+                }
+            });
+
+            if (!answeredAll) {
+                alert("يا بطل! يجب عليك الإجابة على جميع الأسئلة قبل الفحص 🤓");
+                return;
+            }
+
+            const scoreDiv = document.getElementById(`score-${lessonId}`);
+            scoreDiv.style.display = "block";
+            
+            let percentage = (score / totalQs) * 100;
+
+            if (percentage === 100) {
+                scoreDiv.innerHTML = `🌟 رائع وممتاز! حصلت على العلامة الكاملة: ${score} من ${totalQs} 🌟`;
+                scoreDiv.style.color = "var(--success)";
+                scoreDiv.style.background = "#E8F5E9";
+                scoreDiv.style.border = "3px solid var(--success)";
+            } else if (percentage >= 70) {
+                scoreDiv.innerHTML = `👍 جيد جداً! علامتك هي: ${score} من ${totalQs} - راجع الإجابات الملونة بالأحمر لتعرف الصح (بالأخضر).`;
+                scoreDiv.style.color = "var(--primary)";
+                scoreDiv.style.background = "#E3F2FD";
+                scoreDiv.style.border = "3px solid var(--primary)";
+            } else {
+                scoreDiv.innerHTML = `💪 لا بأس، المحاولة القادمة أفضل! علامتك: ${score} من ${totalQs} - اقرأ الدرس مرة أخرى وراجع الأخطاء.`;
+                scoreDiv.style.color = "var(--danger)";
+                scoreDiv.style.background = "#FFEBEE";
+                scoreDiv.style.border = "3px solid var(--danger)";
+            }
+        }
+
+        // تشغيل التطبيق بعد تحميل الصفحة
+        window.onload = initApp;
+    </script>
+</body>
+</html>
