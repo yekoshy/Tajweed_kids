@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أبطال التجويد - الصفحة الرئيسية</title>
+    
+    <!-- استدعاء خط Almarai -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF6F00;
+            --secondary: #00838F;
+            --background: #FFF8E1;
+            --card-bg: #FFFFFF;
+            --text-dark: #212121;
+            --success: #388E3C;
+            --accent: #FFC107;
+            --poem-bg: #E0F7FA;
+            --poem-border: #80DEEA;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Almarai", sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* تنسيقات الأوزان المطلوبة */
+        .almarai-light { font-weight: 300; font-style: normal; }
+        .almarai-regular { font-weight: 400; font-style: normal; }
+        .almarai-bold { font-weight: 700; font-style: normal; }
+        .almarai-extrabold { font-weight: 800; font-style: normal; }
+
+        /* الهيدر للموبايل (Hamburger Menu) */
+        #mobile-header {
+            display: none;
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 25px;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #mobile-header h2 {
+            margin: 0;
+            font-size: 26px;
+            color: #FFF9C4;
+        }
+
+        .hamburger {
+            font-size: 35px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* الشريط الجانبي */
+        #sidebar {
+            width: 320px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 30px 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar h2.desktop-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: var(--accent);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid transparent;
+            padding: 20px 15px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            font-size: 24px; 
+            font-family: inherit;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            border-color: #FFF;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            flex: 1;
+            padding: 50px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .hero-section {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 5px solid var(--accent);
+            margin-bottom: 50px;
+        }
+
+        .hero-title {
+            color: var(--primary);
+            font-size: 50px;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
+        .hero-subtitle {
+            color: var(--secondary);
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        /* تنسيقات متن تحفة الأطفال (الشعر) */
+        .poem-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 4px solid var(--poem-border);
+        }
+
+        .poem-main-title {
+            text-align: center;
+            font-size: 45px;
+            color: var(--secondary);
+            border-bottom: 4px dashed var(--secondary);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .poem-section-title {
+            font-size: 34px;
+            color: var(--primary);
+            background: var(--background);
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 30px;
+            margin: 40px 0 20px 0;
+            border: 2px solid var(--accent);
+        }
+
+        .verse {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+
+        .hemistich {
+            flex: 1;
+            background: var(--poem-bg);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 32px; /* خط كبير جداً كما طلبت */
+            line-height: 1.8;
+            color: #004D40;
+            text-align: center;
+            border: 2px solid #B2EBF2;
+            transition: 0.3s;
+        }
+
+        .hemistich:hover {
+            background: #B2EBF2;
+            transform: scale(1.02);
+        }
+
+        /* تظليل الموبايل */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 998;
+        }
+
+        /* تصميم متجاوب للموبايل */
+        @media (max-width: 1000px) {
+            #mobile-header { display: flex; }
+            #sidebar {
+                position: fixed;
+                right: 0;
+                transform: translateX(100%);
+                width: 320px;
+                padding-top: 90px;
+            }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar h2.desktop-title { display: none; }
+            #overlay.active { display: block; }
+            #main-content { padding: 100px 15px 30px 15px; }
+            
+            .hero-section { padding: 25px; }
+            .hero-title { font-size: 38px; }
+            .hero-subtitle { font-size: 24px; }
+            .nav-btn { font-size: 22px; }
+            
+            .poem-container { padding: 20px; }
+            .poem-main-title { font-size: 35px; }
+            .poem-section-title { font-size: 28px; padding: 10px 20px; }
+            .verse { flex-direction: column; gap: 10px; }
+            .hemistich { width: 100%; font-size: 28px; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر للموبايل -->
+    <div id="mobile-header">
+        <h2 class="almarai-extrabold">أبطال التجويد</h2>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <!-- التظليل للموبايل -->
+    <div id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- القائمة الجانبية (Navigation) -->
+    <div id="sidebar">
+        <h2 class="desktop-title almarai-extrabold">🌟 أبطال التجويد 🌟</h2>
+        <a href="index.html" class="nav-btn active almarai-bold">🏠 الصفحة الرئيسية (متن التحفة)</a>
+        <a href="p1.html" class="nav-btn almarai-bold">📖 الجزء الأول: أحكام النون والميم</a>
+        <a href="p2.html" class="nav-btn almarai-bold">📖 الجزء الثاني: أحكام المدود</a>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="main-content">
+        
+        <!-- قسم الترحيب -->
+        <div class="hero-section">
+            <h1 class="hero-title almarai-extrabold">مرحباً بكم يا أبطال التجويد! 🏆</h1>
+            <p class="hero-subtitle almarai-bold">
+                في هذا الموقع سنتعلم أحكام تلاوة القرآن الكريم بسهولة ومتعة. يمكنك التوجه إلى الدروس من القائمة الجانبية، أو قراءة <b>متن تحفة الأطفال</b> في الأسفل.
+            </p>
+        </div>
+
+        <!-- متن تحفة الأطفال -->
+        <div class="poem-container">
+            <h1 class="poem-main-title almarai-extrabold">📜 مَتْنُ تُحْفَةِ الْأَطْفَالِ وَالْغِلْمَانِ 📜<br><span style="font-size: 24px; color: #555;">تأليف: سُلَيْمَان الْجَمْزُورِي</span></h1>
+
+            <!-- المقدمة -->
+            <div class="poem-section-title almarai-extrabold">الْمُقَدِّمَةُ</div>
+            <div class="verse"><div class="hemistich almarai-bold">يَقُولُ رَاجِي رَحْمَةِ الْغَفُورِ</div><div class="hemistich almarai-bold">دَوْماً سُلَيْمَانُ هُوَ الْجَمْزُورِي</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">الْحَمْدُ لِلَّهِ مُصَلِّياً عَلَى</div><div class="hemistich almarai-bold">مُحَمَّدٍ وَآلِهِ وَمَنْ تَلَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَبَعْدُ هَذَا النَّظْمُ لِلْمُرِيدِ</div><div class="hemistich almarai-bold">فِي النُّونِ وَالتَّنْوِينِ وَالْمُدُودِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">سَمَّيْتُهُ بِتُحْفَةِ الْأَطْفَالِ</div><div class="hemistich almarai-bold">عَنْ شَيْخِنَا الْمِيهِيِّ ذِي الْكَمَالِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">أَرْجُو بِهِ أَنْ يَنْفَعَ الطُّلَّابَا</div><div class="hemistich almarai-bold">وَالْأَجْرَ وَالْقَبُولَ وَالثَّوَابَا</div></div>
+
+            <!-- أحكام النون الساكنة والتنوين -->
+            <div class="poem-section-title almarai-extrabold">أَحْكَامُ النُّونِ السَّاكِنَةِ وَالتَّنْوِينِ</div>
+            <div class="verse"><div class="hemistich almarai-bold">لِلنُّونِ إِنْ تَسْكُنْ وَلِلتَّنْوِينِ</div><div class="hemistich almarai-bold">أَرْبَعُ أَحْكَامٍ فَخُذْ تَبْيِينِي</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">فَالْأَوَّلُ الْإِظْهَارُ قَبْلَ أَحْرُفِ</div><div class="hemistich almarai-bold">لِلْحَلْقِ سِتٍّ رُتِّبَتْ فَلْتَعْرِفِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">هَمْزٌ فَهَاءٌ ثُمَّ عَيْنٌ حَاءُ</div><div class="hemistich almarai-bold">مُهْمَلَتَانِ ثُمَّ غَيْنٌ خَاءُ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالثَّانِي إِدْغَامٌ بِسِتَّةٍ أَتَتْ</div><div class="hemistich almarai-bold">فِي يَرْمَلُونَ عِنْدَهُمْ قَدْ ثَبَتَتْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">لَكِنَّهَا قِسْمَانِ قِسْمٌ يُدْغَمَا</div><div class="hemistich almarai-bold">فِيهِ بِغُنَّةٍ بِيَنْمُو عُلِمَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">إِلَّا إِذَا كَانَا بِكِلْمَةٍ فَلَا</div><div class="hemistich almarai-bold">تُدْغِمْ كَدُنْيَا ثُمَّ صِنْوَانٍ تَلَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالثَّانِي إِدْغَامٌ بِغَيْرِ غُنَّةْ</div><div class="hemistich almarai-bold">فِي اللَّامِ وَالرَّا ثُمَّ كَرِّرَنَّهْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالثَّالِثُ الْإِقْلَابُ عِنْدَ الْبَاءِ</div><div class="hemistich almarai-bold">مِيماً بِغُنَّةٍ مَعَ الْإِخْفَاءِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالرَّابِعُ الْإِخْفَاءُ عِنْدَ الْفَاضِلِ</div><div class="hemistich almarai-bold">مِنَ الْحُرُوفِ وَاجِبٌ لِلْفَاضِلِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">فِي خَمْسَةٍ مِنْ بَعْدِ عَشْرٍ رَمْزُهَا</div><div class="hemistich almarai-bold">فِي كِلْمِ هَذَا الْبَيْتِ قَدْ ضَمَّنْتُهَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">صِفْ ذَا ثَنَا كَمْ جَادَ شَخْصٌ قَدْ سَمَا</div><div class="hemistich almarai-bold">دُمْ طَيِّباً زِدْ فِي تُقًى ضَعْ ظَالِمَا</div></div>
+
+            <!-- أحكام الميم والنون المشددتين -->
+            <div class="poem-section-title almarai-extrabold">أَحْكَامُ الْمِيمِ وَالنُّونِ الْمُشَدَّدَتَيْنِ</div>
+            <div class="verse"><div class="hemistich almarai-bold">وَغُنَّ مِيماً ثُمَّ نُوناً شُدِّدَا</div><div class="hemistich almarai-bold">وَسَمِّ كُلّاً حَرْفَ غُنَّةٍ بَدَا</div></div>
+
+            <!-- أحكام الميم الساكنة -->
+            <div class="poem-section-title almarai-extrabold">أَحْكَامُ الْمِيمِ السَّاكِنَةِ</div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالْمِيمُ إِنْ تَسْكُنْ تَجِي قَبْلَ الْهِجَا</div><div class="hemistich almarai-bold">لَا أَلِفٍ لَيِّنَةٍ لِذِي الْحِجَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">أَحْكَامُهَا ثَلَاثَةٌ لِمَنْ ضَبَطْ</div><div class="hemistich almarai-bold">إِخْفَاءٌ ادْغَامٌ وَإِظْهَارٌ فَقَطْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">فَالْأَوَّلُ الْإِخْفَاءُ عِنْدَ الْبَاءِ</div><div class="hemistich almarai-bold">وَسَمِّهِ الشَّفْوِيَّ لِلْقُرَّاءِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالثَّانِي إِدْغَامٌ بِمِثْلِهَا أَتَى</div><div class="hemistich almarai-bold">وَسَمِّ إِدْغَاماً صَغِيراً يَا فَتَى</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالثَّالِثُ الْإِظْهَارُ فِي الْبَقِيَّةْ</div><div class="hemistich almarai-bold">مِنْ أَحْرُفٍ وَسَمِّهَا شَفْوِيَّةْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي</div><div class="hemistich almarai-bold">لِقُرْبِهَا وَلِاتِّحَادِ فَاعْرِفِ</div></div>
+
+            <!-- أحكام لام أل ولام الفعل -->
+            <div class="poem-section-title almarai-extrabold">أَحْكَامُ لَامِ أَلْ وَلَامِ الْفِعْلِ</div>
+            <div class="verse"><div class="hemistich almarai-bold">لِلَامِ أَلْ حَالَانِ قَبْلَ الْأَحْرُفِ</div><div class="hemistich almarai-bold">أُولَاهُمَا إِظْهَارُهَا فَلْتَعْرِفِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">قَبْلَ ارْبَعٍ مَعْ عَشْرَةٍ خُذْ عِلْمَهُ</div><div class="hemistich almarai-bold">مِنْ ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">ثَانِيهِمَا إِدْغَامُهَا فِي أَرْبَعِ</div><div class="hemistich almarai-bold">وَعَشْرَةٍ أَيْضاً وَرَمْزَهَا فَعِ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">طِبْ ثُمَّ صِلْ رُحْماً تَفُزْ ضِفْ ذَا نِعَمْ</div><div class="hemistich almarai-bold">دَعْ سُوءَ ظَنٍّ زُرْ شَرِيفاً لِلْكَرَمْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَاللَّامَ الْأُولَى سَمِّهَا قَمَرِيَّةْ</div><div class="hemistich almarai-bold">وَاللَّامَ الْأُخْرَى سَمِّهَا شَمْسِيَّةْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَأَظْهِرَنَّ لَامَ فِعْلٍ مُطْلَقَا</div><div class="hemistich almarai-bold">فِي نَحْوِ قُلْ نَعَمْ وَقُلْنَا وَالْتَقَى</div></div>
+
+            <!-- في المثلين والمتقاربين والمتجانسين -->
+            <div class="poem-section-title almarai-extrabold">فِي الْمِثْلَيْنِ وَالْمُتَقَارِبَيْنِ وَالْمُتَجَانِسَيْنِ</div>
+            <div class="verse"><div class="hemistich almarai-bold">إِنْ فِي الصِّفَاتِ وَالْمَخَارِجِ اتَّفَقْ</div><div class="hemistich almarai-bold">حَرْفَانِ فَالْمِثْلَانِ فِيهِمَا أَحَقْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَإِنْ يَكُونَا مَخْرَجاً تَقَارَبَا</div><div class="hemistich almarai-bold">وَفِي الصِّفَاتِ اخْتَلَفَا يُلَقَّبَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">مُتَقَارِبَيْنِ أَوْ يَكُونَا اتَّفَقَا</div><div class="hemistich almarai-bold">فِي مَخْرَجٍ دُونَ الصِّفَاتِ حُقِّقَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">بِالْمُتَجَانِسَيْنِ ثُمَّ إِنْ سَكَنْ</div><div class="hemistich almarai-bold">أَوَّلُ كُلٍّ فَالصَّغِيرَ سَمِّيَنْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">أَوْ حُرِّكَ الْحَرْفَانِ فِي كُلٍّ فَقُلْ</div><div class="hemistich almarai-bold">كُلٌّ كَبِيرٌ وَافْهَمَنْهُ بِالْمُثُلْ</div></div>
+
+            <!-- أقسام المد -->
+            <div class="poem-section-title almarai-extrabold">أَقْسَامُ الْمَدِّ</div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالْمَدُّ أَصْلِيٌّ وَفَرْعِيٌّ لَهُ</div><div class="hemistich almarai-bold">وَسَمِّ أَوَّلًا طَبِيعِيًّا وَهُوَ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">مَا لَا تَوَقُّفٌ لَهُ عَلَى سَبَبْ</div><div class="hemistich almarai-bold">وَلَا بِدُونِهِ الْحُرُوفُ تُجْتَلَبْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">بَلْ أَيُّ حَرْفٍ غَيْرُ هَمْزٍ أَوْ سُكُونْ</div><div class="hemistich almarai-bold">جَاءَ بَعْدَ مَدٍّ فَالطَّبِيعِيَّ يَكُونْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالْآخَرُ الْفَرْعِيُّ مَوْقُوفٌ عَلَى</div><div class="hemistich almarai-bold">سَبَبْ كَهَمْزٍ أَوْ سُكُونٍ مُسْجَلَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">حُرُوفُهُ ثَلَاثَةٌ فَعِيهَا</div><div class="hemistich almarai-bold">مِنْ لَفْظِ وَايٍ وَهْيَ فِي نُوحِيهَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالْكَسْرُ قَبْلَ الْيَا وَقَبْلَ الْوَاوِ ضَمْ</div><div class="hemistich almarai-bold">شَرْطٌ وَفَتْحٌ قَبْلَ أَلْفٍ يُلْتَزَمْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَاللِّينُ مِنْهَا الْيَا وَوَاوٌ سُكِّنَا</div><div class="hemistich almarai-bold">إِنِ انْفِتَاحٌ قَبْلَ كُلٍّ أُعْلِنَا</div></div>
+
+            <!-- أحكام المد -->
+            <div class="poem-section-title almarai-extrabold">أَحْكَامُ الْمَدِّ</div>
+            <div class="verse"><div class="hemistich almarai-bold">لِلْمَدِّ أَحْكَامٌ ثَلَاثَةٌ تَدُومْ</div><div class="hemistich almarai-bold">وَهْيَ الْوُجُوبُ وَالْجَوَازُ وَاللُّزُومْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدْ</div><div class="hemistich almarai-bold">فِي كِلْمَةٍ وَذَا بِمُتَّصِلٍ يُعَدْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَجَائِزٌ مَدٌّ وَقَصْرٌ إِنْ فُصِلْ</div><div class="hemistich almarai-bold">كُلٌّ بِكِلْمَةٍ وَهَذَا الْمُنْفَصِلْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَمِثْلُ ذَا إِنْ عَرَضَ السُّكُونُ</div><div class="hemistich almarai-bold">وَقْفاً كَتَعْلَمُونَ نَسْتَعِينُ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">أَوْ قُدِّمَ الْهَمْزُ عَلَى الْمَدِّ وَذَا</div><div class="hemistich almarai-bold">بَدَلْ كَآمَنُوا وَإِيمَانًا خُذَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَلَازِمٌ إِنِ السُّكُونُ أُصِّلَا</div><div class="hemistich almarai-bold">وَصْلًا وَوَقْفاً بَعْدَ مَدٍّ طُوِّلَا</div></div>
+
+            <!-- أقسام المد اللازم -->
+            <div class="poem-section-title almarai-extrabold">أَقْسَامُ الْمَدِّ اللَّازِمِ</div>
+            <div class="verse"><div class="hemistich almarai-bold">أَقْسَامُ لَازِمٍ لَدَيْهِمْ أَرْبَعَةْ</div><div class="hemistich almarai-bold">وَتِلْكَ كِلْمِيٌّ وَحَرْفِيٌّ مَعَهْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">كِلَاهُمَا مُخَفَّفٌ مُثَقَّلُ</div><div class="hemistich almarai-bold">فَهَذِهِ أَرْبَعَةٌ تُفَصَّلُ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">فَإِنْ بِكِلْمَةٍ سُكُونٌ اجْتَمَعْ</div><div class="hemistich almarai-bold">مَعْ حَرْفِ مَدٍّ فَهْوَ كِلْمِيٌّ وَقَعْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">أَوْ فِي ثُلَاثِيِّ الْحُرُوفِ وُجِدَا</div><div class="hemistich almarai-bold">وَالْمَدُّ وَسْطُهُ فَحَرْفِيٌّ بَدَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">كِلَاهُمَا مُثَقَّلٌ إِنْ أُدْغِمَا</div><div class="hemistich almarai-bold">مُخَفَّفٌ كُلٌّ إِذَا لَمْ يُدْغَمَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَاللَّازِمُ الْحَرْفِيُّ أَوَّلَ السُّوَرْ</div><div class="hemistich almarai-bold">وُجُودُهُ وَفِي ثَمَانٍ انْحَصَرْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">يَجْمَعُهَا حُرُوفُ كَمْ عَسَلْ نَقَصْ</div><div class="hemistich almarai-bold">وَعَيْنُ ذُو وَجْهَيْنِ وَالطُّولُ أَخَصْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَمَا سِوَى الْحَرْفِ الثُّلَاثِي لَا أَلِفْ</div><div class="hemistich almarai-bold">فَمَدُّهُ مَدّاً طَبِيعِيّاً أُلِفْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَذَاكَ أَيْضاً فِي فَوَاتِحِ السُّوَرْ</div><div class="hemistich almarai-bold">فِي لَفْظِ حَيٍّ طَاهِرٍ قَدِ انْحَصَرْ</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَيَجْمَعُ الْفَوَاتِحَ الْأَرْبَعْ عَشَرْ</div><div class="hemistich almarai-bold">صِلْهُ سُحَيْراً مَنْ قَطَعْكَ ذَا اشْتَهَرْ</div></div>
+
+            <!-- الخاتمة -->
+            <div class="poem-section-title almarai-extrabold">الْخَاتِمَةُ</div>
+            <div class="verse"><div class="hemistich almarai-bold">وَتَمَّ ذَا النَّظْمُ بِحَمْدِ اللَّهِ</div><div class="hemistich almarai-bold">عَلَى تَمَامِهِ بِلَا تَنَاهِي</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">أَبْيَاتُهُ نَدٌّ بَدَا لِذِي النُّهَى</div><div class="hemistich almarai-bold">تَارِيخُهُ بُشْرَى لِمَنْ يُتْقِنُهَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">ثُمَّ الصَّلَاةُ وَالسَّلَامُ أَبَدَا</div><div class="hemistich almarai-bold">عَلَى خِتَامِ الْأَنْبِيَاءِ أَحْمَدَا</div></div>
+            <div class="verse"><div class="hemistich almarai-bold">وَالْآلِ وَالصَّحْبِ وَكُلِّ تَابِعِ</div><div class="hemistich almarai-bold">وَكُلِّ قَارِئٍ وَكُلِّ سَامِعِ</div></div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // إظهار وإخفاء القائمة الجانبية في الموبايل
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
