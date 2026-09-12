@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فتوحات الرحمن - أحكام لام أل ولام الفعل</title>
+    
+    <!-- استدعاء خط Almarai من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #FF6F00;
+            --secondary: #00838F;
+            --background: #FFF9C4;
+            --card-bg: #FFFFFF;
+            --text-dark: #212121;
+            --success: #388E3C;
+            --danger: #D32F2F;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Almarai", sans-serif;
+            background-color: var(--background);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .almarai-light { font-weight: 300; font-style: normal; }
+        .almarai-regular { font-weight: 400; font-style: normal; }
+        .almarai-bold { font-weight: 700; font-style: normal; }
+        .almarai-extrabold { font-weight: 800; font-style: normal; }
+
+        /* الهيدر للموبايل (Hamburger Menu) */
+        #mobile-header {
+            display: none;
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 20px;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        #mobile-header h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #FFF59D;
+        }
+
+        .hamburger {
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* الشريط الجانبي (القائمة) */
+        #sidebar {
+            width: 320px;
+            background-color: var(--secondary);
+            color: white;
+            padding: 20px 15px;
+            box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+
+        #sidebar h2.desktop-title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 30px;
+            color: #FFF59D;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid transparent;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            font-size: 18px; 
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.3s ease;
+            line-height: 1.5;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            border-color: #FFF;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        /* المحتوى الرئيسي */
+        #main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .lesson-container {
+            display: none;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            max-width: 950px;
+            margin: 0 auto;
+            border: 4px solid #E0E0E0;
+        }
+
+        .lesson-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson-title {
+            color: var(--primary);
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 3px dashed var(--primary);
+            padding-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .lesson-text {
+            font-size: 28px;
+            line-height: 2.2;
+            margin-bottom: 30px;
+        }
+
+        .quran-text {
+            color: var(--success);
+            font-size: 40px;
+            font-weight: 800;
+            text-align: center;
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #81C784;
+            line-height: 1.8;
+        }
+
+        .poem-text {
+            color: var(--secondary);
+            background: #E0F7FA;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #80DEEA;
+            font-size: 30px;
+            text-align: center;
+            line-height: 2;
+            margin: 20px 0;
+        }
+
+        /* التدريبات */
+        .exercise-section {
+            background: #FFF3E0;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #FFB74D;
+            margin-top: 40px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-size: 34px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .difficulty-header {
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 20px 0;
+        }
+
+        .question-block {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .question {
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #37474F;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: #FAFAFA;
+            border: 3px solid #B0BEC5;
+            padding: 15px 20px;
+            font-size: 24px;
+            font-family: inherit;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: right;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover { background: #ECEFF1; }
+        
+        .option-btn.selected {
+            border-color: var(--secondary);
+            background: #E0F7FA;
+        }
+        .option-btn.correct {
+            border-color: var(--success);
+            background: #C8E6C9;
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            border-color: var(--danger);
+            background: #FFCDD2;
+            color: var(--danger);
+        }
+
+        .check-btn {
+            display: block;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            font-size: 30px;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 800;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .check-btn:hover { background: #E65100; transform: scale(1.02); }
+
+        .score-display {
+            font-size: 36px;
+            text-align: center;
+            font-weight: 800;
+            margin-top: 25px;
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .revision-box {
+            background: #E1F5FE;
+            border: 3px solid #4FC3F7;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .revision-box h3 { color: #0277BD; font-size: 30px; margin-top: 0; }
+        
+        /* طبقة التظليل للموبايل */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        /* تصميم للموبايل */
+        @media (max-width: 900px) {
+            #mobile-header { display: flex; }
+            #sidebar {
+                position: fixed;
+                right: 0;
+                transform: translateX(100%);
+                width: 280px;
+                padding-top: 80px;
+            }
+            #sidebar.open { transform: translateX(0); }
+            #sidebar h2.desktop-title { display: none; }
+            #overlay.active { display: block; }
+            #main-content { padding: 90px 15px 30px 15px; }
+            
+            .lesson-container { padding: 25px 15px; }
+            .lesson-title { font-size: 30px; }
+            .lesson-text { font-size: 22px; }
+            .quran-text { font-size: 30px; padding: 15px; }
+            .poem-text { font-size: 22px; padding: 15px; }
+            .question { font-size: 22px; }
+            .option-btn { font-size: 20px; padding: 12px; }
+            .check-btn { font-size: 24px; padding: 15px; }
+            .score-display { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر للموبايل -->
+    <div id="mobile-header">
+        <h2 class="almarai-extrabold">أبطال التجويد (اللامات)</h2>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <!-- تظليل الخلفية عند فتح القائمة بالموبايل -->
+    <div id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- القائمة الجانبية -->
+    <div id="sidebar">
+        <h2 class="desktop-title almarai-extrabold">🌟 أبطال التجويد 🌟</h2>
+        <div id="nav-buttons"></div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div id="main-content"></div>
+
+    <script>
+        // === بيانات الدروس والتدريبات مع إضافة أبيات الشعر ===
+        const data = [
+            {
+                id: "lesson1",
+                title: "١. اللام القمرية (الإظهار القمري)",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        لِلامِ (أَلْ) للتعريف قبل حروف الهجاء حُكْمَانِ. الحكم الأول هو: <b>الإِظْهَار</b>.<br>
+                        تُسَمَّى هذه اللام بـ <b>اللام القمرية</b>، وهي اللام التي تُكْتَب وتُنْطَق واضحة.<br><br>
+                        <b>حُرُوفُهَا:</b> أربعة عشر حرفاً جُمِعَتْ في جملة: (<b>ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ</b>).<br>
+                        <b>عَلَامَتُهَا فِي الْمُصْحَف:</b> وُجُودُ علامة السكون (رأس حاء) فوق حرف اللام ( لْـ ).
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        لِلَامِ أَلْ حَالَانِ قَبْلَ الْأَحْرُفِ ... أُولَاهُمَا إِظْهَارُهَا فَلْتَعْرِفِ<br>
+                        قَبْلَ ارْبَعٍ مَعْ عَشْرَةٍ خُذْ عِلْمَهُ ... مِنْ ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ<br>
+                        وَاللَّامَ الْأُولَى سَمِّهَا قَمَرِيَّةْ ...
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        الْأَرْضِ - الْبَاطِنُ - الْحَمْدُ - الْيَقِينِ - الْقُرْآنِ
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هو حكم اللام القمرية؟", options: ["الإخفاء", "الإظهار", "الإدغام"], answer: 1 },
+                    { q: "كم عدد حروف اللام القمرية؟", options: ["١٤ حرفاً", "٦ حروف", "٢٨ حرفاً"], answer: 0 },
+                    { q: "ما هي الجملة التي جُمِعَت فيها حروف اللام القمرية؟", options: ["يَرْمَلُونَ", "قُطْبُ جَدّ", "ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ"], answer: 2 },
+                    { q: "كيف تُنْطَق اللام القمرية؟", options: ["تُكْتَب ولا تُنْطَق", "تُكْتَب وتُنْطَق بوضوح", "تُدْغَم في الحرف الذي يليها"], answer: 1 },
+                    { q: "ما هي علامة اللام القمرية في المصحف الشريف؟", options: ["وضع شدة على الحرف الذي يليها", "وضع علامة السكون (رأس حاء) فوق اللام", "تكون اللام خالية من التشكيل"], answer: 1 },
+                    { q: "استخرج الكلمة التي بها لام قمرية:", options: ["الرَّحْمَٰنِ", "الصَّابِرِينَ", "الْجَنَّةِ"], answer: 2 },
+                    { q: "في كلمة (الْغَفُورُ)، لماذا أُظْهِرَت اللام؟", options: ["لأن بعدها حرف الغين وهو من حروف الإظهار القمري", "لأن بعدها حرف مفخم", "لأنها في بداية الجملة"], answer: 0 },
+                    { q: "أكمل الشاهد: لِلَامِ أَلْ حَالَانِ قَبْلَ الْأَحْرُفِ ... أُولَاهُمَا ...", options: ["إِدْغَامُهَا", "إِظْهَارُهَا فَلْتَعْرِفِ", "إِخْفَاؤُهَا"], answer: 1 },
+                    { q: "أكمل الشاهد: وَاللَّامَ الْأُولَى سَمِّهَا ...", options: ["قَمَرِيَّةْ", "شَمْسِيَّةْ", "أَصْلِيَّةْ"], answer: 0 },
+                    { q: "أي الحروف التالية يعتبر من حروف اللام القمرية؟", options: ["الشِّين", "الطَّاء", "الْيَاء"], answer: 2 }
+                ]
+            },
+            {
+                id: "lesson2",
+                title: "٢. اللام الشمسية (الإدغام الشمسي)",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        الحكم الثاني لِلامِ (أَلْ) هو: <b>الإِدْغَام</b>.<br>
+                        تُسَمَّى هذه اللام بـ <b>اللام الشمسية</b>، وهي اللام التي تُكْتَب وَلَا تُنْطَق، بَلْ تُدْغَم في الحرف الذي بَعْدَهَا.<br><br>
+                        <b>حُرُوفُهَا:</b> أربعة عشر حرفاً، وهي الحروف الأولى من كَلِمَات هذا البيت:<br>
+                        (طِبْ ثُمَّ صِلْ رُحْماً تَفُزْ ضِفْ ذَا نِعَمْ ... دَعْ سُوءَ ظَنٍّ زُرْ شَرِيفاً لِلْكَرَمْ)<br>
+                        <b>عَلَامَتُهَا فِي الْمُصْحَف:</b> خُلُوُّ اللامِ مِنَ الحَرَكَة، وَوَضْعُ (شَدَّة) عَلَى الحَرْفِ الَّذِي بَعْدَهَا.
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        ثَانِيهِمَا إِدْغَامُهَا فِي أَرْبَعِ ... وَعَشْرَةٍ أَيْضاً وَرَمْزَهَا فَعِ<br>
+                        طِبْ ثُمَّ صِلْ رُحْماً تَفُزْ ضِفْ ذَا نِعَمْ ... دَعْ سُوءَ ظَنٍّ زُرْ شَرِيفاً لِلْكَرَمْ<br>
+                        ... وَاللَّامَ الْأُخْرَى سَمِّهَا شَمْسِيَّةْ
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        الطَّامَّةُ - الثَّوَابَ - الرَّحْمَٰنِ - النُّورِ - الشَّمْسِ
+                    </div>
+                `,
+                exercises: [
+                    { q: "ما هو حكم اللام الشمسية؟", options: ["الإظهار", "الإدغام", "الإقلاب"], answer: 1 },
+                    { q: "كيف تُنْطَق اللام الشمسية؟", options: ["تُكْتَب ولا تُنْطَق (تُدْغَم)", "تُنْطَق بوضوح مع السكون", "تُخْفَى مع الغنة"], answer: 0 },
+                    { q: "كم عدد حروف اللام الشمسية؟", options: ["١٤ حرفاً", "٦ حروف", "١٠ حروف"], answer: 0 },
+                    { q: "ما هي علامة اللام الشمسية في المصحف؟", options: ["وضع سكون على اللام", "خلو اللام من الحركة ووضع شدة على الحرف الذي بعدها", "وضع ضمة على اللام"], answer: 1 },
+                    { q: "استخرج الكلمة التي بها لام شمسية:", options: ["الْكِتَابُ", "الْمُؤْمِنُونَ", "السَّمَاءِ"], answer: 2 },
+                    { q: "في كلمة (النَّاسِ)، ما هو الحرف الذي أُدْغِمَت فيه اللام؟", options: ["السين", "النون", "الألف"], answer: 1 },
+                    { q: "أكمل الشاهد: ثَانِيهِمَا إِدْغَامُهَا فِي أَرْبَعِ ... وَعَشْرَةٍ أَيْضاً وَرَمْزَهَا...", options: ["فَعِ", "دَعِ", "سَمِّ"], answer: 0 },
+                    { q: "الحرف الأول من كلمة (طِبْ) يشير إلى حرف من حروف اللام الشمسية وهو:", options: ["الباء", "الطاء", "لم يشير لأي حرف"], answer: 1 },
+                    { q: "أكمل الشاهد: ... وَاللَّامَ الْأُخْرَى سَمِّهَا ...", options: ["قَمَرِيَّةْ", "شَمْسِيَّةْ", "مَخْفِيَّةْ"], answer: 1 },
+                    { q: "أي الكلمات التالية تعتبر لامها شمسية؟", options: ["الْوَقْتُ", "الْيَوْمُ", "الذِّكْرَى"], answer: 2 }
+                ]
+            },
+            {
+                id: "lesson3",
+                title: "٣. لام الفعل",
+                content: `
+                    <div class="almarai-bold lesson-text">
+                        <b>لام الفعل:</b> هي اللام الساكنة الأصلية التي تَقَع في الفعل، سواء كان (مَاضِياً، أو مُضَارِعاً، أو أَمْراً).<br><br>
+                        حُكْمُ لامِ الفعل: <b>الإِظْهَار مُطْلَقاً</b>.<br>
+                        (يُسْتَثْنَى من ذلك إذا جاء بعدها حرفا "اللام" أو "الراء" فإنها تُدْغَم، مثل: قُل لَّكُم ، قُل رَّبِّ).
+                    </div>
+                    <div class="almarai-extrabold poem-text">
+                        وَأَظْهِرَنَّ لَامَ فِعْلٍ مُطْلَقَا ... فِي نَحْوِ قُلْ نَعَمْ وَقُلْنَا وَالْتَقَى
+                    </div>
+                    <div class="quran-text almarai-extrabold">
+                        قُلْ نَعَمْ - قُلْنَا - يَلْتَقِطْهُ - جَعَلْنَا
+                    </div>
+                `,
+                exercises: [
+                    { q: "أين تقع لام الفعل؟", options: ["في الأسماء فقط", "في الحروف فقط", "في الأفعال (الماضي، المضارع، الأمر)"], answer: 2 },
+                    { q: "ما هو حكم لام الفعل الساكنة بشكل عام؟", options: ["الإدغام مطلقاً", "الإظهار مطلقاً", "الإخفاء"], answer: 1 },
+                    { q: "أكمل الشاهد: وَأَظْهِرَنَّ لَامَ فِعْلٍ ...", options: ["دَائِماً", "مُطْلَقَا", "قَمَرِيًّا"], answer: 1 },
+                    { q: "استخرج الكلمة التي بها لام فعل مظهرة:", options: ["الْحَمْدُ", "جَعَلْنَا", "السَّمِيعُ"], answer: 1 },
+                    { q: "في كلمة (يَلْتَقِطْهُ)، ما حكم اللام الساكنة؟", options: ["إظهار", "إدغام", "إقلاب"], answer: 0 },
+                    { q: "في كلمة (قُلْنَا)، ما نوع اللام؟", options: ["لام أل", "لام حرف", "لام فعل"], answer: 2 },
+                    { q: "متى تُدْغَم لام الفعل؟ (كحالة استثنائية)", options: ["إذا جاء بعدها حرف الميم", "إذا جاء بعدها لام أو راء (مثل: قُل رَّبِّ)", "لا تُدْغَم أبداً"], answer: 1 },
+                    { q: "أكمل الشاهد: ... فِي نَحْوِ قُلْ نَعَمْ وَقُلْنَا وَـ...", options: ["الْتَقَى", "ارْتَقَى", "انْتَهَى"], answer: 0 },
+                    { q: "في قوله تعالى (قُلْ نَعَمْ)، هل تُدْغَم اللام في النون أم تُظْهَر؟", options: ["تُدْغَم", "تُظْهَر", "تُخْفَى"], answer: 1 },
+                    { q: "أي من الكلمات الآتية تحتوي على لام فعل؟", options: ["الْكَوْثَرَ", "أَلْهَاكُمُ", "الْمَجِيدُ"], answer: 1 }
+                ]
+            },
+            {
+                id: "revision",
+                title: "📚 المراجعة الشاملة لأحكام اللامات 📚",
+                content: `
+                    <div class="almarai-regular lesson-text">
+                        لقد تعلمنا يا بطل أحكام اللامات، هيا نراجعها بسرعة لتستعد للاختبار النهائي:
+                        <br><br>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">١. اللام القمرية (الإظهار):</h3>
+                            - تُكْتَب وتُنْطَق. <br>
+                            - علامتها: سكون (رأس حاء) على اللام.<br>
+                            - حروفها: ١٤ حرفاً (<b>ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ</b>).<br>
+                            - مثل: الْقَمَر، الْبَاب، الْعِلْم.
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">٢. اللام الشمسية (الإدغام):</h3>
+                            - تُكْتَب ولا تُنْطَق (تُدْغَم في الحرف الذي يليها).<br>
+                            - علامتها: اللام خالية من التشكيل والحرف الذي بعدها مُشَدَّد.<br>
+                            - حروفها: ١٤ حرفاً أوائل كلمات (<b>طِبْ ثُمَّ صِلْ رُحْماً تَفُزْ...</b>).<br>
+                            - مثل: الشَّمْس، النُّور، الدِّين.
+                        </div>
+                        <div class="revision-box">
+                            <h3 class="almarai-extrabold">٣. لام الفعل (الإظهار):</h3>
+                            - هي اللام الساكنة الموجودة في الأفعال.<br>
+                            - حكمها: الإظهار دائماً.<br>
+                            - مثل: قُلْ، جَعَلْنَا، يَلْتَقِطْهُ. (إلا إذا أتى بعدها ل، ر فتُدْغَم).
+                        </div>
+                    </div>
+                    <div style="text-align:center; font-size: 30px; color: var(--primary);" class="almarai-extrabold">
+                        هل أنت مستعد؟ توجه الآن للاختبار النهائي! 🏆
+                    </div>
+                `,
+                exercises: []
+            },
+            {
+                id: "final-test",
+                title: "🏆 الاختبار النهائي الشامل 🏆",
+                content: `
+                    <div class="almarai-bold lesson-text" style="text-align: center; color: var(--secondary);">
+                        أجب عن الأسئلة الثلاثين التالية لتثبت أنك بطل التجويد بحق!
+                    </div>
+                `,
+                isFinal: true,
+                exercises: [
+                    // --- 10 Easy Questions ---
+                    { q: "ما هو حكم اللام القمرية؟", options: ["الإخفاء", "الإظهار", "الإدغام"], answer: 1, difficulty: "easy" },
+                    { q: "ما هو حكم اللام الشمسية؟", options: ["الإدغام", "الإظهار", "الإقلاب"], answer: 0, difficulty: "easy" },
+                    { q: "كم عدد حروف اللام القمرية؟", options: ["٢٨ حرفاً", "١٤ حرفاً", "٦ حروف"], answer: 1, difficulty: "easy" },
+                    { q: "حروف اللام القمرية مجموعة في جملة:", options: ["قُطْبُ جَدّ", "يَرْمَلُونَ", "ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ"], answer: 2, difficulty: "easy" },
+                    { q: "اللام التي تُكْتَب ولا تُنْطَق هي:", options: ["اللام القمرية", "اللام الشمسية", "لام الفعل المظهرة"], answer: 1, difficulty: "easy" },
+                    { q: "في كلمة (الْأَرْضِ)، ما نوع اللام؟", options: ["قمرية", "شمسية", "فعل"], answer: 0, difficulty: "easy" },
+                    { q: "في كلمة (الشَّمْسِ)، ما نوع اللام؟", options: ["قمرية", "فعل", "شمسية"], answer: 2, difficulty: "easy" },
+                    { q: "في كلمة (قُلْ)، ما نوع اللام وما حكمها؟", options: ["لام أل - قمرية", "لام فعل - إظهار", "لام اسم - إدغام"], answer: 1, difficulty: "easy" },
+                    { q: "علامة اللام الشمسية في المصحف هي:", options: ["سكون على اللام", "شدة على اللام", "خلو اللام من التشكيل وشدة على ما بعدها"], answer: 2, difficulty: "easy" },
+                    { q: "علامة اللام القمرية في المصحف هي:", options: ["سكون (رأس حاء) على اللام", "خلوها من التشكيل", "وضع فتحة عليها"], answer: 0, difficulty: "easy" },
+                    
+                    // --- 10 Medium Questions ---
+                    { q: "في قوله تعالى (وَالْقَمَرِ)، ما سبب إظهار اللام؟", options: ["لأنها لام فعل", "لأن بعدها حرف القاف وهو من حروف الإظهار القمري", "لأنها جاءت بعد واو"], answer: 1, difficulty: "medium" },
+                    { q: "في قوله تعالى (الصَّابِرِينَ)، لماذا أُدْغِمَت اللام؟", options: ["لأن بعدها حرف الصاد وهو من حروف الإدغام الشمسي", "لأنها لام فعل", "لأنها مفتوحة"], answer: 0, difficulty: "medium" },
+                    { q: "الكلمة (وَالضُّحَىٰ)، اللام فيها:", options: ["مُظْهَرَة (قمرية)", "مُدْغَمَة (شمسية)", "مُخْفَاة"], answer: 1, difficulty: "medium" },
+                    { q: "كلمة (جَعَلْنَا) تحتوي على لام ساكنة، ما نوعها؟", options: ["لام أل", "لام حرف", "لام فعل"], answer: 2, difficulty: "medium" },
+                    { q: "أكمل الشاهد: وَاللَّامَ الْأُولَى سَمِّهَا قَمَرِيَّةْ ... وَاللَّامَ الْأُخْرَى سَمِّهَا...", options: ["شَمْسِيَّةْ", "أَصْلِيَّةْ", "فِعْلِيَّةْ"], answer: 0, difficulty: "medium" },
+                    { q: "أكمل الشاهد: وَأَظْهِرَنَّ لَامَ فِعْلٍ مُطْلَقَا ... فِي نَحْوِ ...", options: ["قُلْ نَعَمْ وَقُلْنَا وَالْتَقَى", "دَعْ سُوءَ ظَنٍّ", "ابْغِ حَجَّكَ"], answer: 0, difficulty: "medium" },
+                    { q: "الحرف الأول من كلمة (دَعْ) من بيت الشعر يشير إلى حرف من حروف:", options: ["اللام القمرية", "اللام الشمسية", "الإظهار الحلقي"], answer: 1, difficulty: "medium" },
+                    { q: "أي الكلمات التالية لامها قمرية؟", options: ["النَّعِيم", "التَّوَّاب", "الْهَادِي"], answer: 2, difficulty: "medium" },
+                    { q: "أي الكلمات التالية لامها فعل؟", options: ["الْجَنَّة", "أَرْسَلْنَا", "الرَّحْمَٰن"], answer: 1, difficulty: "medium" },
+                    { q: "حرف الياء (ي) يعتبر من حروف:", options: ["اللام الشمسية", "اللام القمرية (موجود في ابْغِ حَجَّكَ وَخَفْ عَقِيمَهُ)", "لام الفعل"], answer: 1, difficulty: "medium" },
+
+                    // --- 10 Hard Questions ---
+                    { q: "في قوله تعالى (اللَّيْلِ)، اللام في كلمة الليل هي:", options: ["لام قمرية مظهرة", "لام شمسية مُدْغَمَة في اللام التي تليها", "لام فعل"], answer: 1, difficulty: "hard" },
+                    { q: "لماذا يُسْتَثْنَى الإظهار في لام الفعل إذا جاء بعدها حرف الراء (مثل: قُل رَّبِّ)؟", options: ["لتماثل الحروف", "بسبب التقارب الشديد بين مخرج اللام والراء فيوجب الإدغام", "لأنها لام شمسية"], answer: 1, difficulty: "hard" },
+                    { q: "في كلمة (الْتَقَى)، اللام الساكنة هي:", options: ["لام شمسية", "لام قمرية", "لام فعل أصلية من بُنية الكلمة"], answer: 2, difficulty: "hard" },
+                    { q: "كلمة (الَّذِينَ)، اللام فيها:", options: ["لام شمسية لا تنفك عن الكلمة", "لام قمرية", "لام فعل"], answer: 0, difficulty: "hard" },
+                    { q: "حرف الميم في كلمة (الْمُلْكُ) جعل اللام:", options: ["شمسية لأن الميم من حروف الشفتين", "قمرية لأن الميم من حروف (عَقِيمَهُ)", "مُدْغَمَة"], answer: 1, difficulty: "hard" },
+                    { q: "في بيت الشعر: (طِبْ ثُمَّ صِلْ رُحْماً تَفُزْ ضِفْ ذَا نِعَمْ)، كم حرفاً شمسياً في هذا الشطر؟", options: ["٨ حروف (أوائل الكلمات)", "٧ حروف", "١٤ حرفاً"], answer: 0, difficulty: "hard" },
+                    { q: "في قوله تعالى (قُل لَّكُم)، ما حكم لام الفعل (قُل) هنا؟", options: ["الإظهار المطلق", "الإدغام للتماثل (لام جاء بعدها لام)", "الإخفاء"], answer: 1, difficulty: "hard" },
+                    { q: "كلمة (الْوَدُودُ)، ما نوع اللام ولماذا؟", options: ["شمسية لوجود الواو", "قمرية لوجود الواو في عبارة (وَخَفْ)", "لام فعل"], answer: 1, difficulty: "hard" },
+                    { q: "هل كلمة (أَلْهَاكُمُ) بها لام أل التعريف؟", options: ["نعم، وهي قمرية", "لا، هي لام فعل (أصلية من بنية الفعل ألهى) وحكمها الإظهار", "نعم، وهي شمسية"], answer: 1, difficulty: "hard" },
+                    { q: "السبب الرئيسي لتقسيم لام (أل) إلى قمرية وشمسية هو:", options: ["تسهيل النطق بسبب تباعد أو تقارب مخارج الحروف الشمسيّة والقمريّة من مخرج اللام", "للتفريق بين الاسم والفعل", "مجرد قاعدة بلا سبب نطقي"], answer: 0, difficulty: "hard" }
+                ]
+            }
+        ];
+
+        let userAnswers = {}; 
+
+        // تهيئة التطبيق
+        function initApp() {
+            const sidebar = document.getElementById("nav-buttons");
+            const mainContent = document.getElementById("main-content");
+
+            data.forEach((item, index) => {
+                // إنشاء أزرار القائمة
+                const btn = document.createElement("button");
+                btn.className = "nav-btn almarai-bold" + (index === 0 ? " active" : "");
+                btn.innerText = item.title; 
+                btn.onclick = () => { showLesson(item.id, btn); closeMenu(); };
+                sidebar.appendChild(btn);
+
+                // إنشاء محتوى الدرس
+                const section = document.createElement("div");
+                section.id = item.id;
+                section.className = "lesson-container" + (index === 0 ? " active" : "");
+                
+                let html = `<h1 class="lesson-title almarai-extrabold">${item.title}</h1>`;
+                html += item.content;
+
+                // إنشاء التدريبات
+                if (item.exercises && item.exercises.length > 0) {
+                    html += `<div class="exercise-section">
+                        <h2 class="exercise-title almarai-extrabold">✏️ التدريبات والتطبيقات ✏️</h2>
+                        <div id="quiz-${item.id}">`;
+                    
+                    let currentDifficulty = "";
+                    
+                    item.exercises.forEach((ex, qIndex) => {
+                        // إضافة فواصل الصعوبة للاختبار النهائي
+                        if (item.isFinal && ex.difficulty !== currentDifficulty) {
+                            currentDifficulty = ex.difficulty;
+                            let title = currentDifficulty === "easy" ? "🟢 المرحلة الأولى: أسئلة التأسيس السهلة" :
+                                        currentDifficulty === "medium" ? "🟡 المرحلة الثانية: أسئلة المتميزين المتوسطة" :
+                                        "🔴 المرحلة الثالثة: أسئلة الأبطال والمحترفين";
+                            html += `<div class="difficulty-header almarai-bold">${title}</div>`;
+                        }
+
+                        html += `
+                            <div class="question-block" id="qb-${item.id}-${qIndex}">
+                                <div class="question almarai-bold">${qIndex + 1}. ${ex.q}</div>
+                                <div class="options">
+                                    ${ex.options.map((opt, optIndex) => `
+                                        <button class="option-btn almarai-regular" onclick="selectOption('${item.id}', ${qIndex}, ${optIndex}, this)">
+                                            ${opt}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `</div>
+                        <button class="check-btn almarai-extrabold" onclick="checkAnswers('${item.id}')">اختبر إجاباتي ✔️</button>
+                        <div id="score-${item.id}" class="score-display almarai-extrabold"></div>
+                    </div>`;
+                }
+
+                section.innerHTML = html;
+                mainContent.appendChild(section);
+            });
+        }
+
+        // إظهار وإخفاء القائمة في الموبايل
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function closeMenu() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // التنقل بين الدروس
+        function showLesson(id, btnElement) {
+            document.querySelectorAll(".lesson-container").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active"));
+            
+            document.getElementById(id).classList.add("active");
+            btnElement.classList.add("active");
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // اختيار إجابة
+        function selectOption(lessonId, qIndex, optIndex, btnElement) {
+            if (!userAnswers[lessonId]) userAnswers[lessonId] = {};
+            userAnswers[lessonId][qIndex] = optIndex;
+
+            const parent = btnElement.parentElement;
+            parent.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected"));
+            btnElement.classList.add("selected");
+        }
+
+        // فحص الإجابات وحساب النتيجة
+        function checkAnswers(lessonId) {
+            const lessonData = data.find(d => d.id === lessonId);
+            let score = 0;
+            let answeredAll = true;
+            let totalQs = lessonData.exercises.length;
+
+            lessonData.exercises.forEach((ex, qIndex) => {
+                const selected = userAnswers[lessonId] ? userAnswers[lessonId][qIndex] : undefined;
+                const parent = document.getElementById(`qb-${lessonId}-${qIndex}`).querySelector('.options');
+                const buttons = parent.querySelectorAll('.option-btn');
+
+                if (selected === undefined) {
+                    answeredAll = false;
+                } else {
+                    buttons.forEach(b => b.classList.remove('correct', 'wrong'));
+                    if (selected === ex.answer) {
+                        score++;
+                        buttons[selected].classList.add('correct');
+                    } else {
+                        buttons[selected].classList.add('wrong');
+                        buttons[ex.answer].classList.add('correct'); // إظهار الإجابة الصحيحة
+                    }
+                }
+            });
+
+            if (!answeredAll) {
+                alert("يا بطل! يجب عليك الإجابة على جميع الأسئلة قبل الفحص 🤓");
+                return;
+            }
+
+            const scoreDiv = document.getElementById(`score-${lessonId}`);
+            scoreDiv.style.display = "block";
+            
+            let percentage = (score / totalQs) * 100;
+
+            if (percentage === 100) {
+                scoreDiv.innerHTML = `🌟 رائع وممتاز! حصلت على العلامة الكاملة: ${score} من ${totalQs} 🌟`;
+                scoreDiv.style.color = "var(--success)";
+                scoreDiv.style.background = "#E8F5E9";
+                scoreDiv.style.border = "3px solid var(--success)";
+            } else if (percentage >= 70) {
+                scoreDiv.innerHTML = `👍 جيد جداً! علامتك هي: ${score} من ${totalQs} - راجع الإجابات الملونة بالأحمر لتعرف الصح (بالأخضر).`;
+                scoreDiv.style.color = "var(--primary)";
+                scoreDiv.style.background = "#E3F2FD";
+                scoreDiv.style.border = "3px solid var(--primary)";
+            } else {
+                scoreDiv.innerHTML = `💪 لا بأس، المحاولة القادمة أفضل! علامتك: ${score} من ${totalQs} - اقرأ الدرس مرة أخرى وراجع الأخطاء.`;
+                scoreDiv.style.color = "var(--danger)";
+                scoreDiv.style.background = "#FFEBEE";
+                scoreDiv.style.border = "3px solid var(--danger)";
+            }
+        }
+
+        // تشغيل التطبيق بعد تحميل الصفحة
+        window.onload = initApp;
+    </script>
+</body>
+</html>
